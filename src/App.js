@@ -1,11 +1,18 @@
-
+import { Routes, Route, Link } from "react-router-dom";
+import { Login } from "./components/Login";
+import { Register } from "./components/Register";
+import { NavBar } from "./components/NavBar";
+import "./index.css";
 
 function App() {
   return (
     <div className="App">
-      <h1> algo </h1>
-      <i class="bi bi-1-square"></i>
-      <i class="bi bi-1-square"></i>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />}/>
+      </Routes>
+      
     </div>
   );
 }
