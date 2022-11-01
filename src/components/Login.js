@@ -2,8 +2,32 @@ import { Register } from "./Register"
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import "../styles/login.css";
+import firebaseApp from '../firebase/firebase';
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import {user, setUser, useUserContext} from "../context/userContext";
 
 export const Login = () =>{
+
+    const {user, setUser} = useUserContext();
+    const navigate = useNavigate();
+    const auth = getAuth(firebaseApp);
+
+    // console.log('User en login', userLogged);
+
+    // onAuthStateChanged(auth, (userFromFirebase) => {
+    //     if (userFromFirebase){
+    //         setUser(userFromFirebase)
+    //     }else {
+    //         setUser(null);
+    //     }
+    // })
 
     const {
         register,
@@ -11,12 +35,39 @@ export const Login = () =>{
         formState: { errors },
       } = useForm();
 
-    const onSubmit = (e) =>{
+    const onSubmit = (data, e) =>{
         e.preventDefault();
+        const email = data.email;
+        const password = data.password;
+    
+        try {
+            (signInWithEmailAndPassword(auth, email, password))
+            .then(userCredential => {
+                const userLogged = {
+                    email: userCredential.user.email,
+                    id: userCredential.user.uid
+                }
+                console.log(userCredential);
+
+                // Seting user in Context with setUser imported
+                setUser(userLogged)
+                console.log(user);
+                navigate("/")
+
+            })
+
+            
+        } catch (error) {
+            console.log('Error', error);
+        }
+        
     }
+
+    
+
     return(
         <div className="d-flex flex-column align-items-center">
-            Home
+            Login
             <div className="">
                 <h1>Welcome to Free Market</h1>
                 <p>You'll find everything you need</p>
@@ -25,26 +76,26 @@ export const Login = () =>{
             {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
             <form className="d-flex flex-column align-items-center border border-top-0 border-primary p-3 rounded-bottom" onSubmit={handleSubmit(onSubmit)}>
                 {/* register your input into the hook by invoking the "register" function */}
-                <label>Username:</label>
+                <label>Email:</label>
                 <input
                 className="form__inp"
-                type="text"
-                placeholder="Enter Username"
+                type="email"
+                placeholder="Enter your email"
                 autoComplete="off"
-                {...register("user", {
+                {...register("email", {
                     required: {
                     value: true,
-                    message: "Username is required",
+                    message: "Email is required",
                     },
                     maxLength: {
-                    value: 20,
-                    message: "Field must be less than 20 characters",
+                    value: 30,
+                    message: "Field must be less than 30 characters",
                     },
                 })}
                 />
     
                 {/* errors will return when field validation fails  */}
-                {errors.user && <span>{errors.user.message}</span>}
+                {errors.email && <span>{errors.email.message}</span>}
     
                 <label>Password:</label>
                 <input
