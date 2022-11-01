@@ -1,8 +1,28 @@
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
+import firebaseApp from '../firebase/firebase';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 export const Register = () =>{
+
+  // Firebase Register auth 
+    const registerUser = async (email, password, role) =>{
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+        // userCredential created it's not coming from firebase
+      ).then((userCredential) => {
+        console.log(userCredential);
+        return userCredential;
+      }) 
+    }
+    const auth = getAuth(firebaseApp);
+    // React Hook Form
     const {
         register,
         handleSubmit,
@@ -11,12 +31,21 @@ export const Register = () =>{
     
     const onSubmit = (data, e) => {
 
-      const newUser ={
-        user: data.user,
-        password: data.password,
-        active: false,
+      const email = data.email;
+      const password = data.password;
+      const role = data.role;
+      try{
+        
+        registerUser(email, password, role);
+        alert('Creado con exito')
+      }catch(error){
+        console.log(error);
       }
     }
+
+   
+
+
     return(
     <section className="login__bg">
       <div >
@@ -25,16 +54,18 @@ export const Register = () =>{
         {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
         <form className="d-flex flex-column align-items-center border border-primary p-3 rounded" onSubmit={handleSubmit(onSubmit)}>
           {/* register your input into the hook by invoking the "register" function */}
-          <label>New Username:</label>
+          
+          {/* INPUT EMAIL */}
+          <label>New Email:</label>
           <input
             className="form__inp"
-            type="text"
-            placeholder="Create New Username"
+            type="email"
+            placeholder="example@something.com"
             autoComplete="off"
-            {...register("user", {
+            {...register("email", {
               required: {
                 value: true,
-                message: "Username is required",
+                message: "Email is required",
               },
               maxLength: {
                 value: 20,
@@ -44,8 +75,9 @@ export const Register = () =>{
           />
 
           {/* errors will return when field validation fails  */}
-          {errors.user && <span>{errors.user.message}</span>}
+          {errors.email && <span>{errors.email.message}</span>}
 
+          {/* INPUT PASSWORD */}
           <label>Password:</label>
           <input
             className="form__inp"
@@ -68,6 +100,21 @@ export const Register = () =>{
             })}
           />
           {errors.password && <span>{errors.password.message}</span>}
+
+          {/* INPUT SELECT */}
+          <label>Role</label>
+          <select {...register("role",{
+            required:{
+              value: true,
+              message: "Role is required"
+            }
+          })}>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+
+          {/* errors will return when field validation fails  */}
+          {errors.role && <span>{errors.role.message}</span>}
 
           <input className="form__sub__btn" type="submit" value="SIGN UP" />
           <p className="formu__signUp">

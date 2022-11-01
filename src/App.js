@@ -2,18 +2,24 @@ import { Routes, Route, Link } from "react-router-dom";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { NavBar } from "./components/NavBar";
+import { Home } from "./components/Home";
 import "./index.css";
+import { UserProvider } from "./context/userContext";
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />}/>
-      </Routes>
-      
-    </div>
+    <UserProvider>
+      <div className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />}/>
+          <Route path="/" element={<Home />}/>
+        </Routes>
+        
+      </div>
+
+    </UserProvider>
   );
 }
 

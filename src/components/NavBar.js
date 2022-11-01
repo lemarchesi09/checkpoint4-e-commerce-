@@ -1,4 +1,13 @@
+import { Link } from "react-router-dom"
+
+import {user, setUser, useUserContext} from "../context/userContext";
+
+
 export const NavBar = () =>{
+    // User from context
+    const {user, setUser} = useUserContext();
+    console.log('user en NavBar', user);
+
     return(
         <nav className="navbar navbar-expand-lg bg-light">
             <div className="container-fluid">
@@ -9,14 +18,12 @@ export const NavBar = () =>{
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#">Home</a>
+                    <Link to="/" className="nav-link"> Home </Link>
                     </li>
-                    <li className="nav-item">
-                    <a className="nav-link" href="#">Link</a>
-                    </li>
+
                     <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
+                        Categories
                     </a>
                     <ul className="dropdown-menu">
                         <li><a className="dropdown-item" href="#">Action</a></li>
@@ -34,6 +41,23 @@ export const NavBar = () =>{
                     <button className="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 </div>
+                {user ? (
+                    <div>
+                        <button onClick={() => {setUser(null)}}>Log Out <i className="bi bi-person-check-fill"></i></button>
+                    </div>
+                    
+
+                )
+                    : (
+
+                    <div>
+                        <Link to="/login" className="nav-item">Log in <i className="bi bi-person"></i></Link>   
+                    </div>
+                    )
+        
+                    
+                }
+
             </div>
             </nav>
     )
