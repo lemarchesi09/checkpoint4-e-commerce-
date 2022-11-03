@@ -4,9 +4,9 @@ const ItemListContainter = () => {
   return (
   
     <div>
-      <div className="w-100 meliYellow">
+      {/* <div className="w-100 meliYellow">
       <h1>aca iria un navBar</h1>
-      </div>
+      </div> */}
        
         <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-inner">
