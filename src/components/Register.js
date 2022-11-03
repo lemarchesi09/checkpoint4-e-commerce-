@@ -6,21 +6,43 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { db } from "../firebase/firebase";
+import { collection, addDoc, setDoc, doc, getFirestore } from "firebase/firestore";
 
 export const Register = () =>{
+  // Firestore Users
+  const usersCollection = collection(db, "users");
+  const firestore = getFirestore(firebaseApp);
 
   // Firebase Register auth 
-    const registerUser = async (email, password, role) =>{
+    // const registerUser = async (email, password, role) =>{
+    //   const result = await createUserWithEmailAndPassword(
+    //     auth,
+    //     email,
+    //     password
+    //     // userCredential created it's not coming from firebase
+    //   ).then((userCredential) => {
+    //     console.log(userCredential);
+    //     return userCredential;
+    //   }) 
+    // }
+    const registerUser = async (email, password, role) => {
+      // console.log("registerUser", email, password, role);
       const result = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-        // userCredential created it's not coming from firebase
+          auth,
+          email,
+          password
       ).then((userCredential) => {
-        console.log(userCredential);
-        return userCredential;
-      }) 
-    }
+          // console.log("userCredential", userCredential);
+          return userCredential;
+      });
+      // console.log("result", result);
+      // console.log("result.user.uid", result.user.uid);
+      const userRef = doc(firestore, `users/${result.user.uid}`);
+      // console.log("userRef", userRef);
+      // setDoc(userRef, {email: email, role: role})
+      setDoc(userRef, { email, role });
+  };
     const auth = getAuth(firebaseApp);
     // React Hook Form
     const {
@@ -43,16 +65,26 @@ export const Register = () =>{
       }
     }
 
+
+  //   const addProduct = async (e) =>{
+  //     e.preventDefault();
+  //     try{
+  //         await addDoc(productsCollection, product)
+  //         console.log('Producto enviado');
+  //     }catch(error){
+  //         console.log('Error', error);
+  //     }
+  // }
    
 
 
     return(
-    <section className="login__bg">
-      <div >
+    <section >
 
-      
+      <h2 className='d-flex justify-content-center pt-2'>Create a New User</h2>
+      <div className='d-flex justify-content-center'>
         {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
-        <form className="d-flex flex-column align-items-center border border-primary p-3 rounded" onSubmit={handleSubmit(onSubmit)}>
+        <form className="d-flex flex-column align-items-center border border-primary p-3 rounded-bottom" onSubmit={handleSubmit(onSubmit)}>
           {/* register your input into the hook by invoking the "register" function */}
           
           {/* INPUT EMAIL */}
@@ -109,7 +141,7 @@ export const Register = () =>{
               message: "Role is required"
             }
           })}>
-            <option value="admin">Admin</option>
+            <option value="seller">Seller</option>
             <option value="user">User</option>
           </select>
 
@@ -119,7 +151,7 @@ export const Register = () =>{
           <input className="form__sub__btn" type="submit" value="SIGN UP" />
           <p className="formu__signUp">
             Already have an account?{" "}
-            <Link to="/" className="formu__signUp__link">
+            <Link to="/login" className="formu__signUp__link">
               LOG IN
             </Link>
           </p>

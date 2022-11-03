@@ -66,10 +66,9 @@ export const Login = () =>{
     
 
     return(
-        <div className="d-flex flex-column align-items-center">
-            Login
+        <div className="d-flex flex-column align-items-center pt-2">
             <div className="">
-                <h1>Welcome to Free Market</h1>
+                <h2>Welcome to Free Market</h2>
                 <p>You'll find everything you need</p>
             </div>
             <div className="form__cont">

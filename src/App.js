@@ -5,6 +5,7 @@ import { NavBar } from "./components/NavBar";
 import { Home } from "./components/Home";
 import "./index.css";
 import { UserProvider } from "./context/userContext";
+import { CreateProduct } from "./components/CreateProduct";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />}/>
           <Route path="/" element={<Home />}/>
+          <Route path="/create" element={<CreateProduct />}/>
         </Routes>
         
       </div>

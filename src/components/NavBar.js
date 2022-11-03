@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import {user, setUser, useUserContext} from "../context/userContext";
-
+import "../styles/navBar.css";
 
 export const NavBar = () =>{
     // User from context
@@ -9,54 +9,51 @@ export const NavBar = () =>{
     console.log('user en NavBar', user);
 
     return(
-        <nav className="navbar navbar-expand-lg bg-light">
+        <nav className="navbar navbar-expand-md navbar-expand-lg bg-light">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">Navbar</a>
+            <Link to="/" className="nav-link"> Logo </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item">
-                    <Link to="/" className="nav-link"> Home </Link>
-                    </li>
+                <div className="collapse navbar-collapse flex-column p-1" id="navbarSupportedContent">
+                    <form className="d-flex  form" role="search">
+                        <input className="form-control me-2 " type="search" placeholder="Search" aria-label="Search"/>
+                        <button className="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <ul className="navbar-nav mb-2 mb-lg-0 w-75">
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link"> Home </Link>
+                        </li>
 
-                    <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                    </a>
-                    <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="#">Action</a></li>
-                        <li><a className="dropdown-item" href="#">Another action</a></li>
-                        <li><hr className="dropdown-divider"/></li>
-                        <li><a className="dropdown-item" href="#">Something else here</a></li>
+                        <li className="nav-item">
+                            <Link to="#" className="nav-link"> Category 1 </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="#" className="nav-link"> Category 2 </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="#" className="nav-link"> Category 3 </Link>
+                        </li>
                     </ul>
-                    </li>
-                    <li className="nav-item">
-                    <a className="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-                <form className="d-flex" role="search">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-outline-success" type="submit">Search</button>
-                </form>
                 </div>
+                <div className="nav-user  d-flex justify-content-evenly">
+                    {/*  CONDICIONAL PARA MOSTRAR LOG IN O LOG OUT   */}
                 {user ? (
-                    <div>
-                        <button onClick={() => {setUser(null)}}>Log Out <i className="bi bi-person-check-fill"></i></button>
-                    </div>
-                    
-
-                )
-                    : (
-
-                    <div>
-                        <Link to="/login" className="nav-item">Log in <i className="bi bi-person"></i></Link>   
-                    </div>
+                    <Link to="/" className="nav-item" onClick={() => {setUser(null)}}>Log Out <i className="bi bi-person-check-fill ms-1"></i></Link>
                     )
-        
-                    
+                    : (
+                    <Link to="/login" className="nav-item">Log in <i className="bi bi-person ms-1"></i></Link>   
+
+                    )
                 }
+
+                    <div>
+                        <Link to='#'>Purchase History</Link>
+                    </div>
+                    <div>
+                        <Link to='/cart'> <i class="bi bi-cart"></i>(0) </Link>
+                    </div>
+                </div>
 
             </div>
             </nav>
