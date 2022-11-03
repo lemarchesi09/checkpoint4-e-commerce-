@@ -1,3 +1,4 @@
+
 import { Routes, Route, Link } from "react-router-dom";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
@@ -6,6 +7,7 @@ import { Home } from "./components/Home";
 import "./index.css";
 import { UserProvider } from "./context/userContext";
 import { CreateProduct } from "./components/CreateProduct";
+import ItemListContainter from './components/ItemListContainter'
 
 function App() {
   return (
@@ -20,9 +22,8 @@ function App() {
         </Routes>
         
       </div>
-
+      <ItemListContainter/>
     </UserProvider>
-  );
-}
-
+  )
+  }
 export default App;
