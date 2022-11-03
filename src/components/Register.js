@@ -10,7 +10,7 @@ import { db } from "../firebase/firebase";
 import { collection, addDoc, setDoc, doc, getFirestore } from "firebase/firestore";
 
 export const Register = () =>{
-  // Firestore Users
+  // Firestore Users DB
   const usersCollection = collection(db, "users");
   const firestore = getFirestore(firebaseApp);
 
