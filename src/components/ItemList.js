@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../styles/itemCards.css";
+import ItemDetails from "./ItemDetails";
 const ItemList = () => {
   const [dataCarrousel, setDataCarrousel] = useState([]);
 
@@ -21,6 +23,11 @@ const ItemList = () => {
       <h1 className=" textAboveItems">PRODUCTOS MAS BUSCADOS❤🔥</h1>
       <div className="d-flex justify-content-center items-center container">
         {dataCarrousel.slice(0, 4).map((item, index) => (
+         <Link
+           key={index}
+           to={`/itemDetails/${item.id}`}
+           className="cursor-pointer"
+         >
           <div className="card" key={index}>
             <div className="card-img-top">
               <img src={item.image} alt="..." className="image-card" />
@@ -36,6 +43,8 @@ const ItemList = () => {
               </div>
             </div>
           </div>
+        </Link>
+        
         ))}
       </div>
     </>
