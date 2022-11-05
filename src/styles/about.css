@@ -1,0 +1,19 @@
+.about img{
+    width: 100%;
+}
+
+.about h2{
+    margin: 5%;
+    text-align: center;
+}
+
+.about p{
+    margin: 5%;
+}
+
+.about .cards{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
