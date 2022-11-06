@@ -51,7 +51,7 @@ export const NavBar = () =>{
                         <Link to='#'>Purchase History</Link>
                     </div>
                     <div>
-                        <Link to='/cart'> <i class="bi bi-cart"></i>(0) </Link>
+                        <Link to='/cart'> <i className="bi bi-cart"></i>(0) </Link>
                     </div>
                 </div>
 

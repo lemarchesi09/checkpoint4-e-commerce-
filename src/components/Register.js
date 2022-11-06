@@ -13,37 +13,24 @@ export const Register = () =>{
   // Firestore Users DB
   const usersCollection = collection(db, "users");
   const firestore = getFirestore(firebaseApp);
+  const auth = getAuth(firebaseApp);
 
   // Firebase Register auth 
-    // const registerUser = async (email, password, role) =>{
-    //   const result = await createUserWithEmailAndPassword(
-    //     auth,
-    //     email,
-    //     password
-    //     // userCredential created it's not coming from firebase
-    //   ).then((userCredential) => {
-    //     console.log(userCredential);
-    //     return userCredential;
-    //   }) 
-    // }
-    const registerUser = async (email, password, role) => {
-      // console.log("registerUser", email, password, role);
+
+    const registerUser = async (name, email, password, role) => {
       const result = await createUserWithEmailAndPassword(
           auth,
           email,
           password
       ).then((userCredential) => {
-          // console.log("userCredential", userCredential);
+          console.log("userCredential", userCredential);
           return userCredential;
       });
-      // console.log("result", result);
-      // console.log("result.user.uid", result.user.uid);
       const userRef = doc(firestore, `users/${result.user.uid}`);
-      // console.log("userRef", userRef);
-      // setDoc(userRef, {email: email, role: role})
-      setDoc(userRef, { email, role });
+      // Send registered user to DB adding role and uid
+      setDoc(userRef, {name, email, role, id:result.user.uid });
   };
-    const auth = getAuth(firebaseApp);
+    
     // React Hook Form
     const {
         register,
@@ -53,12 +40,13 @@ export const Register = () =>{
     
     const onSubmit = (data, e) => {
 
+      const name = data.name;
       const email = data.email;
       const password = data.password;
       const role = data.role;
       try{
         
-        registerUser(email, password, role);
+        registerUser(name, email, password, role);
         alert('Creado con exito')
       }catch(error){
         console.log(error);
@@ -87,6 +75,28 @@ export const Register = () =>{
         <form className="d-flex flex-column align-items-center border border-primary p-3 rounded-bottom" onSubmit={handleSubmit(onSubmit)}>
           {/* register your input into the hook by invoking the "register" function */}
           
+                    {/* INPUT EMAIL */}
+                    <label>Name:</label>
+          <input
+            className="form__inp"
+            type="text"
+            placeholder="Your Name"
+            autoComplete="off"
+            {...register("name", {
+              required: {
+                value: true,
+                message: "Name is required",
+              },
+              maxLength: {
+                value: 15,
+                message: "Field must be less than 15 characters",
+              },
+            })}
+          />
+
+          {/* errors will return when field validation fails  */}
+          {errors.name && <span>{errors.name.message}</span>}
+
           {/* INPUT EMAIL */}
           <label>New Email:</label>
           <input

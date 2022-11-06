@@ -8,19 +8,35 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
+import { db } from "../firebase/firebase";
+import { collection, doc, getDocs, getDoc, getFirestore } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {user, setUser, useUserContext} from "../context/userContext";
 
 export const Login = () =>{
 
     const {user, setUser} = useUserContext();
+    const [usersDB, setUsersDB] = useState([])
     const navigate = useNavigate();
     const auth = getAuth(firebaseApp);
 
     // console.log('User en login', userLogged);
 
+    const usersCollection = collection(db, "users");
+
+    const getUsers = async () =>{
+        const dataUsers = await getDocs(usersCollection);
+        const usersList = dataUsers.docs;
+        console.log('usersDB', usersList);
+        setUsersDB(usersList)
+        console.log(usersList);
+    }
+
+    useEffect(()=>{
+        getUsers()
+    }, [])
+    
     // onAuthStateChanged(auth, (userFromFirebase) => {
     //     if (userFromFirebase){
     //         setUser(userFromFirebase)
@@ -29,6 +45,30 @@ export const Login = () =>{
     //     }
     // })
 
+    // Set role for user Logged
+    const getUserFirestore = async (uid) => {
+        const docRef = doc(db, `users/${uid}`);
+        const docSnap = await getDoc(docRef);
+        const role = docSnap.data().role;
+        return role;
+        // Conseguimos el rol del usuario
+    };
+    
+    const setUserWithFirestoreRole = (userFromFirebase) => {
+        // Traer el usuario por ID - Usar un metodo getUserFirestore
+        getUserFirestore(userFromFirebase.uid).then((role) => {
+            // console.log("role", role);
+            // Armar el objeto con el usuario y el rol
+            const userWithRole = {
+                uid: userFromFirebase.uid,
+                email: userFromFirebase.email,
+                role: role,
+            };
+            setUser(userWithRole);
+        });
+    };
+
+    // React Hook Form
     const {
         register,
         handleSubmit,
@@ -47,13 +87,29 @@ export const Login = () =>{
                     email: userCredential.user.email,
                     id: userCredential.user.uid
                 }
-                console.log(userCredential);
-
-                // Seting user in Context with setUser imported
-                setUser(userLogged)
-                console.log(user);
-                navigate("/")
-
+                console.log('userCredential', userCredential);
+                console.log('userLogged', userLogged);
+                
+                onAuthStateChanged(auth, (userFromFirebase) => {
+                    // console.log("userFromFirebase.uid", userFromFirebase.uid);
+                    if (userFromFirebase) {
+                        if (!user) {
+                            setUserWithFirestoreRole(userFromFirebase);
+                            console.log('user desde onAuth setUserwithRole', user);
+                        }
+                    } else {
+                        setUser(null);
+                    }
+                    navigate("/")
+                //     // const userFinded = usersDB.find(user => user.id === userLogged.id)
+                // if (userFinded) {
+                //     // Seting user in Context with setUser imported
+                //     console.log(userFinded);
+                //     setUser(userFinded)
+                //     console.log('user logged successfully', user.role);
+                //     });
+                    
+                })
             })
 
             
@@ -62,6 +118,8 @@ export const Login = () =>{
         }
         
     }
+
+
 
     
 
