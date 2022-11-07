@@ -1,0 +1,27 @@
+.card{
+    margin: 0 !important;
+    padding: .5em;
+   
+}
+.card-title{
+    font-size: 2rem;
+}
+@media (max-width:550px) {
+    .card-title{
+        font-size: 1rem;
+    }
+    .card-buttons{
+        display: flex;
+        flex-direction: column;
+    }
+}
+.card-text:nth-child(4){
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+
+}
+.star-svg{
+    height: 50px;
+}
+
