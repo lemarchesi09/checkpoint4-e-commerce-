@@ -3,12 +3,12 @@
 }
 
 .about h2{
-    margin: 5%;
+    margin: 1% 5% 0;
     text-align: center;
 }
 
 .about p{
-    margin: 5%;
+    margin: 1% 5%;
 }
 
 .about .cards{
@@ -16,4 +16,9 @@
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
+}
+
+.about .cards a{
+    text-decoration: none;
+    margin-bottom: 2%;
 }
