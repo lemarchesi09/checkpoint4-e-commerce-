@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/itemCards.css";
-import ItemDetails from "./ItemDetails";
 const ItemList = () => {
   const [dataCarrousel, setDataCarrousel] = useState([]);
 
@@ -17,7 +16,7 @@ const ItemList = () => {
   useEffect(() => {
     getData();
   }, []);
-  console.log(dataCarrousel);
+
   return (
     <>
       <h1 className=" textAboveItems">PRODUCTOS MAS BUSCADOS❤🔥</h1>
