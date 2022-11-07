@@ -3,11 +3,7 @@ import ItemList from './ItemList'
 const ItemListContainter = () => {
   return (
   
-    <div>
-      {/* <div className="w-100 meliYellow">
-      <h1>aca iria un navBar</h1>
-      </div> */}
-       
+    <div>       
         <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
   <div className="carousel-inner">
     <div className="carousel-item active" data-bs-interval="5000">
