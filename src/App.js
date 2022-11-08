@@ -8,7 +8,6 @@ import { UserProvider } from "./context/userContext";
 import { CreateProduct } from "./components/CreateProduct";
 import { ProductForm } from "./components/ProductForm";
 import { Products } from "./components/Products";
-import { useSelector } from "react-redux";
 import ItemDetails from "./components/ItemDetails";
 import { Cart } from "./components/Cart";
 
@@ -22,17 +21,14 @@ function App() {
         <NavBar />
 
         <Routes>
-        <Route path="/" element={<Home />}/>
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register />}/>
-          <Route path="/create" element={<CreateProduct />}/>
-          <Route
-            path="/itemDetails/:id/"
-            element={<ItemDetails />}
-            />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/create" element={<CreateProduct />} />
+          <Route path="/itemDetails/:id/" element={<ItemDetails />} />
           <Route path="/product" element={<ProductForm />} />
           <Route path="/productlist" element={<Products />} />
-          <Route path="/cart" element={<Cart/>} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </div>
     </UserProvider>
