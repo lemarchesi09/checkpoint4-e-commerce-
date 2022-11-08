@@ -30,7 +30,7 @@ export const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addProduct(await addDoc(productsCollection, product)), console.log(product));
+    dispatch(addProduct(await addDoc(productsCollection, product)));
   };
 
   const handleChange = (e) => {
