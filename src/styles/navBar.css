@@ -1,0 +1,29 @@
+.nav-user{
+    width: 25%;
+}
+.nav-user a{
+    text-decoration: none;
+} 
+
+.form{
+    width: 75%;
+}
+ @media (max-width:768px) {
+    .nav-user{
+        width: 35%;
+    }
+    .collapse{
+        width: 65%;
+    }
+}
+ @media (max-width:320px) {
+     .nav-user{
+         width: 100%;
+         justify-content: space-between;
+         padding-top: 5%;
+     }
+     .form{
+        width: 100%;
+     }
+    
+ }   
