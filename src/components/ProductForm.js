@@ -31,7 +31,9 @@ export const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // basicamente en vez de hacer todo juntos como tenias tenias que hacerlo por separado o por partes como quieras verlo. 
       await addDoc(productsCollection, product)
+      // y lo que se rompia por consola era todo de redux onda le estabas pasando la referencia del addDoc y ademas el obj 
       dispatch(addProduct(product));
     } catch (error) {
       console.log(error);
