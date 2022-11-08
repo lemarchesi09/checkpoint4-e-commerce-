@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import { Rating } from 'react-simple-star-rating'
+//import { Rating } from 'react-simple-star-rating'
 import "../styles/itemDetails.css";
 const ItemDetails = () => {
   const { id } = useParams();
@@ -40,7 +40,6 @@ const ItemDetails = () => {
                 <span>{category}</span>.
               </p>
               <h5 class="card-title">{title}</h5>
-              {/* <Rating  initialValue={ item.rating?.rate} /> */}
               <p class="card-text">{description}.</p>
               
            {quantity>1? <p class="card-text">${price*quantity} </p> : <p class="card-text">${price}</p> }
