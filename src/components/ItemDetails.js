@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Rating } from 'react-simple-star-rating'
+// import { Rating } from 'react-simple-star-rating'
 import "../styles/itemDetails.css";
 const ItemDetails = () => {
   const { id } = useParams();
   const [item, setItem] = useState({});
-  const { title, price, description, image, category,rate } = item;
-
+  const { title, price, description, image, category, rate } = item;
 
   const getDataItem = async () => {
     const url = `https://fakestoreapi.com/products/${id}`;
@@ -31,7 +30,7 @@ const ItemDetails = () => {
                 <span>{category}</span>.
               </p>
               <h5 class="card-title">{title}</h5>
-              <Rating  initialValue={ item.rating?.rate} />
+              {/* <Rating initialValue={item.rating?.rate} /> */}
               <p class="card-text">{description}.</p>
               <p class="card-text">${price}</p>
               <p class="card-text">
@@ -39,10 +38,10 @@ const ItemDetails = () => {
               </p>
             </div>
             <div className=" row-md-2 d-flex justify-content-around">
-              <div className="card_input_count" >
-              <input type="number"  style={{ width: "70px" }} />
+              <div className="card_input_count">
+                <input type="number" style={{ width: "70px" }} />
               </div>
-         
+
               <div className="card-buttons d-flex  col-md-6 gap-4  ">
                 <div className="card-button_buy">
                   <button className="btn btn-primary ">Buy now</button>

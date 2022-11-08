@@ -7,9 +7,10 @@ import "./index.css";
 import { UserProvider } from "./context/userContext";
 import { CreateProduct } from "./components/CreateProduct";
 import { ProductForm } from "./components/ProductForm";
-import { Products } from "./components/Products";
+import { ProductList } from "./components/ProductList";
 import { useSelector } from "react-redux";
 import ItemDetails from "./components/ItemDetails";
+import { ProductUpdate } from "./components/ProductUpdate";
 
 function App() {
   // const products = useSelector((state) => state.products);
@@ -21,16 +22,14 @@ function App() {
         <NavBar />
 
         <Routes>
-        <Route path="/" element={<Home />}/>
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register />}/>
-          <Route path="/create" element={<CreateProduct />}/>
-          <Route
-            path="/itemDetails/:id/"
-            element={<ItemDetails />}
-            />
-          <Route path="/product" element={<ProductForm />} />
-          <Route path="/productlist" element={<Products />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/create" element={<CreateProduct />} />
+          <Route path="/itemDetails/:id/" element={<ItemDetails />} />
+          <Route path="/productform" element={<ProductForm />} />
+          <Route path="/productlist" element={<ProductList />} />
+          <Route path="/update/:id" element={<ProductUpdate />} />
         </Routes>
       </div>
     </UserProvider>
