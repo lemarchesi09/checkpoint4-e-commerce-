@@ -6,7 +6,7 @@ export const Home = () =>{
     return(
         <div>
 
-            {user?.role  ? <Link to="/create">Create</Link> : <></>}
+            {user?.role==="admin"  ? <Link to="/create">Create</Link> : <></>}
 
             <ItemListContainter/>
             {/* <Link to="/create">Create</Link> */}

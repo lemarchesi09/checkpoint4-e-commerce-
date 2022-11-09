@@ -9,9 +9,11 @@ export const useUserContext = () => {
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
+    const [searchProducts, setSearchProducts] = useState([]);
+
 console.log('user en Context', user);
     return (
-        <userContext.Provider value={{user, setUser}}>
+        <userContext.Provider value={{user, setUser, searchProducts, setSearchProducts}}>
             {children}
         </userContext.Provider>
     );

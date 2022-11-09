@@ -29,21 +29,12 @@ export const CreateProduct = () =>{
             // await setDoc(usersCollection,product )
             
             // Add product to personal collection  
-            if (user.hasOwnProperty('productsToSell')) {
-                await setDoc(doc(db, "users", `/${user.uid}`), {
-                    ...user,
-                    productsToSell: [product],
-                  });
-                
-                  console.log('Producto agregado en el usuario registrado');
-            }else{
-                
-                
-                await setDoc(doc(db, "users", `/${user.uid}`), {
-                    
-                  });
-                console.log('entro en el else de productsToSell');
-            }
+            await setDoc(doc(db, "users", `/${user.uid}`), {
+                ...user,
+                productsToSell: [product],
+              });
+            console.log('Producto agregado en el usuario registrado');
+
             // const userRef = doc(db, `users/${result.user.uid}`);
             // Capturar el user logeado - Esta faltando eso
             // await setDoc(userRef, {sellerProducts: product });
