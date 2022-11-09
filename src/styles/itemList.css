@@ -2,23 +2,40 @@ a{
     text-decoration: none!important ;
 }
 
-.itemList .cards{
-    /* background-color: #00a650; */
-    margin: 2.5% 0;
-    align-items: center;
-    justify-content: space-around;
+.textAboveItems {
+    font-family: monospace;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 2rem;
+}
+
+.itemList{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.itemList .cards{
+    margin: 2.5% 0;
+    display: flex;
 }
 
 .itemList .cards .card{
     width: 15rem;
-   /*  margin: 0.5rem 1rem; */
+    margin: 1rem;
 }
 
 .itemList .cards .card:hover{
     transform: scale(1.1);
     box-shadow: 5px 5px 30px var(--button-bg);
+}
+
+.itemList .cards .card .image{
+    height: 300px;
 }
 
 .itemList .cards .card-title{
@@ -40,18 +57,4 @@ a{
 
 .itemList .card-text p:nth-child(2){
     color:#00a650;
-}
-
-
-.meliYellow {
-    background-color: #fff159;
-}
-
-.textAboveItems {
-    font-family: monospace;
-    font-weight: 300;
-    font-size: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    margin-top: 2rem;
 }

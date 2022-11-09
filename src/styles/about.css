@@ -12,6 +12,7 @@
 }
 
 .about .cards{
+    margin: 2.5% 0;
     align-items: center;
     justify-content: space-around;
     display: flex;

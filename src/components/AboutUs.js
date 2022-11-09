@@ -24,9 +24,9 @@ export const AboutUs = () => (
       <Card.Body>
         <Card.Title className ="title">Florencia Miguez Oliverio</Card.Title>
         <Card.Text className="text row">
-        <Link to="https://github.com/fmiguezo/" className=""> <BsGithub/> Github </Link>
-        <Link to="https://www.linkedin.com/in/" className=""> <BsLinkedin/> LinkedIn </Link>
-        <div><BsFillGeoAltFill/> Ubicación</div> 
+        <Link to="https://github.com/fmiguezo/"> <BsGithub/> Github </Link>
+        <Link to="https://www.linkedin.com/in/florencia-miguez-oliverio/"> <BsLinkedin/> LinkedIn </Link>
+        <div><BsFillGeoAltFill/> CABA - Buenos Aires</div> 
         </Card.Text>
       </Card.Body>
     </Card>
@@ -35,9 +35,9 @@ export const AboutUs = () => (
       <Card.Body>
         <Card.Title className ="title">Ignacio Benitez</Card.Title>
         <Card.Text className="text row">
-        <Link to="https://github.com/ignacio2194/" className=""> <BsGithub/> Github </Link>
-        <Link to="https://www.linkedin.com/in/" className=""> <BsLinkedin/> LinkedIn </Link>
-        <div><BsFillGeoAltFill/> Ubicación</div>
+        <Link to="https://github.com/ignacio2194/"> <BsGithub/> Github </Link>
+        <Link to="https://www.linkedin.com/in/ignaciobntz/"> <BsLinkedin/> LinkedIn </Link>
+        <div><BsFillGeoAltFill/> Mar del Plata - Buenos Aires</div>
         </Card.Text>
       </Card.Body>
     </Card>
@@ -46,9 +46,9 @@ export const AboutUs = () => (
       <Card.Body>
         <Card.Title className ="title">Enzo Marchesi</Card.Title>
         <Card.Text className="text row">
-        <Link to="https://github.com/lemarchesi09" className=""> <BsGithub/> Github </Link>
-        <Link to="https://www.linkedin.com/in/" className=""> <BsLinkedin/> LinkedIn </Link>
-        <div><BsFillGeoAltFill/> Ubicación</div>
+        <Link to="https://github.com/lemarchesi09"> <BsGithub/> Github </Link>
+        <Link to="https://www.linkedin.com/in/lemarchesi/"> <BsLinkedin/> LinkedIn </Link>
+        <div><BsFillGeoAltFill/> Córdoba - Córdoba</div>
         </Card.Text>
       </Card.Body>
     </Card>
@@ -57,9 +57,9 @@ export const AboutUs = () => (
       <Card.Body>
         <Card.Title className ="title">Ian Noreiko</Card.Title>
         <Card.Text className="text row">
-        <Link to="https://github.com/Ianbpn" className=""> <BsGithub/> Github </Link>
-        <Link to="https://www.linkedin.com/in/" className=""> <BsLinkedin/> LinkedIn </Link>
-        <div><BsFillGeoAltFill/> Ubicación</div>
+        <Link to="https://github.com/Ianbpn"> <BsGithub/> Github </Link>
+        <Link to="https://www.linkedin.com/in/ian-pereyra-noreiko/"> <BsLinkedin/> LinkedIn </Link>
+        <div><BsFillGeoAltFill/> Mar del Plata - Buenos Aires</div>
         </Card.Text>
       </Card.Body>
     </Card>
@@ -68,8 +68,8 @@ export const AboutUs = () => (
       <Card.Body>
         <Card.Title className ="title">Cecilia Kuckiewicz</Card.Title>
         <Card.Text className="text row">
-        <Link to="https://github.com/kucki90" className=""> <BsGithub/> Github </Link>
-        <Link to="https://www.linkedin.com/in/cecilia-kuckiewicz/" className=""> <BsLinkedin/> LinkedIn </Link>
+        <Link to="https://github.com/kucki90"> <BsGithub/> Github </Link>
+        <Link to="https://www.linkedin.com/in/cecilia-kuckiewicz/"> <BsLinkedin/> LinkedIn </Link>
         <div><BsFillGeoAltFill/> Vicente López - Buenos Aires</div>
         </Card.Text>
       </Card.Body>

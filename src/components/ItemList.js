@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "../styles/itemCards.css";
 import Card from 'react-bootstrap/Card';
+import "../styles/itemList.css";
 const ItemList = () => {
   const [dataCarrousel, setDataCarrousel] = useState([]);
 
@@ -26,7 +26,7 @@ const ItemList = () => {
          <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer" >
           <div className="cards">
             <Card className="card" key={index}>
-              <Card.Img variant="top" src={`${ item.image }`} />
+              <Card.Img className="image" variant="top" src={`${ item.image }`} />
               <Card.Body>
                 <Card.Title className ="card-title">{item.title}</Card.Title>
                 <Card.Text className="text row">
