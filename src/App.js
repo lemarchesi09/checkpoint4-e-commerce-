@@ -25,7 +25,6 @@ function App() {
         {/* <ProSidebarProvider>
           <SideBar />
         </ProSidebarProvider> */}
-        ;
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
