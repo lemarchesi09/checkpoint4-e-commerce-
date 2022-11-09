@@ -11,6 +11,7 @@ import { Products } from "./components/Products";
 import { useSelector } from "react-redux";
 import ItemDetails from "./components/ItemDetails";
 import { Cart } from "./components/Cart";
+import PurchaseForm from "./components/PurchaseForm";
 
 function App() {
   // const products = useSelector((state) => state.products);
@@ -33,6 +34,7 @@ function App() {
           <Route path="/product" element={<ProductForm />} />
           <Route path="/productlist" element={<Products />} />
           <Route path="/cart" element={<Cart/>} />
+          <Route path="/PurchaseForm" element={<PurchaseForm/>} />
         </Routes>
       </div>
     </UserProvider>
