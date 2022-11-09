@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-//import { Rating } from 'react-simple-star-rating'
 import "../styles/itemDetails.css";
 const ItemDetails = () => {
   const { id } = useParams();
@@ -51,7 +50,7 @@ const ItemDetails = () => {
               <div className="card_input_count" >
               <input type="number" min={1} max={10} value={count} onChange={getQuantity} style={{ width: "70px" }} />
               </div>
-         
+
               <div className="card-buttons d-flex  col-md-6 gap-4  ">
                 <div className="card-button_buy">
                   <button className="btn btn-primary ">Buy now</button>
