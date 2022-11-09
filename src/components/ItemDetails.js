@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-//import { Rating } from 'react-simple-star-rating'
+import { Rating } from 'react-simple-star-rating';
 import "../styles/itemDetails.css";
 const ItemDetails = () => {
   const { id } = useParams();
   const [item, setItem] = useState({});
+  const [quantity,setQuantity] =useState(0)
+  const [count,setCount] =useState(1)
   const { title, price, description, image, category,rate } = item;
 
 
@@ -15,6 +17,13 @@ const ItemDetails = () => {
     const res = await data.json();
     setItem(res);
   };
+  const getQuantity=(e)=>{
+      setQuantity (Number(e.target.value))
+      setCount(Number(e.target.value))
+
+  
+    console.log(quantity);
+  }
   useEffect(() => {
     getDataItem();
   }, []);
@@ -32,16 +41,17 @@ const ItemDetails = () => {
               </p>
               <h5 class="card-title">{title}</h5>
               <p class="card-text">{description}.</p>
-              <p class="card-text">${price}</p>
+              
+           {quantity>1? <p class="card-text">${price*quantity} </p> : <p class="card-text">${price}</p> }
               <p class="card-text">
                 <small class="text-muted">Last updated 3 mins ago</small>
               </p>
             </div>
             <div className=" row-md-2 d-flex justify-content-around">
               <div className="card_input_count" >
-              <input type="number"  style={{ width: "70px" }} />
+              <input type="number" min={1} max={10} value={count} onChange={getQuantity} style={{ width: "70px" }} />
               </div>
-         
+
               <div className="card-buttons d-flex  col-md-6 gap-4  ">
                 <div className="card-button_buy">
                   <button className="btn btn-primary ">Buy now</button>

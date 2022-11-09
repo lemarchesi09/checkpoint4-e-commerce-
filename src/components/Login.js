@@ -96,11 +96,21 @@ export const Login = () =>{
                         if (!user) {
                             setUserWithFirestoreRole(userFromFirebase);
                             console.log('user desde onAuth setUserwithRole', user);
+                            
                         }
                     } else {
                         setUser(null);
                     }
-                    navigate("/")
+                    // Esta hecho, pero tiene que ser asincrono
+                    console.log('user fuera de setuserwithrole', user);
+                    if (user?.role === "admin") {
+                        console.log('es admin');
+                        navigate("/admin");
+                    }else{
+                        console.log('no es admin');
+                        navigate("/");
+                    }
+                    
                 //     // const userFinded = usersDB.find(user => user.id === userLogged.id)
                 // if (userFinded) {
                 //     // Seting user in Context with setUser imported
