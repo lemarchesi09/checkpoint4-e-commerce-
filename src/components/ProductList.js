@@ -1,32 +1,32 @@
 import { db } from "../firebase/firebase";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import "../styles/Products.css";
+import "../styles/ProductList.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Link } from "react-router-dom";
 
 const MySwal = withReactContent(Swal);
 
-export const Products = () => {
+export const ProductList = () => {
   const [products, setProducts] = useState([]);
   const productsCollection = collection(db, "generalProducts");
+
   const getProducts = async () => {
     const dataProducts = await getDocs(productsCollection);
     setProducts(dataProducts.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   const confirmDeleteProduct = (id) => {
-    console.log("id", id);
     MySwal.fire({
       title: "Are you sure to delete this product?",
-      text: "This action don't have reverse!",
+      text: "This action can't be reversed!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
-      console.log("result", result);
       if (result.isConfirmed) {
         deleteProduct(id);
       }
@@ -34,7 +34,7 @@ export const Products = () => {
   };
 
   const deleteProduct = async (id) => {
-    const productToDelete = doc(db, "products", id);
+    const productToDelete = doc(db, "generalProducts", id);
     try {
       await deleteDoc(productToDelete);
       MySwal.fire({
@@ -86,9 +86,11 @@ export const Products = () => {
                       <td>{product.stock}</td>
                       <td>{product.description}</td>
                       <td>
-                        <button type="button" class="btn btn-primary">
-                          <i class="far fa-eye">Update</i>
-                        </button>
+                        <Link to={`/update/${product.id}`}>
+                          <button type="button" class="btn btn-primary">
+                            <i class="far fa-eye">Update</i>
+                          </button>
+                        </Link>
                         <button type="button" class="btn btn-danger" onClick={() => confirmDeleteProduct(product.id)}>
                           <i class="far fa-trash-alt">Delete</i>
                         </button>
