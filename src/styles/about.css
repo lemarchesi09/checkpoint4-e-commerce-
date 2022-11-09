@@ -13,9 +13,42 @@
 
 .about .cards{
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     display: flex;
     flex-wrap: wrap;
+}
+
+.about .cards .card{
+    width: 15rem;
+    /* margin: 2rem; */
+}
+
+.about .cards .card1:hover{
+    transform: scale(1.1);
+    box-shadow: 5px 5px 30px rgb(233, 7, 113);
+}
+
+.about .cards .card2:hover{
+    transform: scale(1.1);
+    box-shadow: 5px 5px 30px rgb(1, 248, 1);
+}
+
+.about .cards .card3:hover{
+    transform: scale(1.1);
+    box-shadow: 5px 5px 30px rgb(44, 149, 209);
+}
+
+.about .cards .card4:hover{
+    transform: scale(1.1);
+    box-shadow: 5px 5px 30px rgb(40, 67, 224);
+}
+
+.about .cards .title{
+    height: 3rem;
+}
+
+.about .cards .text{
+    height: 7rem;
 }
 
 .about .cards a{

@@ -1,23 +1,52 @@
 import { db } from "../firebase/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import  firebaseApp from "../firebase/firebase";
+import { collection, addDoc, setDoc, doc, getFirestore } from "firebase/firestore";
 import { Button } from "bootstrap";
 import { useState } from "react";
-
+import { useUserContext } from "../context/userContext";
 
 export const CreateProduct = () =>{
     const productsCollection = collection(db, "generalProducts");
+    const usersCollection = collection(db, "users");
+    const firestore = getFirestore(firebaseApp);
+
+    // Get user from Context
+    const {user, setUser} = useUserContext();
 
     const [product, setProduct] = useState({
         title: "",
         description: "",
+        price: 0,
         stock: 0,
     })
 
     const addProduct = async (e) =>{
         e.preventDefault();
         try{
+            // Add product to general store 
             await addDoc(productsCollection, product)
-            console.log('Producto enviado');
+            console.log('Producto enviado a productsCollection');
+            // await setDoc(usersCollection,product )
+            
+            // Add product to personal collection  
+            if (user.hasOwnProperty('productsToSell')) {
+                await setDoc(doc(db, "users", `/${user.uid}`), {
+                    ...user,
+                    productsToSell: [product],
+                  });
+                
+                  console.log('Producto agregado en el usuario registrado');
+            }else{
+                
+                
+                await setDoc(doc(db, "users", `/${user.uid}`), {
+                    
+                  });
+                console.log('entro en el else de productsToSell');
+            }
+            // const userRef = doc(db, `users/${result.user.uid}`);
+            // Capturar el user logeado - Esta faltando eso
+            // await setDoc(userRef, {sellerProducts: product });
         }catch(error){
             console.log('Error', error);
         }
@@ -46,6 +75,14 @@ export const CreateProduct = () =>{
                 name="description"
                 placeholder="Description"
                 value={product.description}
+                // onChange={(e) => setDescription(e.target.value)}
+                onChange={handleChange}
+            />
+            <input
+                type="text"
+                name="price"
+                placeholder="Price"
+                value={product.price}
                 // onChange={(e) => setDescription(e.target.value)}
                 onChange={handleChange}
             />
