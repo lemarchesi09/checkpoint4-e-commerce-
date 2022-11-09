@@ -1,7 +1,7 @@
 import { db } from "../firebase/firebase";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import "../styles/Products.css";
+import "../styles/ProductList.css";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { Link } from "react-router-dom";

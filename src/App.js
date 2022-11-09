@@ -11,6 +11,8 @@ import { ProductList } from "./components/ProductList";
 import { useSelector } from "react-redux";
 import ItemDetails from "./components/ItemDetails";
 import { ProductUpdate } from "./components/ProductUpdate";
+import { SideBar } from "./components/SideBar";
+import { ProSidebarProvider } from "react-pro-sidebar";
 
 function App() {
   // const products = useSelector((state) => state.products);
@@ -20,7 +22,10 @@ function App() {
     <UserProvider>
       <div className="App">
         <NavBar />
-
+        {/* <ProSidebarProvider>
+          <SideBar />
+        </ProSidebarProvider> */}
+        ;
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
