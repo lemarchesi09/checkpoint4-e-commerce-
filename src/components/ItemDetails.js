@@ -1,39 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import { addProduct } from "../../src/features/item/itemSlice";
+import { addItem, addProduct } from "../../src/features/item/itemSlice";
+import { db } from "../firebase/firebase";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 // import { Rating } from 'react-simple-star-rating';
 import "../styles/itemDetails.css";
 
 const ItemDetails = () => {
   const { id } = useParams();
-  const [item, setItem] = useState({});
-  const [quantity,setQuantity] =useState(1)
-  const [count,setCount] =useState(1)
-  const { title, price, description, image, category,rate } = item;
+  // const [item, setItem] = useState({});
+  // const [quantity,setQuantity] =useState(1)
+  // const [count,setCount] =useState(1)
+  const [itemQty,setItemQty] =useState({
+    item:{},
+    quantity:1,
+    count:1
+  })
+  const { title, price, description, image, category } = itemQty.item;
+
   const stateItem = useSelector((state) => state.item);
 
   const dispatch =useDispatch()
 
+  const productsCollection = collection(db, "generalProducts");
 
-  const getDataItem = async () => {
-    const url = `https://fakestoreapi.com/products/${id}`;
-    const data = await fetch(url);
-    const res = await data.json();
-    setItem(res);
+  const getProducts = async () => {
+    const dataProducts = await getDocs(productsCollection);
+    dataProducts.docs.filter((item) => ({ ...item.data(), id: item.id }) )
+    // itemQty.item=dataProducts
+    console.log(dataProducts);
   };
+
   const getQuantity=(e)=>{
-      setQuantity (Number(e.target.value))
-      setCount(Number(e.target.value))
+      setItemQty.quantity(Number(e.target.value))
+      setItemQty.count(Number(e.target.value))
 
   }
   const AddNow =()=>{
-    dispatch(addProduct({item, quantity}))
-    const newArray = stateItem.map(item=> console.log(item))
-    console.log(newArray);
+    dispatch(addItem(itemQty.item , itemQty.quantity))
+
+
   }
   useEffect(() => {
-    getDataItem();
+    getProducts()
   }, []);
   return (
     <div className="p-4">
@@ -49,12 +59,7 @@ const ItemDetails = () => {
               </p>
               <h5 className="card-title">{title}</h5>
               <p className="card-text">{description}.</p>
-
-              {quantity > 1 ? (
-                <p className="card-text">${price * quantity} </p>
-              ) : (
-                <p className="card-text">${price}</p>
-              )}
+              <p className="card-text">${price}</p>
               <p className="card-text">
                 <small className="text-muted">Last updated 3 mins ago</small>
               </p>
@@ -65,7 +70,7 @@ const ItemDetails = () => {
                   type="number"
                   min={1}
                   max={10}
-                  value={count}
+                  value={itemQty.count}
                   onChange={getQuantity}
                   style={{ width: "70px" }}
                 />

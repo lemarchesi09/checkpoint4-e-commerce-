@@ -6,26 +6,24 @@ export const itemSlice = createSlice({
   name: "items",
   initialState,
   reducers: {
-    addProduct: (state, action) => {
+    addItem: (state, action) => {
       state.push(action.payload);
+
     },
-    updateProduct: (state, action) => {
-      const { id, title, price, category, description, image, stock } = action.payload;
-      const findProduct = state.find((product) => product.id === id);
-      if (findProduct) {
-        findProduct.title = title;
-        findProduct.price = price;
-        findProduct.category = category;
-        findProduct.description = description;
-        findProduct.image = image;
-        findProduct.stock = stock;
+    updateItem: (state, action) => {
+      const { id,quantity } = action.payload;
+  
+      const findItem = state.find((item) => item.id === id);
+      if (findItem) {
+        findItem.quantity += quantity;
+   
       }
     },
-    deleteProduct: (state, action) => {
-      return state.filter((product) => product.id !== action.payload);
+    deleteItem: (state, action) => {
+      return state.filter((Item) => Item.id !== action.payload);
     },
   },
 });
 
-export const { addProduct, updateProduct, deleteProduct } = itemSlice.actions;
+export const { addItem, updateItem, deleteItem } = itemSlice.actions;
 export default itemSlice.reducer;
