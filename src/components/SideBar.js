@@ -8,7 +8,7 @@ import { useUserContext } from "../context/userContext";
 
 export const SideBar = () => {
   const { collapseSidebar, collapsed } = useProSidebar();
-  const {setUser} = useUserContext();
+  const { setUser } = useUserContext();
 
   return (
     <>
@@ -32,12 +32,17 @@ export const SideBar = () => {
             </MenuItem>
           </Menu>
           <Menu iconShape="square" id="footer">
-            <MenuItem icon={<FiLogOut />} id="logout" onClick={() => {setUser(null)}}>
+            <MenuItem
+              icon={<FiLogOut />}
+              id="logout"
+              onClick={() => {
+                setUser(null);
+              }}
+            >
               Logout
             </MenuItem>
           </Menu>
         </Sidebar>
-        ;
       </div>
     </>
   );
