@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { addProduct } from "../../src/features/item/itemSlice";
 import { useParams } from "react-router-dom";
-import { Rating } from 'react-simple-star-rating';
+// import { Rating } from 'react-simple-star-rating';
 import "../styles/itemDetails.css";
 const ItemDetails = () => {
   const { id } = useParams();
   const [item, setItem] = useState({});
-  const [quantity,setQuantity] =useState(0)
+  const [quantity,setQuantity] =useState(1)
   const [count,setCount] =useState(1)
   const { title, price, description, image, category,rate } = item;
+  const stateItem = useSelector((state) => state.item);
+
   const dispatch =useDispatch()
 
 
@@ -27,6 +29,8 @@ const ItemDetails = () => {
   }
   const AddNow =()=>{
     dispatch(addProduct({item, quantity}))
+    const newArray = stateItem.map(item=> console.log(item))
+    console.log(newArray);
   }
   useEffect(() => {
     getDataItem();
