@@ -13,6 +13,7 @@ import { collection, doc, getDocs, getDoc, getFirestore } from "firebase/firesto
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {user, setUser, useUserContext} from "../context/userContext";
+import Swal from "sweetalert2";
 
 export const Login = () =>{
 
@@ -64,7 +65,39 @@ export const Login = () =>{
                 email: userFromFirebase.email,
                 role: role,
             };
+            console.log('user with role', userWithRole);
             setUser(userWithRole);
+            if (userWithRole?.role === "admin") {
+                console.log('es admin');
+                Swal.fire({
+                    title: "Log in success!",
+                    text: `Welcome ${userWithRole.email.toUpperCase()}`,
+                    icon: "success",
+                    confirmButtonText: "Go ahead",
+                    confirmButtonColor: "#8c7851",
+                    cancelButtonColor: "#d33",
+                  }).then((result) => {
+                    // Una vez logeado, navegar al dashboard
+                    if (result.isConfirmed) {
+                      navigate("/admin");
+                    }
+                  });
+                } else {
+                  console.log("Datos invalidos");
+                  Swal.fire({
+                    title: "Log in success!",
+                    text: `Welcome ${userWithRole.email.toUpperCase()}`,
+                    icon: "success",
+                    confirmButtonText: "Go ahead",
+                    confirmButtonColor: "#8c7851",
+                    cancelButtonColor: "#d33",
+                  }).then((result) => {
+                    // Una vez logeado, navegar al dashboard
+                    if (result.isConfirmed) {
+                      navigate("/");
+                    }
+                  });
+                }
         });
     };
 
@@ -91,16 +124,20 @@ export const Login = () =>{
                 console.log('userLogged', userLogged);
                 
                 onAuthStateChanged(auth, (userFromFirebase) => {
-                    // console.log("userFromFirebase.uid", userFromFirebase.uid);
+                    console.log("userFromFirebase.uid", userFromFirebase.uid);
                     if (userFromFirebase) {
                         if (!user) {
                             setUserWithFirestoreRole(userFromFirebase);
                             console.log('user desde onAuth setUserwithRole', user);
+  
+                            
+                        }else {
+                            setUser(null);
                         }
-                    } else {
-                        setUser(null);
-                    }
-                    navigate("/")
+                    } 
+                    
+
+
                 //     // const userFinded = usersDB.find(user => user.id === userLogged.id)
                 // if (userFinded) {
                 //     // Seting user in Context with setUser imported
@@ -110,15 +147,18 @@ export const Login = () =>{
                 //     });
                     
                 })
-            })
+                // Esta hecho, pero tiene que ser asincrono
+                console.log('user fuera de setuserwithrole', user);
 
+            })
             
         } catch (error) {
             console.log('Error', error);
         }
-        
+        console.log('user antes de salir de setuserwithrole', user);
     }
 
+    
 
 
     

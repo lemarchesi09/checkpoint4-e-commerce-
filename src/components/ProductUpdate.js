@@ -1,19 +1,15 @@
 import { db } from "../firebase/firebase";
-import { collection, addDoc } from "firebase/firestore";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { getDoc, doc, updateDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-// import { useDispatch } from "react-redux";
-// import { addProduct } from "../features/product/productsSlice";
-//import { useUserContext } from "../context/userContext";
 
 const MySwal = withReactContent(Swal);
 
-export const ProductForm = () => {
-  //const { user, setUser } = useUserContext();
-  const productsCollection = collection(db, "generalProducts");
-
+export const ProductUpdate = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
     title: "",
     price: 0,
@@ -23,36 +19,51 @@ export const ProductForm = () => {
     stock: 0,
   });
 
-  const navigate = useNavigate();
+  const getProduct = async () => {
+    const docRef = doc(db, "generalProducts", id);
+    const docSnap = await getDoc(docRef);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await addDoc(productsCollection, product);
-
-      MySwal.fire({
-        title: "Created!",
-        text: "Your product has been created successfully.",
-        icon: "success",
-        confirmButtonText: "Ok",
-      });
-      navigate("/");
-    } catch (error) {
-      MySwal.fire({
-        title: "Error!",
-        text: "Your product has not been created.",
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
-      navigate("/");
+    if (docSnap.exists()) {
+      setProduct(docSnap.data());
+    } else {
+      console.log("Product doesn't exist!");
+      navigate("/productlist");
     }
   };
+
+  useEffect(() => {
+    getProduct(id);
+  }, [id]);
 
   const handleChange = (e) => {
     setProduct({
       ...product,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const docRef = doc(db, "generalProducts", id);
+    try {
+      await updateDoc(docRef, product);
+      MySwal.fire({
+        title: "Updated!",
+        text: "Your product has been updated successfully.",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+      navigate("/productlist");
+    } catch (error) {
+      MySwal.fire({
+        title: "Error!",
+        text: "Your product has not been updated.",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      navigate("/productlist");
+      console.log(error);
+    }
   };
 
   return (
@@ -150,7 +161,7 @@ export const ProductForm = () => {
           <div className="row justify-content-end">
             <div className="col-sm-10">
               <button type="submit" className="btn btn-primary">
-                Add product
+                Update product
               </button>
             </div>
           </div>

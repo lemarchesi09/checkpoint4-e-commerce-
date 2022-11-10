@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../features/product/productsSlice";
+import { useDispatch,useSelector } from "react-redux";
+import { addProduct } from "../../src/features/item/itemSlice";
+import { useParams } from "react-router-dom";
+// import { Rating } from 'react-simple-star-rating';
 import "../styles/itemDetails.css";
 
 const ItemDetails = () => {
   const { id } = useParams();
   const [item, setItem] = useState({});
-  // state for calculate quantity*price
-  const [quantity, setQuantity] = useState(0);
-  // state for the input
-  const [count, setCount] = useState(1);
-  const { title, price, description, image, category, rate } = item;
-  const dispatch= useDispatch()
-  const navigate = useNavigate();
+  const [quantity,setQuantity] =useState(1)
+  const [count,setCount] =useState(1)
+  const { title, price, description, image, category,rate } = item;
+  const stateItem = useSelector((state) => state.item);
+
+  const dispatch =useDispatch()
+
 
   const getDataItem = async () => {
     const url = `https://fakestoreapi.com/products/${id}`;
@@ -21,14 +22,15 @@ const ItemDetails = () => {
     const res = await data.json();
     setItem(res);
   };
-  const getQuantity = (e) => {
-    setQuantity(Number(e.target.value));
-    setCount(Number(e.target.value));
-  };
-  const addToCart=()=>{
-dispatch(addProduct(item))
-navigate('/')
-alert("producto cargado re piola ameo 🤙")
+  const getQuantity=(e)=>{
+      setQuantity (Number(e.target.value))
+      setCount(Number(e.target.value))
+
+  }
+  const AddNow =()=>{
+    dispatch(addProduct({item, quantity}))
+    const newArray = stateItem.map(item=> console.log(item))
+    console.log(newArray);
   }
   useEffect(() => {
     getDataItem();
@@ -74,7 +76,7 @@ alert("producto cargado re piola ameo 🤙")
                   <button className="btn btn-primary ">Buy now</button>
                 </div>
                 <div className="card-button_Add ">
-                  <button className="btn btn-primary" onClick={addToCart}>Add now </button>
+                  <button className="btn btn-primary" onClick={AddNow}>Add now </button>
                 </div>
               </div>
             </div>
