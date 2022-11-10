@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../src/features/item/itemSlice";
 import { useParams } from "react-router-dom";
 import "../styles/itemDetails.css";
 const ItemDetails = () => {
@@ -7,6 +9,7 @@ const ItemDetails = () => {
   const [quantity,setQuantity] =useState(0)
   const [count,setCount] =useState(1)
   const { title, price, description, image, category,rate } = item;
+  const dispatch =useDispatch()
 
 
   const getDataItem = async () => {
@@ -20,8 +23,9 @@ const ItemDetails = () => {
       setQuantity (Number(e.target.value))
       setCount(Number(e.target.value))
 
-  
-    console.log(quantity);
+  }
+  const AddNow =()=>{
+    dispatch(addProduct({item, quantity}))
   }
   useEffect(() => {
     getDataItem();
@@ -56,7 +60,7 @@ const ItemDetails = () => {
                   <button className="btn btn-primary ">Buy now</button>
                 </div>
                 <div className="card-button_Add ">
-                  <button className="btn btn-primary">Add now </button>
+                  <button className="btn btn-primary" onClick={AddNow}>Add now </button>
                 </div>
               </div>
             </div>
