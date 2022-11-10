@@ -20,6 +20,29 @@ export const CreateProduct = () => {
     stock: 0,
   });
 
+    // const addProduct = async (e) =>{
+    //     e.preventDefault();
+    //     try{
+    //         // Add product to general store 
+    //         await addDoc(productsCollection, product)
+    //         console.log('Producto enviado a productsCollection');
+    //         // await setDoc(usersCollection,product )
+            
+    //         // Add product to personal collection  
+    //         await setDoc(doc(db, "users", `/${user.uid}`), {
+    //             ...user,
+    //             productsToSell: [product],
+    //           });
+    //         console.log('Producto agregado en el usuario registrado');
+
+    //         // const userRef = doc(db, `users/${result.user.uid}`);
+    //         // Capturar el user logeado - Esta faltando eso
+    //         // await setDoc(userRef, {sellerProducts: product });
+    //     }catch(error){
+    //         console.log('Error', error);
+    //     }
+    // }
+
   const addProduct = async (e) => {
     e.preventDefault();
     try {

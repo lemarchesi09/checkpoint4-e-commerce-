@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../src/features/item/itemSlice";
 import { useParams } from "react-router-dom";
+import { Rating } from 'react-simple-star-rating';
 import "../styles/itemDetails.css";
 const ItemDetails = () => {
   const { id } = useParams();

@@ -151,7 +151,7 @@ export const Register = () =>{
               message: "Role is required"
             }
           })}>
-            <option value="seller">Seller</option>
+            <option value="admin">Admin</option>
             <option value="user">User</option>
           </select>
 
