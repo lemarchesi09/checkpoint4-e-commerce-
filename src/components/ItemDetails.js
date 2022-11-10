@@ -35,9 +35,10 @@ const ItemDetails = () => {
   };
 
   const getQuantity = (e) => {
-    setItemQty.quantity(Number(e.target.value));
-    setItemQty.count(Number(e.target.value));
+    setItemQty({ ...itemQty, quantity: e.target.value });
+    setItemQty({ ...itemQty, count: e.target.value });
   };
+
   const AddNow = () => {
     dispatch(addItem(itemQty.item, itemQty.quantity));
   };
