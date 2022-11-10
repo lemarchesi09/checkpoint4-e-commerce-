@@ -8,15 +8,12 @@ export const itemSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       state.push(action.payload);
-
     },
     updateItem: (state, action) => {
-      const { id,quantity } = action.payload;
-  
+      const { id, quantity } = action.payload;
       const findItem = state.find((item) => item.id === id);
       if (findItem) {
         findItem.quantity += quantity;
-   
       }
     },
     deleteItem: (state, action) => {

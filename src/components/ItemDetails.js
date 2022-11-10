@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, addProduct } from "../../src/features/item/itemSlice";
+import { addItem, updateItem } from "../../src/features/item/itemSlice";
 import { db } from "../firebase/firebase";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useParams } from "react-router-dom";
@@ -35,12 +35,16 @@ const ItemDetails = () => {
   };
 
   const getQuantity = (e) => {
-    setItemQty({ ...itemQty, quantity: e.target.value });
-    setItemQty({ ...itemQty, count: e.target.value });
+    setItemQty({ ...itemQty, quantity: e.target.value, count: e.target.value });
   };
 
-  const AddNow = () => {
-    dispatch(addItem(itemQty.item, itemQty.quantity));
+  const addToCart = () => {
+    if (stateItem.some((item) => item.item.id === itemQty.item.id)) {
+      dispatch(updateItem({ ...itemQty.item.id, quantity: itemQty.quantity }));
+    } else {
+      dispatch(addItem(itemQty));
+    }
+    console.log("stateItem", stateItem);
   };
 
   useEffect(() => {
@@ -83,8 +87,8 @@ const ItemDetails = () => {
                   <button className="btn btn-primary ">Buy now</button>
                 </div>
                 <div className="card-button_Add ">
-                  <button className="btn btn-primary" onClick={AddNow}>
-                    Add now{" "}
+                  <button className="btn btn-primary" onClick={addToCart}>
+                    Add to cart
                   </button>
                 </div>
               </div>
