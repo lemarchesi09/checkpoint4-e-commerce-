@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem, addProduct } from "../../src/features/item/itemSlice";
 import { db } from "../firebase/firebase";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
@@ -9,42 +9,43 @@ import "../styles/itemDetails.css";
 
 const ItemDetails = () => {
   const { id } = useParams();
-  // const [item, setItem] = useState({});
-  // const [quantity,setQuantity] =useState(1)
-  // const [count,setCount] =useState(1)
-  const [itemQty,setItemQty] =useState({
-    item:{},
-    quantity:1,
-    count:1
-  })
+  const [itemQty, setItemQty] = useState({
+    item: {},
+    quantity: 1,
+    count: 1,
+  });
+
   const { title, price, description, image, category } = itemQty.item;
 
   const stateItem = useSelector((state) => state.item);
 
-  const dispatch =useDispatch()
+  const dispatch = useDispatch();
 
   const productsCollection = collection(db, "generalProducts");
 
   const getProducts = async () => {
-    const dataProducts = await getDocs(productsCollection);
-    dataProducts.docs.filter((item) => ({ ...item.data(), id: item.id }) )
-    // itemQty.item=dataProducts
-    console.log(dataProducts);
+    try {
+      const dataProducts = await getDocs(productsCollection);
+      const items = dataProducts.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const item = items.find((item) => item.id === id);
+      setItemQty({ ...itemQty, item: item });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const getQuantity=(e)=>{
-      setItemQty.quantity(Number(e.target.value))
-      setItemQty.count(Number(e.target.value))
+  const getQuantity = (e) => {
+    setItemQty.quantity(Number(e.target.value));
+    setItemQty.count(Number(e.target.value));
+  };
+  const AddNow = () => {
+    dispatch(addItem(itemQty.item, itemQty.quantity));
+  };
 
-  }
-  const AddNow =()=>{
-    dispatch(addItem(itemQty.item , itemQty.quantity))
-
-
-  }
   useEffect(() => {
-    getProducts()
+    getProducts();
   }, []);
+
   return (
     <div className="p-4">
       <div className="card  col-md-4 w-100  ">
@@ -81,7 +82,9 @@ const ItemDetails = () => {
                   <button className="btn btn-primary ">Buy now</button>
                 </div>
                 <div className="card-button_Add ">
-                  <button className="btn btn-primary" onClick={AddNow}>Add now </button>
+                  <button className="btn btn-primary" onClick={AddNow}>
+                    Add now{" "}
+                  </button>
                 </div>
               </div>
             </div>
