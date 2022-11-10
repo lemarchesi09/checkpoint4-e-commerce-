@@ -21,10 +21,10 @@ export const SideBar = () => {
             {collapsed ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
           </div>
           <Menu iconShape="square">
-            <MenuItem icon={<FaList />} routerLink={<Link to="/productlist" />}>
+            <MenuItem icon={<FaList />} routerLink={<Link to="/admin/productlist" />}>
               My products
             </MenuItem>
-            <MenuItem icon={<RiPencilLine />} routerLink={<Link to="/productform" />}>
+            <MenuItem icon={<RiPencilLine />} routerLink={<Link to="/admin/productform" />}>
               Add product
             </MenuItem>
             <MenuItem icon={<FaHistory />} routerLink={<Link to="/" />}>

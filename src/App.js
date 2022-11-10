@@ -16,6 +16,7 @@ import { SideBar } from "./components/SideBar";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import userEvent from "@testing-library/user-event";
 import { Admin } from "./components/Admin";
+import { SearchResults } from "./components/SearchResults";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
 
           <Route path="/cart/*" element={<Cart/>} />
           <Route path="/PurchaseForm/*" element={<PurchaseForm/>} />
+          <Route path="/searchresults/*" element={<SearchResults/>} />
           <Route path="/admin/*" element={<Admin/>} />
         </Routes>
         

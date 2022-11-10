@@ -86,7 +86,7 @@ export const ProductList = () => {
                       <td>{product.stock}</td>
                       <td>{product.description}</td>
                       <td>
-                        <Link to={`/update/${product.id}`}>
+                        <Link to={`/admin/update/${product.id}`}>
                           <button type="button" class="btn btn-primary">
                             <i class="far fa-eye">Update</i>
                           </button>
