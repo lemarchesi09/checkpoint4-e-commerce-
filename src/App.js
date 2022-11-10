@@ -16,10 +16,12 @@ import { SideBar } from "./components/SideBar";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import userEvent from "@testing-library/user-event";
 import { Admin } from "./components/Admin";
+import { SearchResults } from "./components/SearchResults";
 
 function App() {
 
-  // const {user} = useUserContext();
+  // const {user, setUser} = useUserContext();
+  // console.log('user app', user);
   return (
     <UserProvider>
       <div className="App">
@@ -33,9 +35,10 @@ function App() {
           <Route path="/create" element={<CreateProduct />} />
           <Route path="/itemDetails/:id/" element={<ItemDetails />} />
 
-          <Route path="/cart" element={<Cart/>} />
-          <Route path="/PurchaseForm" element={<PurchaseForm/>} />
-          <Route path="/admin" element={<Admin/>} />
+          <Route path="/cart/*" element={<Cart/>} />
+          <Route path="/PurchaseForm/*" element={<PurchaseForm/>} />
+          <Route path="/searchresults/*" element={<SearchResults/>} />
+          <Route path="/admin/*" element={<Admin/>} />
         </Routes>
         
       
