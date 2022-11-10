@@ -37,7 +37,7 @@ const ItemList = () => {
               <div className="icon-ship">
                 <p className="card-text">${item.price}</p>
                 <p className="card-text">
-                  <i class="bi bi-truck "></i> Envio gratis!
+                  <i className="bi bi-truck "></i> Envio gratis!
                 </p>
               </div>
             </div>
