@@ -10,7 +10,7 @@ export const Admin = () =>{
     const {user} = useUserContext();
     return(
         <div>
-            {user?.role==="admin"  ? 
+            {user?.role === "admin"  ? 
             <>
             
             <Routes>

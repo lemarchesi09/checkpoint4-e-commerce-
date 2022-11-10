@@ -19,7 +19,8 @@ import { Admin } from "./components/Admin";
 
 function App() {
 
-  // const {user} = useUserContext();
+  // const {user, setUser} = useUserContext();
+  // console.log('user app', user);
   return (
     <UserProvider>
       <div className="App">
@@ -33,9 +34,9 @@ function App() {
           <Route path="/create" element={<CreateProduct />} />
           <Route path="/itemDetails/:id/" element={<ItemDetails />} />
 
-          <Route path="/cart" element={<Cart/>} />
-          <Route path="/PurchaseForm" element={<PurchaseForm/>} />
-          <Route path="/admin" element={<Admin/>} />
+          <Route path="/cart/*" element={<Cart/>} />
+          <Route path="/PurchaseForm/*" element={<PurchaseForm/>} />
+          <Route path="/admin/*" element={<Admin/>} />
         </Routes>
         
       

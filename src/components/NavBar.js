@@ -70,6 +70,9 @@ export const NavBar = () =>{
 
     console.log('search', search);
     return(
+        <>
+        {user?.role !== "admin" ? 
+        
         <nav className="navbar navbar-expand-md navbar-expand-lg bg-light">
             <div className="container-fluid">
             <Link to="/" className="nav-link"> Logo </Link>
@@ -101,7 +104,16 @@ export const NavBar = () =>{
                 <div className="nav-user  d-flex justify-content-evenly">
                     {/*  CONDICIONAL PARA MOSTRAR LOG IN O LOG OUT   */}
                 {user ? (
+                    <>
+                    
                     <Link to="/" className="nav-item" onClick={() => {setUser(null)}}>Log Out<i className="bi bi-person-check-fill ms-1"></i></Link>
+                        <div>
+                            <Link to='#'>Purchase History</Link>
+                        </div>
+                        <div>
+                            <Link to='/cart'> <i className="bi bi-cart"></i>(0) </Link>
+                        </div>
+                    </>
                     )
                     : (
                     <Link to="/login" className="nav-item">Log in <i className="bi bi-person ms-1"></i></Link>   
@@ -109,15 +121,13 @@ export const NavBar = () =>{
                     )
                 }
 
-                    <div>
-                        <Link to='#'>Purchase History</Link>
-                    </div>
-                    <div>
-                        <Link to='/cart'> <i className="bi bi-cart"></i>(0) </Link>
-                    </div>
                 </div>
 
             </div>
             </nav>
-    )
+        :
+        <div>Admin</div>
+    }
+    </>
+)
 }
