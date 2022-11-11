@@ -19,7 +19,7 @@ export const AboutUs = () => (
       Ante cualquier duda o consulta les dejamos nuestros datos para que puedan ponerse en contacto
     </p>
     <div className="cards">
-    <Card className="card card1">
+    <Card className="card">
       <Card.Img variant="top" src={user1} />
       <Card.Body>
         <Card.Title className ="title">Florencia Miguez Oliverio</Card.Title>
@@ -30,7 +30,7 @@ export const AboutUs = () => (
         </Card.Text>
       </Card.Body>
     </Card>
-    <Card className="card card2">
+    <Card className="card">
       <Card.Img variant="top" src={user2} />
       <Card.Body>
         <Card.Title className ="title">Ignacio Benitez</Card.Title>
@@ -41,7 +41,7 @@ export const AboutUs = () => (
         </Card.Text>
       </Card.Body>
     </Card>
-    <Card className="card card3">
+    <Card className="card">
       <Card.Img variant="top" src={user3} />
       <Card.Body>
         <Card.Title className ="title">Enzo Marchesi</Card.Title>
@@ -52,7 +52,7 @@ export const AboutUs = () => (
         </Card.Text>
       </Card.Body>
     </Card>
-    <Card className="card card4">
+    <Card className="card">
       <Card.Img variant="top" src={user4} />
       <Card.Body>
         <Card.Title className ="title">Ian Noreiko</Card.Title>
@@ -63,7 +63,7 @@ export const AboutUs = () => (
         </Card.Text>
       </Card.Body>
     </Card>
-    <Card className="card card1">
+    <Card className="card">
       <Card.Img variant="top" src={user1} />
       <Card.Body>
         <Card.Title className ="title">Cecilia Kuckiewicz</Card.Title>
