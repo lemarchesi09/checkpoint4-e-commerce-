@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, updateItem } from "../../src/features/item/itemSlice";
 import { db } from "../firebase/firebase";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { useParams } from "react-router-dom";
-// import { Rating } from 'react-simple-star-rating';
+
 import "../styles/itemDetails.css";
 
 const ItemDetails = () => {
   const { id } = useParams();
-  const [count,setCount] = useState(0)
+  let [count,setCount] = useState(1)
+  console.log(count);
   const [itemQty, setItemQty] = useState({
     item: {},
     quantity: 1,
   });
 
-  const { title, price, description, image, category } = itemQty.item;
+  const { title, price, description, image, category,stock } = itemQty.item;
 
   const stateItem = useSelector((state) => state.item);
 
@@ -32,25 +33,25 @@ const ItemDetails = () => {
       }));
       const item = items.find((item) => item.id === id);
       setItemQty({ ...itemQty, item: item });
-      alert('producto cargado')
     } catch (error) {
       console.log(error);
     }
   };
   const increasebutton=()=>{
-    setCount(count+1)
-    if(count===10){
-      setCount(1)
-      getQuantity()
-    }
 
+    if(count >=Number(stock)){
+      setCount(1)
+    }else{
+      setCount(count+1)
+    }
+    getQuantity()
   }
 const decreaseButton =()=>{
   setCount(count-1)
   if(count===0){
-    setCount(1)
-    getQuantity()
+    setCount(1) 
   }
+  getQuantity()
  
 }
   const getQuantity = () => {
@@ -89,6 +90,9 @@ const decreaseButton =()=>{
               <h5 className="card-title">{title}</h5>
               <p className="card-text">{description}.</p>
               <p className="card-text">${price}</p>
+              <p className="card-text">
+                <small className="text-muted"> stock: {stock}</small>
+              </p>
               <p className="card-text">
                 <small className="text-muted">Last updated 3 mins ago</small>
               </p>
