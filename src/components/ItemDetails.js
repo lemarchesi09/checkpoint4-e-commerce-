@@ -9,10 +9,10 @@ import "../styles/itemDetails.css";
 
 const ItemDetails = () => {
   const { id } = useParams();
+  const [count,setCount] = useState(0)
   const [itemQty, setItemQty] = useState({
     item: {},
     quantity: 1,
-    count: 1,
   });
 
   const { title, price, description, image, category } = itemQty.item;
@@ -26,16 +26,36 @@ const ItemDetails = () => {
   const getProducts = async () => {
     try {
       const dataProducts = await getDocs(productsCollection);
-      const items = dataProducts.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const items = dataProducts.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
       const item = items.find((item) => item.id === id);
       setItemQty({ ...itemQty, item: item });
+      alert('producto cargado')
     } catch (error) {
       console.log(error);
     }
   };
+  const increasebutton=()=>{
+    setCount(count+1)
+    if(count===10){
+      setCount(1)
+      getQuantity()
+    }
 
-  const getQuantity = (e) => {
-    setItemQty({ ...itemQty, quantity: e.target.value, count: e.target.value });
+  }
+const decreaseButton =()=>{
+  setCount(count-1)
+  if(count===0){
+    setCount(1)
+    getQuantity()
+  }
+ 
+}
+  const getQuantity = () => {
+    // setItemQty({ ...itemQty, quantity:Number( e.target.value), count: Number(e.target.value) });
+    setItemQty({ ...itemQty, quantity:count});
   };
 
   const addToCart = () => {
@@ -44,7 +64,6 @@ const ItemDetails = () => {
     } else {
       dispatch(addItem(itemQty));
     }
-    console.log("stateItem", stateItem);
   };
 
   useEffect(() => {
@@ -56,7 +75,11 @@ const ItemDetails = () => {
       <div className="card  col-md-4 w-100  ">
         <div className="row g-0">
           <div className="col-md-4">
-            <img src={image} className="img-fluid rounded-start" alt="..." />
+            <img
+              src={image}
+              className="img-fluid rounded-start"
+              alt=" Product img"
+            />
           </div>
           <div className="col-md-6">
             <div className="card-body d-flex  flex-column justify-content-center">
@@ -71,15 +94,10 @@ const ItemDetails = () => {
               </p>
             </div>
             <div className=" row-md-2 d-flex justify-content-around">
-              <div className="card_input_count">
-                <input
-                  type="number"
-                  min={1}
-                  max={10}
-                  value={itemQty.count}
-                  onChange={getQuantity}
-                  style={{ width: "70px" }}
-                />
+              <div className="card_input_count d-flex">
+                <button className="btn btn-primary" onClick={decreaseButton}>-</button>
+                {count}
+                <button className="btn btn-primary"  onClick={increasebutton}>+</button>
               </div>
 
               <div className="card-buttons d-flex  col-md-6 gap-4  ">
