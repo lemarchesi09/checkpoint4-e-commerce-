@@ -56,12 +56,12 @@ const decreaseButton =()=>{
 }
   const getQuantity = () => {
     // setItemQty({ ...itemQty, quantity:Number( e.target.value), count: Number(e.target.value) });
-    setItemQty({ ...itemQty, quantity:count});
+    setItemQty({ ...itemQty, quantity:count++});
   };
 
   const addToCart = () => {
     if (stateItem.some((item) => item.item.id === itemQty.item.id)) {
-      dispatch(updateItem({ ...itemQty.item.id, quantity: itemQty.quantity }));
+      dispatch(updateItem({ ...itemQty.item.id, quantity: itemQty.quantity   }));
     } else {
       dispatch(addItem(itemQty));
     }
