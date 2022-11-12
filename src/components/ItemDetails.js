@@ -9,8 +9,8 @@ import "../styles/itemDetails.css";
 
 const ItemDetails = () => {
   const { id } = useParams();
-  let [count,setCount] = useState(1)
-  console.log(count);
+  const  [count,setCount] = useState(1)
+
   const [itemQty, setItemQty] = useState({
     item: {},
     quantity: 1,
@@ -41,6 +41,7 @@ const ItemDetails = () => {
 
     if(count >=Number(stock)){
       setCount(1)
+     
     }else{
       setCount(count+1)
     }
