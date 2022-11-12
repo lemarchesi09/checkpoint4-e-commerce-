@@ -1,0 +1,43 @@
+.about img{
+    width: 100%;
+}
+
+.about h2{
+    margin: 1% 5% 0;
+    text-align: center;
+}
+
+.about p{
+    margin: 1% 5%;
+}
+
+.about .cards{
+    margin: 2.5% 0;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.about .cards .card{
+    width: 15rem;
+    /* margin: 2rem; */
+}
+
+.about .cards .card:hover{
+    transform: scale(1.01);
+    box-shadow: 3px 3px 50px var(--color-shadow);
+}
+
+.about .cards .title{
+    height: 3rem;
+}
+
+.about .cards .text{
+    height: 7rem;
+}
+
+.about .cards a{
+    text-decoration: none;
+    margin-bottom: 2%;
+}

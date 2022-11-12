@@ -13,7 +13,7 @@ export const itemSlice = createSlice({
       const { id, quantity } = action.payload;
       const findItem = state.find((item) => item.id === id);
       if (findItem) {
-        findItem.quantity = quantity;
+        findItem.quantity += quantity;
       }
     },
     deleteItem: (state, action) => {
