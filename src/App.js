@@ -8,11 +8,6 @@ import { Footer } from "./components/Footer";
 import { AboutUs } from "./components/AboutUs";
 import "./index.css";
 import { CreateProduct } from "./components/CreateProduct";
-<<<<<<< HEAD
-// import { ProductForm } from "./components/ProductForm";
-// import { ProductList } from "./components/ProductList";
-=======
->>>>>>> itemListContainer
 import ItemDetails from "./components/ItemDetails";
 import { Cart } from "./components/Cart";
 import PurchaseForm from "./components/PurchaseForm";
