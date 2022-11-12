@@ -9,14 +9,14 @@ import "../styles/itemDetails.css";
 
 const ItemDetails = () => {
   const { id } = useParams();
-  const  [count,setCount] = useState(1)
+  const [count, setCount] = useState(1);
 
   const [itemQty, setItemQty] = useState({
     item: {},
-    quantity: 1,
+    quantity: count,
   });
 
-  const { title, price, description, image, category,stock } = itemQty.item;
+  const { title, price, description, image, category, stock } = itemQty.item;
 
   const stateItem = useSelector((state) => state.item);
 
@@ -37,32 +37,24 @@ const ItemDetails = () => {
       console.log(error);
     }
   };
-  const increasebutton=()=>{
 
-    if(count >=Number(stock)){
-      setCount(1)
-     
-    }else{
-      setCount(count+1)
+  const increasebutton = () => {
+    const newValue = count + 1;
+    if (newValue <= stock) {
+      setCount(newValue);
     }
-    getQuantity()
-  }
-const decreaseButton =()=>{
-  setCount(count-1)
-  if(count===0){
-    setCount(1) 
-  }
-  getQuantity()
- 
-}
-  const getQuantity = () => {
-    // setItemQty({ ...itemQty, quantity:Number( e.target.value), count: Number(e.target.value) });
-    setItemQty({ ...itemQty, quantity:count++});
+    setItemQty({ ...itemQty, quantity: newValue });
+  };
+
+  const decreaseButton = () => {
+    const newValue = count - 1;
+    newValue >= itemQty.quantity && setCount(newValue);
+    setItemQty({ ...itemQty, quantity: newValue });
   };
 
   const addToCart = () => {
     if (stateItem.some((item) => item.item.id === itemQty.item.id)) {
-      dispatch(updateItem({ ...itemQty.item.id, quantity: itemQty.quantity   }));
+      dispatch(updateItem({ ...itemQty.item.id, quantity: itemQty.quantity }));
     } else {
       dispatch(addItem(itemQty));
     }
@@ -100,9 +92,13 @@ const decreaseButton =()=>{
             </div>
             <div className=" row-md-2 d-flex justify-content-around">
               <div className="card_input_count d-flex">
-                <button className="btn btn-primary" onClick={decreaseButton}>-</button>
+                <button className="btn btn-primary" onClick={decreaseButton}>
+                  -
+                </button>
                 {count}
-                <button className="btn btn-primary"  onClick={increasebutton}>+</button>
+                <button className="btn btn-primary" onClick={increasebutton}>
+                  +
+                </button>
               </div>
 
               <div className="card-buttons d-flex  col-md-6 gap-4  ">

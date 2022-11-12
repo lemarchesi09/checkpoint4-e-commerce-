@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 import "../styles/itemList.css";
 const ItemList = () => {
   const [dataCarrousel, setDataCarrousel] = useState([]);
-
+  const productsCollection = collection(db, "generalProducts");
   const getData = async () => {
     try {
       const dataProducts = await getDocs(productsCollection);
