@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 import {
   useUserContext,
@@ -12,13 +12,13 @@ export const NavBar = () => {
   // User from context
   const { user, setUser } = useUserContext();
   // value to display the number of items in the cart
-  const [qtyValue, setQtyValue]= useState(0)
+  
   const quantityELements= useSelector(state=>state.item)
 
   // Search Products from context
-  const { searchProducts, setSearchProducts } = useUserContext();
+  const { setSearchProducts } = useUserContext();
 
-  const productsCollection = collection(db, "generalProducts");
+  // const productsCollection = collection(db, "generalProducts");
 
   // Creating a state for search input
   const [search, setSearch] = useState("");
@@ -167,7 +167,7 @@ export const NavBar = () => {
                 </Link>
               )}
             </div>
-
+                  
           </div>
           
         </nav>
