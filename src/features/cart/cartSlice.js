@@ -11,8 +11,6 @@ export const cartSlice = createSlice({
             state.push(action.payload);
         },
         deleteProduct: (state,action)=>{ 
-            console.log("el state",state)
-            console.log("el action",action.payload);
         return state.filter((product) => product.id !== action.payload);
         }
     }
