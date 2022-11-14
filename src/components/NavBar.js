@@ -62,6 +62,8 @@ export const NavBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     getProductsFromSearch();
+    e.target.search.value = "";
+    
   };
 
   
@@ -151,10 +153,11 @@ export const NavBar = () => {
                   <div>
                     <Link to="#">Purchase History</Link>
                   </div>
-                  <div>
-                    <Link to="/cart">
-                      {" "}
-                      <i className="bi bi-cart"></i>(0){" "}
+                  <div className="cart">
+                    <Link to='/cart'>
+                      <i className="bi bi-cart">
+                      <div className="quantityElements">{quantityELements.length}</div>
+                      </i>
                     </Link>
                   </div>
                 </>
@@ -164,13 +167,7 @@ export const NavBar = () => {
                 </Link>
               )}
             </div>
-            <div className="cart">
-        <Link to='/cart'>
-          <i className="bi bi-cart">
-          <div className="quantityElements">{quantityELements.length}</div>
-          </i>
-          </Link>
-            </div>
+
           </div>
           
         </nav>
