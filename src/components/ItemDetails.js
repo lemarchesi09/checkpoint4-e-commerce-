@@ -3,13 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem, updateItem } from "../../src/features/item/itemSlice";
 import { db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { useParams } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useUserContext,
+} from "../context/userContext";
 import "../styles/itemDetails.css";
 
 const ItemDetails = () => {
+  const { user, setUser } = useUserContext();
   const { id } = useParams();
   const [count, setCount] = useState(1);
+  const navigate = useNavigate();
 
   const [itemQty, setItemQty] = useState({
     item: {},
