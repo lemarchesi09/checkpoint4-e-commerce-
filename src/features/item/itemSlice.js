@@ -19,9 +19,14 @@ export const itemSlice = createSlice({
       }
     },
     deleteItem: (state, action) => {
-       return  state.filter(item=> item.id!== action.payload)
+      console.log("el state en item",state)
+      console.log("el action en item",action.payload);
       
-    },
+      return  state.filter((item)=> item.item.id !== action.payload);
+      
+      // Deberiamos capturar el id del producto, capturar el index del ese producto y eliminar ese index del array
+      
+    }
   },
 });
 
