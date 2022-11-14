@@ -8,8 +8,10 @@ export const itemSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       state.push(action.payload);
+
     },
     updateItem: (state, action) => {
+
       const { id, quantity } = action.payload;
       const findItem = state.find((item) => item.id === id);
       if (findItem) {
@@ -17,7 +19,8 @@ export const itemSlice = createSlice({
       }
     },
     deleteItem: (state, action) => {
-      return state.filter((Item) => Item.id !== action.payload);
+       return  state.filter(item=> item.id!== action.payload)
+      
     },
   },
 });

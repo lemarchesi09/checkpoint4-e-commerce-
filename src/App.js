@@ -9,7 +9,7 @@ import { AboutUs } from "./components/AboutUs";
 import "./index.css";
 import { CreateProduct } from "./components/CreateProduct";
 import ItemDetails from "./components/ItemDetails";
-import { Cart } from "./components/Cart";
+import Cart from './components/Cart'
 import PurchaseForm from "./components/PurchaseForm";
 // import { ProductUpdate } from "./components/ProductUpdate";
 // import { SideBar } from "./components/SideBar";
