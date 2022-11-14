@@ -11,7 +11,6 @@ const ItemList = () => {
     try {
       const dataProducts = await getDocs(productsCollection);
       const items = dataProducts.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      console.log("items", items);
       setDataCarrousel(items);
     } catch (error) {
       console.log(error);
@@ -35,7 +34,7 @@ const ItemList = () => {
                 <Card.Title className ="card-title">{item.title}</Card.Title>
                 <Card.Text className="text row">
                   <p>${item.price}</p>
-                  <p><i class="bi bi-truck "></i> Envio gratis!</p>
+                  <p><i className="bi bi-truck "></i> Envio gratis!</p>
                 </Card.Text>
               </Card.Body>
             </Card>

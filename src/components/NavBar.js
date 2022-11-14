@@ -2,20 +2,19 @@ import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import {
-  user,
-  setUser,
-  searchProducts,
-  setSearchProducts,
   useUserContext,
 } from "../context/userContext";
 import "../styles/navBar.css";
 import { db } from "../firebase/firebase";
-import { collection, doc, query, where, getDocs } from "firebase/firestore";
-
+import { collection, query, where, getDocs } from "firebase/firestore";
+import {  useSelector } from "react-redux";
 export const NavBar = () => {
   // User from context
   const { user, setUser } = useUserContext();
-  console.log("user en NavBar", user);
+  // value to display the number of items in the cart
+  const [qtyValue, setQtyValue]= useState(0)
+  const quantityELements= useSelector(state=>state.item)
+
   // Search Products from context
   const { searchProducts, setSearchProducts } = useUserContext();
 
@@ -39,7 +38,6 @@ export const NavBar = () => {
 
     // In querySnapshot comes the response. Then, a forEach function is needed to capture every doc founded
     const querySnapshot = await getDocs(q);
-    console.log("querysnapshot", querySnapshot);
     setSearchProducts(querySnapshot);
     // setSearchProducts(querySnapshot.forEach((doc) => {
     //     // doc.data() is never undefined for query doc snapshots
@@ -66,7 +64,7 @@ export const NavBar = () => {
     getProductsFromSearch();
   };
 
-  console.log("search", search);
+  
   return (
     <>
       {user?.role !== "admin" ? (
@@ -166,12 +164,22 @@ export const NavBar = () => {
                 </Link>
               )}
             </div>
-          
+            <div className="cart">
+        <Link to='/cart'>
+          <i className="bi bi-cart">
+          <div className="quantityElements">{quantityELements.length}</div>
+          </i>
+          </Link>
+            </div>
           </div>
+          
         </nav>
       ) : (
-        <></>
+        <>
+        </>
+        
       )}
+    
     </>
   );
 };
