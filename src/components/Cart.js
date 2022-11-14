@@ -1,13 +1,12 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteItem } from "../../src/features/item/itemSlice";
 import "../styles/cart.css";
 import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { useUserContext } from "../context/userContext";
-import { Navigate } from "react-router-dom";
+import { Navigate,Link } from "react-router-dom";
 
 const Cart = () => {
   const {user} = useUserContext();
@@ -105,13 +104,13 @@ const Cart = () => {
             </div>
           ))}
           <div className={`${stateItem.length===0? "d-none":"d-block"} d-flex flex-row align-items-around mt-3 p-2 bg-white rounded`}>
+          <Link to="/purchaseForm">
             <button
               className="btn btn-warning btn-block btn-lg ml-2 pay-button"
               type="button"
               onClick={() => {sendBuyToFirebase()}}
-            >
-              Proceed to Pay
-            </button>
+            > Proced to pay </button>
+             </Link>
             <div className="totalPrice d-flex justify-content-around">
               <h3> Total price: ${acum}</h3>
             </div>
