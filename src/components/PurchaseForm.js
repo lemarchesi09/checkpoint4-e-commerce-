@@ -1,6 +1,6 @@
 import React from "react";
 import { useUserContext } from "../context/userContext";
-import { Navigate } from "react-router-dom";
+import { Navigate,Link } from "react-router-dom";
 
 const PurchaseForm = () => {
   const {user} = useUserContext();
@@ -42,9 +42,11 @@ const PurchaseForm = () => {
               id="exampleInputPassword1"
             />
           </div>
+          <Link to="PaymentMethod">
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
+          </Link>
         </div>
         :
         <Navigate to={"/"}></Navigate>

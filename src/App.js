@@ -10,10 +10,8 @@ import "./index.css";
 import ItemDetails from "./components/ItemDetails";
 import Cart from './components/Cart'
 import PurchaseForm from "./components/PurchaseForm";
-// import { ProductUpdate } from "./components/ProductUpdate";
-// import { SideBar } from "./components/SideBar";
-// import { ProSidebarProvider } from "react-pro-sidebar";
-// import userEvent from "@testing-library/user-event";
+import PaymentMethod from "./components/PaymentMethod";
+
 import { Admin } from "./components/Admin";
 import { SearchResults } from "./components/SearchResults";
 import ItemList from "./components/ItemList";
@@ -30,6 +28,7 @@ function App() {
           <Route path="/itemDetails/:id/" element={<ItemDetails />} />
           <Route path="/cart/*" element={<Cart />} />
           <Route path="/purchaseForm/*" element={<PurchaseForm />} />
+          <Route path="/PaymentMethod" element={<PaymentMethod />} />
           <Route path="/searchresults/*" element={<SearchResults />} />
           <Route path="/admin/*" element={<Admin />} />
           <Route path="/aboutUs" element={<AboutUs />} />
