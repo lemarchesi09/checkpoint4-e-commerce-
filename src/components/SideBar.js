@@ -4,9 +4,11 @@ import { FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi"
 import { RiPencilLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import "../styles/SideBar.css";
+import { useUserContext } from "../context/userContext";
 
 export const SideBar = () => {
   const { collapseSidebar, collapsed } = useProSidebar();
+  const { setUser } = useUserContext();
 
   return (
     <>
@@ -19,10 +21,10 @@ export const SideBar = () => {
             {collapsed ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
           </div>
           <Menu iconShape="square">
-            <MenuItem icon={<FaList />} routerLink={<Link to="/productlist" />}>
+            <MenuItem icon={<FaList />} routerLink={<Link to="/admin/productlist" />}>
               My products
             </MenuItem>
-            <MenuItem icon={<RiPencilLine />} routerLink={<Link to="/productform" />}>
+            <MenuItem icon={<RiPencilLine />} routerLink={<Link to="/admin/productform" />}>
               Add product
             </MenuItem>
             <MenuItem icon={<FaHistory />} routerLink={<Link to="/" />}>
@@ -30,12 +32,17 @@ export const SideBar = () => {
             </MenuItem>
           </Menu>
           <Menu iconShape="square" id="footer">
-            <MenuItem icon={<FiLogOut />} id="logout">
+            <MenuItem
+              icon={<FiLogOut />}
+              id="logout"
+              onClick={() => {
+                setUser(null);
+              }}
+            >
               Logout
             </MenuItem>
           </Menu>
         </Sidebar>
-        ;
       </div>
     </>
   );

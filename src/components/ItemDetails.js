@@ -1,55 +1,108 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Rating } from 'react-simple-star-rating';
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, updateItem } from "../../src/features/item/itemSlice";
+import { db } from "../firebase/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  useUserContext,
+} from "../context/userContext";
 import "../styles/itemDetails.css";
+
 const ItemDetails = () => {
+  const { user, setUser } = useUserContext();
   const { id } = useParams();
-  const [item, setItem] = useState({});
-  const [quantity,setQuantity] =useState(0)
-  const [count,setCount] =useState(1)
-  const { title, price, description, image, category,rate } = item;
+  const [count, setCount] = useState(1);
+  const navigate = useNavigate();
 
+  const [itemQty, setItemQty] = useState({
+    item: {},
+    quantity: count,
+  });
 
-  const getDataItem = async () => {
-    const url = `https://fakestoreapi.com/products/${id}`;
-    console.log(url);
-    const data = await fetch(url);
-    const res = await data.json();
-    setItem(res);
+  const { title, price, description, image, category, stock } = itemQty.item;
+
+  const stateItem = useSelector((state) => state.item);
+
+  const dispatch = useDispatch();
+
+  const productsCollection = collection(db, "generalProducts");
+
+  const getProducts = async () => {
+    try {
+      const dataProducts = await getDocs(productsCollection);
+      const items = dataProducts.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      const item = items.find((item) => item.id === id);
+      setItemQty({ ...itemQty, item: item });
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const getQuantity=(e)=>{
-      setQuantity (Number(e.target.value))
-      setCount(Number(e.target.value))
 
-  
-    console.log(quantity);
-  }
+  const increasebutton = () => {
+    const newValue = count + 1;
+    if (newValue <= stock) {
+      setCount(newValue);
+    }
+    setItemQty({ ...itemQty, quantity: newValue });
+  };
+
+  const decreaseButton = () => {
+    const newValue = count - 1;
+    newValue >= itemQty.quantity && setCount(newValue);
+    setItemQty({ ...itemQty, quantity: newValue });
+  };
+
+  const addToCart = () => {
+    if (stateItem.some((item) => item.item.id === itemQty.item.id)) {
+      dispatch(updateItem({ ...itemQty.item.id, quantity: itemQty.quantity }));
+    } else {
+      dispatch(addItem(itemQty));
+    }
+  };
+
   useEffect(() => {
-    getDataItem();
+    getProducts();
   }, []);
+
   return (
     <div className="p-4">
-      <div class="card  col-md-4 w-100  ">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src={image} class="img-fluid rounded-start" alt="..." />
+      <div className="card  col-md-4 w-100  ">
+        <div className="row g-0">
+          <div className="col-md-4">
+            <img
+              src={image}
+              className="img-fluid rounded-start"
+              alt=" Product img"
+            />
           </div>
-          <div class="col-md-6">
-            <div class="card-body d-flex  flex-column justify-content-center">
-              <p class="card-text">
+          <div className="col-md-6">
+            <div className="card-body d-flex  flex-column justify-content-center">
+              <p className="card-text">
                 <span>{category}</span>.
               </p>
-              <h5 class="card-title">{title}</h5>
-              <p class="card-text">{description}.</p>
-              
-           {quantity>1? <p class="card-text">${price*quantity} </p> : <p class="card-text">${price}</p> }
-              <p class="card-text">
-                <small class="text-muted">Last updated 3 mins ago</small>
+              <h5 className="card-title">{title}</h5>
+              <p className="card-text">{description}.</p>
+              <p className="card-text">${price}</p>
+              <p className="card-text">
+                <small className="text-muted"> stock: {stock}</small>
+              </p>
+              <p className="card-text">
+                <small className="text-muted">Last updated 3 mins ago</small>
               </p>
             </div>
             <div className=" row-md-2 d-flex justify-content-around">
-              <div className="card_input_count" >
-              <input type="number" min={1} max={10} value={count} onChange={getQuantity} style={{ width: "70px" }} />
+              <div className="card_input_count d-flex">
+                <button className="btn btn-primary" onClick={decreaseButton}>
+                  -
+                </button>
+                {count}
+                <button className="btn btn-primary" onClick={increasebutton}>
+                  +
+                </button>
               </div>
 
               <div className="card-buttons d-flex  col-md-6 gap-4  ">
@@ -57,7 +110,9 @@ const ItemDetails = () => {
                   <button className="btn btn-primary ">Buy now</button>
                 </div>
                 <div className="card-button_Add ">
-                  <button className="btn btn-primary">Add now </button>
+                  <button className="btn btn-primary" onClick={addToCart}>
+                    Add to cart
+                  </button>
                 </div>
               </div>
             </div>

@@ -9,15 +9,17 @@ import { AboutUs } from "./components/AboutUs";
 import "./index.css";
 import { CreateProduct } from "./components/CreateProduct";
 import { ProductForm } from "./components/ProductForm";
-import { ProductList } from "./components/ProductList";
+//import { ProductList } from "./components/ProductList";
 import ItemDetails from "./components/ItemDetails";
 import { Cart } from "./components/Cart";
 import PurchaseForm from "./components/PurchaseForm";
-import { ProductUpdate } from "./components/ProductUpdate";
-import { SideBar } from "./components/SideBar";
-import { ProSidebarProvider } from "react-pro-sidebar";
-import userEvent from "@testing-library/user-event";
+//import { ProductUpdate } from "./components/ProductUpdate";
+//import { SideBar } from "./components/SideBar";
+//import { ProSidebarProvider } from "react-pro-sidebar";
+//import userEvent from "@testing-library/user-event";
 import { Admin } from "./components/Admin";
+import { SearchResults } from "./components/SearchResults";
+import ItemList from "./components/ItemList";
 
 function App() {
 
@@ -34,13 +36,14 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register />}/>
           <Route path="/create" element={<CreateProduct />}/>
-          <Route path="/aboutUs" element={<AboutUs />}/>
           <Route path="/itemDetails/:id/" element={<ItemDetails />}/>
           <Route path="/product" element={<ProductForm />} />
           {/* <Route path="/productlist" element={<Products />} /> */}
           <Route path="/cart" element={<Cart/>} />
           <Route path="/PurchaseForm" element={<PurchaseForm/>} />
+          <Route path="/searchresults/*" element={<SearchResults />} />
           <Route path="/admin" element={<Admin/>} />
+          <Route path="/aboutUs" element={<AboutUs />}/>
         </Routes>
 
         <Footer />
