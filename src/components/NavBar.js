@@ -151,7 +151,7 @@ export const NavBar = () => {
                     Log Out<i className="bi bi-person-check-fill ms-1"></i>
                   </Link>
                   <div>
-                    <Link to="#">Purchase History</Link>
+                    <Link to="/purchasehistory">Purchase History</Link>
                   </div>
                   <div className="cart">
                     <Link to='/cart'>

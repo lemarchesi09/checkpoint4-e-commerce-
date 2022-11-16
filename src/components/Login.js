@@ -59,6 +59,7 @@ export const Login = () => {
         uid: userFromFirebase.uid,
         email: userFromFirebase.email,
         role: role,
+        
       };
       console.log("user with role", userWithRole);
       setUser(userWithRole);
@@ -73,12 +74,10 @@ export const Login = () => {
           cancelButtonColor: "#d33",
         }).then((result) => {
           // Una vez logeado, navegar al dashboard
-          if (result.isConfirmed) {
-            navigate("/admin");
-          }
+          result.isConfirmed && navigate("/admin")
         });
       } else {
-        console.log("Datos invalidos");
+        console.log("es usuario");
         Swal.fire({
           title: "Log in success!",
           text: `Welcome ${userWithRole.email.toUpperCase()}`,
@@ -88,9 +87,7 @@ export const Login = () => {
           cancelButtonColor: "#d33",
         }).then((result) => {
           // Una vez logeado, navegar al dashboard
-          if (result.isConfirmed) {
-            navigate("/");
-          }
+          result.isConfirmed && navigate("/")
         });
       }
     });

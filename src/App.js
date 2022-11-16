@@ -17,6 +17,7 @@ import PurchaseForm from "./components/PurchaseForm";
 import { Admin } from "./components/Admin";
 import { SearchResults } from "./components/SearchResults";
 import ItemList from "./components/ItemList";
+import { PurchaseHistory } from "./components/PurchaseHistory";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/itemDetails/:id/" element={<ItemDetails />} />
           <Route path="/cart/*" element={<Cart />} />
+          <Route path="/purchasehistory/*" element={<PurchaseHistory />} />
           <Route path="/purchaseForm/*" element={<PurchaseForm />} />
           <Route path="/searchresults/*" element={<SearchResults />} />
           <Route path="/admin/*" element={<Admin />} />
