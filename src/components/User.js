@@ -7,12 +7,16 @@ export const User = () => {
   const { user } = useUserContext();
   return (
     <div>
-      {user?.role === "user" && (
+      {user?.role === "user" ? (
         <>
           <Routes>
             <Route path="/cart/*" element={<Cart />} />
             <Route path="/purchaseForm/*" element={<PurchaseForm />} />
           </Routes>
+        </>
+      ) : (
+        <>
+          <Navigate to={"/"}></Navigate>
         </>
       )}
     </div>
