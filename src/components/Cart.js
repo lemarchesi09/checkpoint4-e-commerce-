@@ -16,15 +16,19 @@ const Cart = () => {
   console.log(stateItem);
   const arrayTransformado = stateItem.map((producto) => producto);
   console.log('array nuevo', arrayTransformado);
+
+  console.log('user en cart', user);
   // Converting array to object
   const object = Object.assign({}, stateItem)
   console.log('array pasado a objetos', object);
 
   const [compra, setCompra] = useState(object);
+  const date = Date();
+  console.log(date);
 
   const sendBuyToFirebase = async () => {
     try{
-       await addDoc(purchasesCollection, compra)
+       await addDoc(purchasesCollection, {...compra, user: user, date: date})
        console.log('entro el try', compra);
     }catch(error){
       console.log('error in sendBuyToFirebase', error);
