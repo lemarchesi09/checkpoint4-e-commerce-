@@ -77,11 +77,7 @@ export const Login = () => {
           result.isConfirmed && navigate("/admin")
         });
       } else {
-<<<<<<< HEAD
-        // console.log("Datos invalidos");
-=======
         console.log("es usuario");
->>>>>>> a3ce61335d5c060d1fbb06b3e0d0aa1dc3f76c36
         Swal.fire({
           title: "Log in success!",
           text: `Welcome ${userWithRole.email.toUpperCase()}`,

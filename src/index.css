@@ -12,14 +12,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-/* .App{
-  background-color: #ffd803;
-  height: 100vh;
-<<<<<<< HEAD
-} */
-=======
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
->>>>>>> a3ce61335d5c060d1fbb06b3e0d0aa1dc3f76c36
+

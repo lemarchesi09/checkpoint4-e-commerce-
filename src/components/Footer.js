@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "../styles/footer.css";
 import { useUserContext } from "../context/userContext";
 
-export const Footer = () => {
+const Footer = () => {
   const { user } = useUserContext();
   return (
     <>
@@ -20,3 +20,4 @@ export const Footer = () => {
     </>
   );
 };
+export default Footer
