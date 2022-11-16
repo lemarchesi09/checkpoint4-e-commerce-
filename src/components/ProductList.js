@@ -60,48 +60,44 @@ export const ProductList = () => {
 
   return (
     <>
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Title</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Stock</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Actions</th>
+      <div className="productsContainer">
+        <table className="productsTable">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => {
+              return (
+                <tr key={product.id}>
+                  <td>
+                    <i className="fab fa-angular fa-lg text-danger me-3"></i> <strong>{product.title}</strong>
+                  </td>
+                  <td>{product.category}</td>
+                  <td>{product.price}</td>
+                  <td>{product.stock}</td>
+                  <td>{product.description}</td>
+                  <td>
+                    <Link to={`/admin/update/${product.id}`}>
+                      <button type="button" className="btn btn-primary">
+                        <i className="far fa-eye">Update</i>
+                      </button>
+                    </Link>
+                    <button type="button" className="btn btn-danger" onClick={() => confirmDeleteProduct(product.id)}>
+                      <i className="far fa-trash-alt">Delete</i>
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => {
-                  return (
-                    <tr key={product.id}>
-                      <td>
-                        <i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{product.title}</strong>
-                      </td>
-                      <td>{product.category}</td>
-                      <td>{product.price}</td>
-                      <td>{product.stock}</td>
-                      <td>{product.description}</td>
-                      <td>
-                        <Link to={`/admin/update/${product.id}`}>
-                          <button type="button" class="btn btn-primary">
-                            <i class="far fa-eye">Update</i>
-                          </button>
-                        </Link>
-                        <button type="button" class="btn btn-danger" onClick={() => confirmDeleteProduct(product.id)}>
-                          <i class="far fa-trash-alt">Delete</i>
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </>
   );

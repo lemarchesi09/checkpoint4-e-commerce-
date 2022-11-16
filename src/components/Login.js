@@ -17,16 +17,16 @@ export const Login = () => {
   const navigate = useNavigate();
   const auth = getAuth(firebaseApp);
 
-  // console.log('User en login', userLogged);
+  // // console.log('User en login', userLogged);
 
   const usersCollection = collection(db, "users");
 
   const getUsers = async () => {
     const dataUsers = await getDocs(usersCollection);
     const usersList = dataUsers.docs;
-    console.log("usersDB", usersList);
+    // console.log("usersDB", usersList);
     setUsersDB(usersList);
-    console.log(usersList);
+    // console.log(usersList);
   };
 
   useEffect(() => {
@@ -53,17 +53,17 @@ export const Login = () => {
   const setUserWithFirestoreRole = (userFromFirebase) => {
     // Traer el usuario por ID - Usar un metodo getUserFirestore
     getUserFirestore(userFromFirebase.uid).then((role) => {
-      // console.log("role", role);
+      // // console.log("role", role);
       // Armar el objeto con el usuario y el rol
       const userWithRole = {
         uid: userFromFirebase.uid,
         email: userFromFirebase.email,
         role: role,
       };
-      console.log("user with role", userWithRole);
+      // console.log("user with role", userWithRole);
       setUser(userWithRole);
       if (userWithRole?.role === "admin") {
-        console.log("es admin");
+        // console.log("es admin");
         Swal.fire({
           title: "Log in success!",
           text: `Welcome ${userWithRole.email.toUpperCase()}`,
@@ -78,7 +78,7 @@ export const Login = () => {
           }
         });
       } else {
-        console.log("Datos invalidos");
+        // console.log("Datos invalidos");
         Swal.fire({
           title: "Log in success!",
           text: `Welcome ${userWithRole.email.toUpperCase()}`,
@@ -114,15 +114,15 @@ export const Login = () => {
           email: userCredential.user.email,
           id: userCredential.user.uid,
         };
-        console.log("userCredential", userCredential);
-        console.log("userLogged", userLogged);
+        // console.log("userCredential", userCredential);
+        // console.log("userLogged", userLogged);
 
         onAuthStateChanged(auth, (userFromFirebase) => {
-          console.log("userFromFirebase.uid", userFromFirebase.uid);
+          // console.log("userFromFirebase.uid", userFromFirebase.uid);
           if (userFromFirebase) {
             if (!user) {
               setUserWithFirestoreRole(userFromFirebase);
-              console.log("user desde onAuth setUserwithRole", user);
+              // console.log("user desde onAuth setUserwithRole", user);
             } else {
               setUser(null);
             }
@@ -131,18 +131,18 @@ export const Login = () => {
           //     // const userFinded = usersDB.find(user => user.id === userLogged.id)
           // if (userFinded) {
           //     // Seting user in Context with setUser imported
-          //     console.log(userFinded);
+          //     // console.log(userFinded);
           //     setUser(userFinded)
-          //     console.log('user logged successfully', user.role);
+          //     // console.log('user logged successfully', user.role);
           //     });
         });
         // Esta hecho, pero tiene que ser asincrono
-        console.log("user fuera de setuserwithrole", user);
+        // console.log("user fuera de setuserwithrole", user);
       });
     } catch (error) {
-      console.log("Error", error);
+      // console.log("Error", error);
     }
-    console.log("user antes de salir de setuserwithrole", user);
+    // console.log("user antes de salir de setuserwithrole", user);
   };
 
   return (
