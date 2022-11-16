@@ -8,13 +8,8 @@ export const useUserContext = () => {
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
   const [searchProducts, setSearchProducts] = useState([]);
   return (
-    <userContext.Provider
-      value={{ user, setUser, searchProducts, setSearchProducts }}
-    >
-      {children}
-    </userContext.Provider>
+    <userContext.Provider value={{ user, setUser, searchProducts, setSearchProducts }}>{children}</userContext.Provider>
   );
 };

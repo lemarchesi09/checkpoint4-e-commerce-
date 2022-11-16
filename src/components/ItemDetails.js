@@ -4,16 +4,14 @@ import { addItem, updateItem } from "../../src/features/item/itemSlice";
 import { db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  useUserContext,
-} from "../context/userContext";
+//import { useUserContext } from "../context/userContext";
 import "../styles/itemDetails.css";
 
 const ItemDetails = () => {
-  const { user, setUser } = useUserContext();
+  //const { user, setUser } = useUserContext();
   const { id } = useParams();
   const [count, setCount] = useState(1);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const [itemQty, setItemQty] = useState({
     item: {},
@@ -66,6 +64,7 @@ const ItemDetails = () => {
 
   useEffect(() => {
     getProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -73,11 +72,7 @@ const ItemDetails = () => {
       <div className="card  col-md-4 w-100  ">
         <div className="row g-0">
           <div className="col-md-4">
-            <img
-              src={image}
-              className="img-fluid rounded-start"
-              alt=" Product img"
-            />
+            <img src={image} className="img-fluid rounded-start" alt=" Product img" />
           </div>
           <div className="col-md-6">
             <div className="card-body d-flex  flex-column justify-content-center">

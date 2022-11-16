@@ -1,15 +1,9 @@
-import { Link } from "react-router-dom"
-import { useUserContext } from "../context/userContext"
-import ItemListContainter from './ItemListContainter'
-export const Home = () =>{
-    const {user, setUser} = useUserContext();
-    return(
-        <div>
+import ItemListContainter from "./ItemListContainter";
 
-            {user?.role==="admin"  ? <Link to="/create">Create</Link> : <></>}
-
-            <ItemListContainter/>
-            {/* <Link to="/create">Create</Link> */}
-        </div>
-    )
-}
+export const Home = () => {
+  return (
+    <div>
+      <ItemListContainter />
+    </div>
+  );
+};

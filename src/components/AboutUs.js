@@ -2,25 +2,20 @@ import "../styles/about.css";
 import Card from 'react-bootstrap/Card';
 import React from "react";
 import { Link } from "react-router-dom";
-import user1 from "./user1.jpeg";
-import user2 from "./user2.jpeg";
-import user3 from "./user3.jpeg";
-import user4 from "./user4.jpeg";
 import { BsGithub } from "react-icons/bs";
 import { BsLinkedin } from "react-icons/bs";
 import { BsFillGeoAltFill } from "react-icons/bs";
 
 export const AboutUs = () => (
   <div className="about">
-    <h2>Te contamos un poco sobre nosotros...</h2>
+    <h2>We tell you a little about us...</h2>
     <p>
-      Somos un grupo de desarrolladores que pudo encontrar un maraviloso ritmo y coordinación a la hora de trabajar.
-      Apoyándonos en las fortalezas de cada uno pudimos llegar a éste proyecto final que esperamos hayan podido disfrutar.
-      Ante cualquier duda o consulta les dejamos nuestros datos para que puedan ponerse en contacto
+    We are a group of developers who were able to find a wonderful rhythm and coordination to work with.
+      Leaning on each other's strengths, we were able to reach this final project that we hope you enjoyed.
+      If you have any questions or concerns, we leave you our information so that you can contact us.
     </p>
     <div className="cards">
     <Card className="card">
-      <Card.Img variant="top" src={user1} />
       <Card.Body>
         <Card.Title className ="title">Florencia Miguez Oliverio</Card.Title>
         <Card.Text className="text row">
@@ -31,7 +26,6 @@ export const AboutUs = () => (
       </Card.Body>
     </Card>
     <Card className="card">
-      <Card.Img variant="top" src={user2} />
       <Card.Body>
         <Card.Title className ="title">Ignacio Benitez</Card.Title>
         <Card.Text className="text row">
@@ -42,7 +36,6 @@ export const AboutUs = () => (
       </Card.Body>
     </Card>
     <Card className="card">
-      <Card.Img variant="top" src={user3} />
       <Card.Body>
         <Card.Title className ="title">Enzo Marchesi</Card.Title>
         <Card.Text className="text row">
@@ -53,7 +46,6 @@ export const AboutUs = () => (
       </Card.Body>
     </Card>
     <Card className="card">
-      <Card.Img variant="top" src={user4} />
       <Card.Body>
         <Card.Title className ="title">Ian Noreiko</Card.Title>
         <Card.Text className="text row">
@@ -64,7 +56,6 @@ export const AboutUs = () => (
       </Card.Body>
     </Card>
     <Card className="card">
-      <Card.Img variant="top" src={user1} />
       <Card.Body>
         <Card.Title className ="title">Cecilia Kuckiewicz</Card.Title>
         <Card.Text className="text row">
