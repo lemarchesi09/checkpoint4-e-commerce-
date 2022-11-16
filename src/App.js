@@ -6,9 +6,8 @@ import { NavBar } from "./components/NavBar";
 import { Home } from "./components/Home";
 import { AboutUs } from "./components/AboutUs";
 import "./index.css";
-import { CreateProduct } from "./components/CreateProduct";
 import ItemDetails from "./components/ItemDetails";
-import { Cart } from "./components/Cart";
+import Cart from './components/Cart'
 import PurchaseForm from "./components/PurchaseForm";
 import { Admin } from "./components/Admin";
 import { SearchResults } from "./components/SearchResults";
@@ -23,13 +22,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/create" element={<CreateProduct />} />
           <Route path="/itemDetails/:id/" element={<ItemDetails />} />
           <Route path="/cart/*" element={<Cart />} />
-          <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/purchaseForm/*" element={<PurchaseForm />} />
           <Route path="/searchresults/*" element={<SearchResults />} />
           <Route path="/admin/*" element={<Admin />} />
+          <Route path="/aboutUs" element={<AboutUs />} />
         </Routes>
         <Footer />
       </div>

@@ -1,18 +1,22 @@
 import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { user, setUser, searchProducts, setSearchProducts, useUserContext } from "../context/userContext";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useUserContext } from "../context/userContext";
 import "../styles/navBar.css";
 import { db } from "../firebase/firebase";
-import { collection, doc, query, where, getDocs } from "firebase/firestore";
-
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { useSelector } from "react-redux";
 export const NavBar = () => {
   // User from context
   const { user, setUser } = useUserContext();
-  // console.log("user en NavBar", user);
-  // Search Products from context
-  const { searchProducts, setSearchProducts } = useUserContext();
+  // value to display the number of items in the cart
 
-  const productsCollection = collection(db, "generalProducts");
+  const quantityELements = useSelector((state) => state.item);
+
+  // Search Products from context
+  const { setSearchProducts } = useUserContext();
+
+  // const productsCollection = collection(db, "generalProducts");
 
   // Creating a state for search input
   const [search, setSearch] = useState("");
@@ -29,11 +33,10 @@ export const NavBar = () => {
 
     // In querySnapshot comes the response. Then, a forEach function is needed to capture every doc founded
     const querySnapshot = await getDocs(q);
-    // console.log("querysnapshot", querySnapshot);
     setSearchProducts(querySnapshot);
     // setSearchProducts(querySnapshot.forEach((doc) => {
     //     // doc.data() is never undefined for query doc snapshots
-    // // console.log(doc.id, " => ", doc.data());
+    // console.log(doc.id, " => ", doc.data());
     // }
     // ));
 
@@ -43,20 +46,20 @@ export const NavBar = () => {
     // const dataProducts = await getDocs(productsCollection);
     // const querySnapshot = await getDocs(collection(db, "generalProducts"));
     // setSearchProducts(dataProducts.docs.map((doc) => ({...doc.data(), id: doc.id }) ));
-    // // console.log(searchProducts);
+    // console.log(searchProducts);
     // querySnapshot.forEach((doc) => {
     //     setSearchProducts(doc.data)
     //     doc.data() is never undefined for query doc snapshots
-    //   // console.log(doc.id, " => ", doc.data());
+    //   console.log(doc.id, " => ", doc.data());
     // });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     getProductsFromSearch();
+    e.target.search.value = "";
   };
 
-  // console.log("search", search);
   return (
     <>
       {user?.role !== "admin" ? (
@@ -136,10 +139,11 @@ export const NavBar = () => {
                   <div>
                     <Link to="#">Purchase History</Link>
                   </div>
-                  <div>
+                  <div className="cart">
                     <Link to="/cart">
-                      {" "}
-                      <i className="bi bi-cart"></i>(0){" "}
+                      <i className="bi bi-cart">
+                        <div className="quantityElements">{quantityELements.length}</div>
+                      </i>
                     </Link>
                   </div>
                 </>

@@ -11,7 +11,6 @@ const ItemList = () => {
     try {
       const dataProducts = await getDocs(productsCollection);
       const items = dataProducts.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      // console.log("items", items);
       setDataCarrousel(items);
     } catch (error) {
       // console.log(error);

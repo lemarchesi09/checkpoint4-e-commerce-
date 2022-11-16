@@ -1,0 +1,21 @@
+.bi-cart{
+    font-size: 25px;
+    position: relative;
+}
+.quantityElements {
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    color: #fff;
+    border-radius: 50% ;
+    text-decoration:none;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    display: inline-block !important;
+    top: -13px;
+    right: -12px;
+
+
+}

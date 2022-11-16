@@ -1,83 +1,126 @@
-import { useState } from "react";
-
+import React from "react";
+import { useEffect,useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteItem } from "../../src/features/item/itemSlice";
 import "../styles/cart.css";
+import { db } from "../firebase/firebase";
+import { collection, addDoc } from "firebase/firestore";
+import { useUserContext } from "../context/userContext";
+import { Navigate,Link } from "react-router-dom";
 
-export const Cart = ()=>{
-    const [products,setProducts] =[
-    {productId: "1", productTitle:"Samsung RKT",productPrice:"155", productStock:"7"},
-    {productId: "2", productTitle:"Chromecast 4",productPrice:"155", productStock:"5"},
-    {productId: "3", productTitle:"Noga Speakers",productPrice:"155", productStock:"3"}
-];
+const Cart = () => {
+  const {user} = useUserContext();
+  const [acum, setAcum] = useState(0);
+  const stateItem = useSelector((state) => state.item);
+  console.log(stateItem);
+  const arrayTransformado = stateItem.map((producto) => producto);
+  console.log('array nuevo', arrayTransformado);
+  // Converting array to object
+  const object = Object.assign({}, stateItem)
+  console.log('array pasado a objetos', object);
 
-    return (
-        <>
-        <div class="container mt-5 mb-5">
-            <div class="d-flex justify-content-center row">
-                <div class="col-md-8">
-                    <div class="p-2">
-                        <h4>Shopping cart</h4>
-                        <div class="d-flex flex-row align-items-center pull-right"><span class="mr-1">Sort by:</span><span class="mr-1 font-weight-bold">Price</span><i class="fa fa-angle-down"></i></div>
-                    </div>
-                    <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
-                        <div class="d-flex flex-column align-items-center product-details"><span class="font-weight-bold">Basic T-shirt</span>
-                            <div class="d-flex flex-row product-desc">
-                                <div class="size mr-1"><span class="text-grey">Size:</span><span class="font-weight-bold">&nbsp;M</span></div>
-                                <div class="color"><span class="text-grey">Color:</span><span class="font-weight-bold">&nbsp;Grey</span></div>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center qty"><i class="fa fa-minus text-danger"></i>
-                            <h5 class="text-grey mt-1 mr-1 ml-1">2</h5><i class="fa fa-plus text-success"></i></div>
-                        <div>
-                            <h5 class="text-grey">$20.00</h5>
-                        </div>
-                        <div class="d-flex align-items-center"><i class="fa fa-trash mb-1 text-danger"></i></div>
-                    </div>
-                    <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
-                        <div class="d-flex flex-column align-items-center product-details"><span class="font-weight-bold">Basic T-shirt</span>
-                            <div class="d-flex flex-row product-desc">
-                                <div class="size mr-1"><span class="text-grey">Size:</span><span class="font-weight-bold">&nbsp;M</span></div>
-                                <div class="color"><span class="text-grey">Color:</span><span class="font-weight-bold">&nbsp;Grey</span></div>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center qty"><i class="fa fa-minus text-danger"></i>
-                            <h5 class="text-grey mt-1 mr-1 ml-1">2</h5><i class="fa fa-plus text-success"></i></div>
-                        <div>
-                            <h5 class="text-grey">$20.00</h5>
-                        </div>
-                        <div class="d-flex align-items-center"><i class="fa fa-trash mb-1 text-danger"></i></div>
-                    </div>
-                    <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
-                        <div class="d-flex flex-column align-items-center product-details"><span class="font-weight-bold">Basic T-shirt</span>
-                            <div class="d-flex flex-row product-desc">
-                                <div class="size mr-1"><span class="text-grey">Size:</span><span class="font-weight-bold">&nbsp;M</span></div>
-                                <div class="color"><span class="text-grey">Color:</span><span class="font-weight-bold">&nbsp;Grey</span></div>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center qty"><i class="fa fa-minus text-danger"></i>
-                            <h5 class="text-grey mt-1 mr-1 ml-1">2</h5><i class="fa fa-plus text-success"></i></div>
-                        <div>
-                            <h5 class="text-grey">$20.00</h5>
-                        </div>
-                        <div class="d-flex align-items-center"><i class="fa fa-trash mb-1 text-danger"></i></div>
-                    </div>
-                    <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
-                        <div class="d-flex flex-column align-items-center product-details"><span class="font-weight-bold">Basic T-shirt</span>
-                            <div class="d-flex flex-row product-desc">
-                                <div class="size mr-1"><span class="text-grey">Size:</span><span class="font-weight-bold">&nbsp;M</span></div>
-                                <div class="color"><span class="text-grey">Color:</span><span class="font-weight-bold">&nbsp;Grey</span></div>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center qty"><i class="fa fa-minus text-danger"></i>
-                            <h5 class="text-grey mt-1 mr-1 ml-1">2</h5><i class="fa fa-plus text-success"></i></div>
-                        <div>
-                            <h5 class="text-grey">$20.00</h5>
-                        </div>
-                        <div class="d-flex align-items-center"><i class="fa fa-trash mb-1 text-danger"></i></div>
-                    </div>
-                    <div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded"><button class="btn btn-warning btn-block btn-lg ml-2 pay-button" type="button">Proceed to Pay</button></div>
+  const [compra, setCompra] = useState(object);
+
+  const sendBuyToFirebase = async () => {
+    try{
+       await addDoc(purchasesCollection, compra)
+       console.log('entro el try', compra);
+    }catch(error){
+      console.log('error in sendBuyToFirebase', error);
+    }
+  }
+
+  const dispatch= useDispatch()
+
+  const purchasesCollection = collection(db, "purchases")
+
+  const deleteProduct =(id)=>{
+    console.log('delete id', id);
+    dispatch(deleteItem(id))
+
+  }
+// accumulator to render the total price
+  useEffect(() => {
+    let newValue = 0;
+    stateItem.forEach((element) => {
+      newValue = newValue + Number(element.item.price) * element.quantity;
+    });
+    setAcum(newValue);
+  }, [stateItem]);
+  return (
+    <div>
+
+      {user?.role === "user"  ?
+      <>
+      
+        <div className="container mt-5 mb-5">
+          <h4>Shopping cart</h4>
+  
+          {stateItem.length===0? <h1 className="text-center">todavia no hay productos en el carrito!</h1>:stateItem.map((item, index) => (
+            <div className="d-flex justify-content-center row">
+              <div className="col-md-8">
+                <div className="p-2">
+                  <div className="d-flex flex-row align-items-center pull-right">
+                    <span className="mr-1 font-weight-bold">
+        
+                      quantity: {item.item.quantity}
+                    </span>
+                    <i className="fa fa-angle-down"></i>
+                  </div>
                 </div>
+                <div key={index} className="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
+                  <div className="d-flex flex-column align-items-center product-details">
+                    <span className="font-weight-bold">{item.item.title}</span>
+                    <div className="d-flex flex-row product-desc">
+                      <div className="size mr-1"></div>
+                      <div className="color">
+                        <span className="text-grey"> stock :{item.item.stock}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="d-flex flex-row align-items-center qty">
+                    <i className="fa fa-minus text-danger"></i>
+                    <h5 className="text-grey mt-1 mr-1 ml-1">
+                      {" "}
+                      quantity:{item.quantity}
+                    </h5>
+                    <i className="fa fa-plus text-success"></i>
+                  </div>
+                  <div className="deleteItem">
+                    <button className="btn btn-danger" onClick={()=> deleteProduct(item.item.id)}>
+                      delete
+                    </button>
+                  </div>
+                  <div>
+                    <h5 className="text-grey">
+                      ${item.item.price * item.quantity}{""}
+                    </h5>
+                  </div>
+                  <div className="d-flex align-items-center">
+                    <i className="fa fa-trash mb-1 text-danger"></i>
+                  </div>
+                </div>
+              </div>
             </div>
+          ))}
+          <div className={`${stateItem.length===0? "d-none":"d-block"} d-flex flex-row align-items-around mt-3 p-2 bg-white rounded`}>
+          <Link to="/purchaseForm">
+            <button
+              className="btn btn-warning btn-block btn-lg ml-2 pay-button"
+              type="button"
+              onClick={() => {sendBuyToFirebase()}}
+            > Proced to pay </button>
+             </Link>
+            <div className="totalPrice d-flex justify-content-around">
+              <h3> Total price: ${acum}</h3>
+            </div>
+          </div>
         </div>
-        </>
-    );
+      </>
+      :
+      <Navigate to={"/"}></Navigate>
+    }
+    </div>
+  );
 };
+export default Cart;
