@@ -9,14 +9,10 @@ import "./index.css";
 import ItemDetails from "./components/ItemDetails";
 import Cart from './components/Cart'
 import PurchaseForm from "./components/PurchaseForm";
-<<<<<<< HEAD
-import PaymentMethod from "./components/PaymentMethod";
-
-=======
->>>>>>> 12cf818a166c87af5e7bc8c8eabbc6b3aca20b52
 import { Admin } from "./components/Admin";
 import { SearchResults } from "./components/SearchResults";
 import { Footer } from "./components/Footer";
+import PaymentMethod from "./components/PaymentMethod";
 
 function App() {
   return (
