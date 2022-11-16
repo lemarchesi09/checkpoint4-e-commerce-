@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
 import "../styles/itemList.css";
 const ItemList = () => {
   const [dataCarrousel, setDataCarrousel] = useState([]);
@@ -13,7 +13,7 @@ const ItemList = () => {
       const items = dataProducts.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       setDataCarrousel(items);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -26,20 +26,22 @@ const ItemList = () => {
       <h1 className=" textAboveItems">PRODUCTOS MAS BUSCADOS❤🔥</h1>
       <div className="itemList">
         {dataCarrousel.slice(0, 4).map((item, index) => (
-         <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer" >
-          <div className="cards">
-            <Card className="card" key={index}>
-              <Card.Img className="image" variant="top" src={`${ item.image }`} />
-              <Card.Body>
-                <Card.Title className ="card-title">{item.title}</Card.Title>
-                <Card.Text className="text row">
-                  <p>${item.price}</p>
-                  <p><i className="bi bi-truck "></i> Envio gratis!</p>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
-          {/* <div className="card" key={index}>
+          <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer">
+            <div className="cards">
+              <Card className="card" key={index}>
+                <Card.Img className="image" variant="top" src={`${item.image}`} />
+                <Card.Body>
+                  <Card.Title className="card-title">{item.title}</Card.Title>
+                  <Card.Text className="text row">
+                    <p>${item.price}</p>
+                    <p>
+                      <i class="bi bi-truck "></i> Envio gratis!
+                    </p>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+            {/* <div className="card" key={index}>
             <div className="card-img-top">
               <img src={item.image} alt="..." className="image-card" />
             </div>
@@ -55,8 +57,7 @@ const ItemList = () => {
               </div>
             </div>
           </div> */}
-        </Link>
-        
+          </Link>
         ))}
       </div>
     </>

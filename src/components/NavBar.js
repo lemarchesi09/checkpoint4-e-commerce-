@@ -1,19 +1,17 @@
 import { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import {
-  useUserContext,
-} from "../context/userContext";
+import { useUserContext } from "../context/userContext";
 import "../styles/navBar.css";
 import { db } from "../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 export const NavBar = () => {
   // User from context
   const { user, setUser } = useUserContext();
   // value to display the number of items in the cart
-  
-  const quantityELements= useSelector(state=>state.item)
+
+  const quantityELements = useSelector((state) => state.item);
 
   // Search Products from context
   const { setSearchProducts } = useUserContext();
@@ -31,10 +29,7 @@ export const NavBar = () => {
 
   const getProductsFromSearch = async () => {
     // Get some products
-    const q = query(
-      collection(db, "generalProducts"),
-      where("title", "==", search)
-    );
+    const q = query(collection(db, "generalProducts"), where("title", "==", search));
 
     // In querySnapshot comes the response. Then, a forEach function is needed to capture every doc founded
     const querySnapshot = await getDocs(q);
@@ -63,10 +58,8 @@ export const NavBar = () => {
     e.preventDefault();
     getProductsFromSearch();
     e.target.search.value = "";
-    
   };
 
-  
   return (
     <>
       {user?.role !== "admin" ? (
@@ -87,16 +80,9 @@ export const NavBar = () => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div
-              className="collapse navbar-collapse flex-column p-1"
-              id="navbarSupportedContent"
-            >
+            <div className="collapse navbar-collapse flex-column p-1" id="navbarSupportedContent">
               {/* SearchBar */}
-              <form
-                className="d-flex  form"
-                role="search"
-                onSubmit={handleSubmit}
-              >
+              <form className="d-flex  form" role="search" onSubmit={handleSubmit}>
                 <input
                   className="form-control me-2 "
                   type="search"
@@ -154,9 +140,9 @@ export const NavBar = () => {
                     <Link to="#">Purchase History</Link>
                   </div>
                   <div className="cart">
-                    <Link to='/cart'>
+                    <Link to="/cart">
                       <i className="bi bi-cart">
-                      <div className="quantityElements">{quantityELements.length}</div>
+                        <div className="quantityElements">{quantityELements.length}</div>
                       </i>
                     </Link>
                   </div>
@@ -167,16 +153,11 @@ export const NavBar = () => {
                 </Link>
               )}
             </div>
-                  
           </div>
-          
         </nav>
       ) : (
-        <>
-        </>
-        
+        <></>
       )}
-    
     </>
   );
 };

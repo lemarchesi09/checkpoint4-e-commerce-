@@ -1,12 +1,39 @@
-.container {
+.productsContainer {
   padding: 2rem 0rem;
+  float: right;
+  width: 80vw;
 }
 
-h4 {
-  margin: 2rem 0rem 1rem;
+.productsTable {
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 1em;
+  width: 80%;
 }
 
-.table-image td,
-th {
-  vertical-align: middle;
+.productsTable tbody {
+  border-radius: 10px;
+}
+
+.productsTable tr {
+  border-color: #fece00;
+  border-width: 2px;
+}
+
+.productsTable thead tr {
+  background-color: #fece00;
+  color: black;
+  text-align: left;
+}
+
+.productsTable th,
+.productsTable td {
+  padding: 12px 15px;
+}
+
+.productsTable tbody tr {
+  border-bottom: 1px solid#fbf4cd;
+  background-color: rgb(249, 249, 249, 0.7);
+  color: black;
+  font-weight: 500;
 }

@@ -3,20 +3,13 @@ import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 import "../styles/card.css";
 const PaymentMethod = () => {
-    const [dataCard, setDataCard] = useState({
-        number:'',
-        name:'',
-        expiry :'',
-        cvc:'',
-    })
-    const [focus, setFocus] =useState('')
-//   const [number, setNumber] = useState("");
-//   const [name, setName] = useState("");
-//   const [expiry, setExpiry] = useState("");
-//   const [cvc, setCvc] = useState("");
-//   const [focus, setFocus] = useState("");
-const {name,number,expiry,cvc} = dataCard
-console.log(dataCard.number);
+
+  const [number, setNumber] = useState("");
+  const [name, setName] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvc, setCvc] = useState("");
+  const [focus, setFocus] = useState("");
+
   return (
     <div>
       <Cards
@@ -34,8 +27,8 @@ console.log(dataCard.number);
               name="name"
               placeholder="Name Card"
               onFocus={(e) => setFocus(e.target.name)}
-              value={dataCard.name}
-              onChange={(e) => setDataCard({name:e.target.value})}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="input-number">
@@ -44,8 +37,8 @@ console.log(dataCard.number);
               name="number"
               placeholder="Card Number"
               onFocus={(e) => setFocus(e.target.name)}
-              value={dataCard.number}
-              onChange={(e) => setDataCard({number:e.target.value})}
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
             />
           </div>
           <div className="input-expiry">
@@ -53,9 +46,9 @@ console.log(dataCard.number);
               type="text"
               name="expiry"
               placeholder="expiry"
-              onFocus={(e) =>setFocus(e.target.name)}
-              value={dataCard.expiry}
-              onChange={(e) => setDataCard({expiry:e.target.value})}
+              onFocus={(e) => setFocus(e.target.name)}
+              value={expiry}
+              onChange={(e) => setExpiry(e.target.value)}
             />
           </div>
           <div className="input-cvc">
@@ -64,8 +57,8 @@ console.log(dataCard.number);
               name="cvc"
               placeholder="CVC"
               onFocus={(e) => setFocus(e.target.name)}
-              value={dataCard.cvc}
-              onChange={(e) => setDataCard({cvc:e.target.value})}
+              value={cvc}
+              onChange={(e) => setCvc(e.target.value)}
             />
           </div>
         </div>
