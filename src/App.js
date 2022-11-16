@@ -7,14 +7,14 @@ import { Home } from "./components/Home";
 import { AboutUs } from "./components/AboutUs";
 import "./index.css";
 import ItemDetails from "./components/ItemDetails";
-import Cart from './components/Cart'
+import Cart from "./components/Cart";
 import PurchaseForm from "./components/PurchaseForm";
 import { Admin } from "./components/Admin";
 import { SearchResults } from "./components/SearchResults";
 import ItemList from "./components/ItemList";
 import { PurchaseHistory } from "./components/PurchaseHistory";
 import PaymentMethod from "./components/PaymentMethod";
-import Footer from './components/Footer'
+import { Footer } from "./components/Footer";
 function App() {
   return (
     <UserProvider>

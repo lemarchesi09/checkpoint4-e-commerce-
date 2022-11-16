@@ -59,7 +59,6 @@ export const Login = () => {
         uid: userFromFirebase.uid,
         email: userFromFirebase.email,
         role: role,
-        
       };
       // console.log("user with role", userWithRole);
       setUser(userWithRole);
@@ -74,7 +73,7 @@ export const Login = () => {
           cancelButtonColor: "#d33",
         }).then((result) => {
           // Una vez logeado, navegar al dashboard
-          result.isConfirmed && navigate("/admin")
+          result.isConfirmed && navigate("/admin");
         });
       } else {
         console.log("es usuario");
@@ -87,7 +86,7 @@ export const Login = () => {
           cancelButtonColor: "#d33",
         }).then((result) => {
           // Una vez logeado, navegar al dashboard
-          result.isConfirmed && navigate("/")
+          result.isConfirmed && navigate("/");
         });
       }
     });
