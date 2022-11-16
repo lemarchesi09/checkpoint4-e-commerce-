@@ -4,14 +4,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-// import { useDispatch } from "react-redux";
-// import { addProduct } from "../features/product/productsSlice";
-//import { useUserContext } from "../context/userContext";
 
 const MySwal = withReactContent(Swal);
 
 export const ProductForm = () => {
-  //const { user, setUser } = useUserContext();
   const productsCollection = collection(db, "generalProducts");
 
   const [product, setProduct] = useState({
