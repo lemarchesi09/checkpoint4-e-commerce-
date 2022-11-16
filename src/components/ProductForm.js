@@ -32,7 +32,7 @@ export const ProductForm = () => {
         icon: "success",
         confirmButtonText: "Ok",
       });
-      navigate("/");
+      navigate("/admin/productlist");
     } catch (error) {
       MySwal.fire({
         title: "Error!",
@@ -40,7 +40,7 @@ export const ProductForm = () => {
         icon: "error",
         confirmButtonText: "Ok",
       });
-      navigate("/");
+      navigate("/admin/productlist");
     }
   };
 
@@ -98,9 +98,11 @@ export const ProductForm = () => {
               onChange={handleChange}
             >
               <option>Open this select menu</option>
-              <option value="category3">Category 1</option>
-              <option value="category2">Category 2</option>
-              <option value="category3">Category 3</option>
+              <option value="Clothes">Clothes</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Shoes">Shoes</option>
+              <option value="Others">Others</option>
             </select>
           </div>
           <div className="mb-3">
@@ -123,7 +125,7 @@ export const ProductForm = () => {
             </label>
             <input
               className="form-control"
-              type="file"
+              type="text"
               id="formFile"
               name="image"
               value={product.image}
