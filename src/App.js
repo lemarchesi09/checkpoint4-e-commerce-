@@ -11,9 +11,10 @@ import Cart from './components/Cart'
 import PurchaseForm from "./components/PurchaseForm";
 import { Admin } from "./components/Admin";
 import { SearchResults } from "./components/SearchResults";
-import { Footer } from "./components/Footer";
+import ItemList from "./components/ItemList";
+import { PurchaseHistory } from "./components/PurchaseHistory";
 import PaymentMethod from "./components/PaymentMethod";
-
+import Footer from './components/Footer'
 function App() {
   return (
     <UserProvider>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/itemDetails/:id/" element={<ItemDetails />} />
           <Route path="/cart/*" element={<Cart />} />
+          <Route path="/purchasehistory/*" element={<PurchaseHistory />} />
           <Route path="/purchaseForm/*" element={<PurchaseForm />} />
           <Route path="/PaymentMethod" element={<PaymentMethod />} />
           <Route path="/searchresults/*" element={<SearchResults />} />
