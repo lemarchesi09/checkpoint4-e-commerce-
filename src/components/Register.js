@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import firebaseApp from "../firebase/firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc, getFirestore } from "firebase/firestore";
+import "../styles/login.css";
+import Card from "react-bootstrap/Card";
 
 export const Register = () => {
   // Firestore Users DB
@@ -42,9 +44,10 @@ export const Register = () => {
   return (
     <section>
       <h2 className="d-flex justify-content-center pt-2">Create a New User</h2>
-      <div className="d-flex justify-content-center">
-        <form
-          className="d-flex flex-column align-items-center border border-primary p-3 rounded-bottom"
+      <div className="d-flex justify-content-center my-3">
+        <Card>
+          <form
+          className="d-flex flex-column align-items-center p-3"
           onSubmit={handleSubmit(onSubmit)}
         >
           <label>Name:</label>
@@ -118,14 +121,15 @@ export const Register = () => {
             <option value="user">User</option>
           </select>
           {errors.role && <span>{errors.role.message}</span>}
-          <input className="form__sub__btn" type="submit" value="SIGN UP" />
-          <p className="formu__signUp">
+          <input className="form__sub mt-4" type="submit" value="SIGN UP" />
+          <p className="formu__signUp mt-4">
             Already have an account?{" "}
             <Link to="/login" className="formu__signUp__link">
               LOG IN
             </Link>
           </p>
         </form>
+          </Card>
       </div>
     </section>
   );
