@@ -63,12 +63,12 @@ const Cart = () => {
               stateItem.map((item, index) => (
                 <div className="d-flex justify-content-center row">
                   <div className="col-md-8">
-                    <div className="p-2">
+                    {/* <div className="p-2">
                       <div className="d-flex flex-row align-items-center pull-right">
                         <span className="mr-1 font-weight-bold">quantity: {item.item.quantity}</span>
                         <i className="fa fa-angle-down"></i>
                       </div>
-                    </div>
+                    </div> */}
                     <div
                       key={index}
                       className="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded"

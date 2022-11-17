@@ -3,8 +3,10 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { useUserContext } from "../context/userContext";
 import "../styles/PurchaseForm.css";
 const PurchaseForm = () => {
+  const {user} = useUserContext();
   return (
     <div className="PurchaseForm">
       <Card className=" cards cardContainer">
