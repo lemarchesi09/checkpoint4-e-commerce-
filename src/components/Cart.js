@@ -7,6 +7,7 @@ import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { useUserContext } from "../context/userContext";
 import { Navigate, Link } from "react-router-dom";
+import Card from 'react-bootstrap/Card';
 
 const Cart = () => {
   const { user } = useUserContext();
@@ -54,43 +55,32 @@ const Cart = () => {
     <div>
       {user?.role === "user" ? (
         <>
-          <div className="container mt-5 mb-5">
+          <div className="container mt-5 mb-5 cartContainer">
             <h4>Shopping cart</h4>
-
+            <div>
+              <Card>
             {stateItem.length === 0 ? (
               <h1 className="text-center">todavia no hay productos en el carrito!</h1>
             ) : (
               stateItem.map((item, index) => (
-                <div className="d-flex justify-content-center row">
-                  <div className="col-md-8">
-                    <div className="p-2">
-                      <div className="d-flex flex-row align-items-center pull-right">
-                        <span className="mr-1 font-weight-bold">quantity: {item.item.quantity}</span>
-                        <i className="fa fa-angle-down"></i>
+                <div className="d-flex justify-content-center cartDetail">
+                  <div className="cart">
+                    <div key={index} className="cartProduct p-2 bg-white mt-4 px-3 rounded" >
+                      <div className="d-flex flex-column  product-details itemTitle-cart">
+                        <h3 className="font-weight-bold">{item.item.title}</h3>
                       </div>
-                    </div>
-                    <div
-                      key={index}
-                      className="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded"
-                    >
-                      <div className="d-flex flex-column align-items-center product-details">
-                        <span className="font-weight-bold">{item.item.title}</span>
-                        <div className="d-flex flex-row product-desc">
+                      <div className="qtyPrice">
+
+                      <div className="qty">
+                        <i className="fa fa-minus text-danger"></i>
+                        <h5 className="text-grey mt-1 mr-1 ml-1"> quantity: {item.quantity}</h5>
+                        <i className="fa fa-plus text-success"></i>
+                        <div className="product-desc">
                           <div className="size mr-1"></div>
                           <div className="color">
-                            <span className="text-grey"> stock :{item.item.stock}</span>
+                            <span className="text-grey"> stock: {item.item.stock}</span>
                           </div>
                         </div>
-                      </div>
-                      <div className="d-flex flex-row align-items-center qty">
-                        <i className="fa fa-minus text-danger"></i>
-                        <h5 className="text-grey mt-1 mr-1 ml-1"> quantity:{item.quantity}</h5>
-                        <i className="fa fa-plus text-success"></i>
-                      </div>
-                      <div className="deleteItem">
-                        <button className="btn btn-danger" onClick={() => deleteProduct(item.item.id)}>
-                          delete
-                        </button>
                       </div>
                       <div>
                         <h5 className="text-grey">
@@ -98,19 +88,30 @@ const Cart = () => {
                           {""}
                         </h5>
                       </div>
+                      </div>
                       <div className="d-flex align-items-center">
                         <i className="fa fa-trash mb-1 text-danger"></i>
                       </div>
                     </div>
-                  </div>
+                  </div>  
+                    <div className="deleteItem">
+                        <button className="btn btn-danger" onClick={() => deleteProduct(item.item.id)}>
+                          delete
+                        </button>
+                    </div>
                 </div>
-              ))
-            )}
-            <div
-              className={`${
-                stateItem.length === 0 ? "d-none" : "d-block"
-              } d-flex flex-row align-items-around mt-3 p-2 bg-white rounded`}
-            >
+                
+                ))
+                )}
+                </Card>
+            </div>
+            
+            <div className={`${ stateItem.length === 0 ? "d-none" : "d-block" } d-flex flex-column mt-3 p-2 bg-white rounded`} >
+              <div className="totalPrice d-flex justify-content-end">
+                <h3> Total price: ${acum}</h3>
+              </div>
+              <div className="d-flex justify-content-end">
+
               <Link to="/purchaseForm">
                 <button
                   className="btn btn-warning btn-block btn-lg ml-2 pay-button"
@@ -123,9 +124,7 @@ const Cart = () => {
                   Proced to pay{" "}
                 </button>
               </Link>
-              <div className="totalPrice d-flex justify-content-around">
-                <h3> Total price: ${acum}</h3>
-              </div>
+                    </div>
             </div>
           </div>
         </>
