@@ -6,6 +6,8 @@ import "../styles/navBar.css";
 import { db } from "../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { useSelector } from "react-redux";
+import  Logo  from "../assets/img/logo-market.png"
+
 export const NavBar = () => {
   // User from context
   const { user, setUser } = useUserContext();
@@ -63,11 +65,10 @@ export const NavBar = () => {
   return (
     <>
       {user?.role !== "admin" ? (
-        <nav className="navbar navbar-expand-md navbar-expand-lg bg-light">
-          <div className="container-fluid">
-            <Link to="/" className="nav-link">
-              {" "}
-              Logo{" "}
+        <nav className="position-fixed navbar navbar-expand-md navbar-expand-lg bg-light">
+          <div className=" container-fluid">
+            <Link to="/" className="nav-link-logo">
+              <img className="logo" src={ Logo }/>
             </Link>
             <button
               className="navbar-toggler"
@@ -82,9 +83,9 @@ export const NavBar = () => {
             </button>
             <div className="collapse navbar-collapse flex-column p-1" id="navbarSupportedContent">
               {/* SearchBar */}
-              <form className="d-flex  form" role="search" onSubmit={handleSubmit}>
+              <form className="d-flex form w-100 align-items-center" role="search" onSubmit={handleSubmit}>
                 <input
-                  className="form-control me-2 "
+                  className="form-control me-2"
                   type="search"
                   name="search"
                   onChange={handleChange}
@@ -95,7 +96,7 @@ export const NavBar = () => {
                   Search
                 </button>
               </form>
-              <ul className="navbar-nav mb-2 mb-lg-0 w-75">
+              <ul className="navbar-nav mb-2 mb-lg-0 ">
                 <li className="nav-item">
                   <Link to="/" className="nav-link">
                     {" "}

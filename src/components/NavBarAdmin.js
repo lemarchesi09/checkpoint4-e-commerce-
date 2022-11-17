@@ -6,7 +6,7 @@ export const NavBarAdmin = () => {
 
   return (
     <>
-      <div className="navbar">
+      <div className="navbar position-fixed">
         <div className="profile_pic">
           {/* <img src="images/img.jpg" alt="..." className="img-circle profile_img"> */}
         </div>

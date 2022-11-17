@@ -1,12 +1,38 @@
+.navbar{
+    display: contents !important;
+}
 .nav-user{
     width: 25%;
 }
 .nav-user a{
     text-decoration: none;
 } 
+.nav-link-logo{
+    width: 20%;
+}
+.nav-item{
+    
+    width: 35%;
+}
 
+.logo{
+    width:50%;
+}
 .form{
     width: 75%;
+}
+ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+ul li{
+    
+
+}
+li a{
+    
+    display: contents;
 }
  @media (max-width:768px) {
     .nav-user{

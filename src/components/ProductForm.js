@@ -56,7 +56,7 @@ export const ProductForm = () => {
   };
 
   return (
-    <div className="col-xxl d-flex justify-content-center">
+    <div className="col-xxl d-flex justify-content-center " style={{paddingTop: "5rem"}}>
       <div className="card mb-4 w-50">
         <h5 className="card-header d-flex align-items-center justify-content-between">Enter product details</h5>
         <form className="card-body" onSubmit={handleSubmit}>

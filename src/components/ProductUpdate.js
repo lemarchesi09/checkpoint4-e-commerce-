@@ -138,7 +138,7 @@ export const ProductUpdate = () => {
             </label>
             <input
               className="form-control"
-              type="file"
+              type="text"
               id="formFile"
               name="image"
               value={product.image}
