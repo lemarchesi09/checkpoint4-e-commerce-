@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { useUserContext } from "../context/userContext";
 import "../styles/navBar.css";
 import { db } from "../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { useSelector } from "react-redux";
+
 import  Logo  from "../assets/img/logo-market.png"
+
 
 export const NavBar = () => {
   // User from context

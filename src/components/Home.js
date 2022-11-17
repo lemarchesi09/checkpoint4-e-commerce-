@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import ItemListContainter from './ItemListContainter';
+import ItemListContainter from "./ItemListContainter";
 
+<<<<<<< HEAD
 export const Home = () =>{
 
     return(
@@ -9,3 +9,12 @@ export const Home = () =>{
         </>
     )
 }
+=======
+export const Home = () => {
+  return (
+    <div>
+      <ItemListContainter />
+    </div>
+  );
+};
+>>>>>>> 67f25ea387f08e3f48f311ff39cdf0821a9f802e

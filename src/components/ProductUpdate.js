@@ -27,12 +27,13 @@ export const ProductUpdate = () => {
       setProduct(docSnap.data());
     } else {
       console.log("Product doesn't exist!");
-      navigate("/productlist");
+      navigate("/admin/productlist");
     }
   };
 
   useEffect(() => {
     getProduct(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleChange = (e) => {
@@ -113,9 +114,11 @@ export const ProductUpdate = () => {
               onChange={handleChange}
             >
               <option>Open this select menu</option>
-              <option value="category3">Category 1</option>
-              <option value="category2">Category 2</option>
-              <option value="category3">Category 3</option>
+              <option value="Clothes">Clothes</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Furniture">Furniture</option>
+              <option value="Shoes">Shoes</option>
+              <option value="Others">Others</option>
             </select>
           </div>
           <div className="mb-3">

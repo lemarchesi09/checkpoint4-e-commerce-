@@ -13,12 +13,13 @@ const ItemList = () => {
       const items = dataProducts.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       setDataCarrousel(items);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -35,28 +36,12 @@ const ItemList = () => {
                   <Card.Text className="text row">
                     <p>${item.price}</p>
                     <p>
-                      <i class="bi bi-truck "></i> Envio gratis!
+                      <i className="bi bi-truck "></i> Envio gratis!
                     </p>
                   </Card.Text>
                 </Card.Body>
               </Card>
             </div>
-            {/* <div className="card" key={index}>
-            <div className="card-img-top">
-              <img src={item.image} alt="..." className="image-card" />
-            </div>
-
-              <div className="card-body">
-                <h5 className="card-title">{item.title}</h5>
-                <div className="icon-ship">
-                  <p className="card-text">${item.price}</p>
-                  <p className="card-text">
-                    <i className="bi bi-truck "></i> Envio gratis!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div> */}
           </Link>
         ))}
       </div>
