@@ -53,7 +53,6 @@ const PurchaseForm = () => {
             <Card.Title className="card-title">Purchase Details</Card.Title>
             <Card.Text className="text row">
               <h3>Purchase Resume</h3>
-              {cartItems.map((item) => (
                 <div>
                   <ListGroup>
                     <ListGroup.Item>
@@ -65,39 +64,40 @@ const PurchaseForm = () => {
                             <th>Cost</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="d-flex flex-column product-details">
-                                <span class="font-weight-bold">
-                                  {item.item.title}
-                                </span>
-                                {/* <div class="d-flex flex-row product-desc">
-                              <div class="size mr-1">
-                                <span class="text-grey">Size:</span>
-                                <span class="font-weight-bold">&nbsp;M</span>
-                              </div>
-                            </div>
-                            <div class="d-flex flex-row product-desc">
-                              <div class="color">
-                                <span class="text-grey">Color:</span>
-                                <span class="font-weight-bold">&nbsp;Grey</span>
-                              </div>
-                            </div> */}
-                              </div>
-                            </td>
-                            <td>{item.quantity}</td>
-                            <td>${item.item.price}</td>
-                          </tr>
-                        </tbody>
+                        {cartItems.map((item) => (
+                          <tbody>
+                            <tr>
+                              <td>
+                                <div class="d-flex flex-column product-details">
+                                  <span class="font-weight-bold">
+                                    {item.item.title.slice(0,10)}...
+                                  </span>
+                                      {/* <div class="d-flex flex-row product-desc">
+                                    <div class="size mr-1">
+                                      <span class="text-grey">Size:</span>
+                                      <span class="font-weight-bold">&nbsp;M</span>
+                                    </div>
+                                  </div>
+                                  <div class="d-flex flex-row product-desc">
+                                    <div class="color">
+                                      <span class="text-grey">Color:</span>
+                                      <span class="font-weight-bold">&nbsp;Grey</span>
+                                    </div>
+                                  </div> */}
+                                </div>
+                              </td>
+                              <td>{item.quantity}</td>
+                              <td>${item.item.price}</td>
+                            </tr>
+                          </tbody>
+                        ))}
                       </Table>
                     </ListGroup.Item>
                   
                   </ListGroup>
                
                 </div>
-              ))}
-                 <h4>Total value: ${qtyCatch * acumulator} </h4>
+                 <h4 className="my-3">Total value: ${qtyCatch * acumulator} </h4>
             </Card.Text>
           </Card.Body>
         </Card>

@@ -9,7 +9,8 @@
 
 .PurchaseForm .cards{
     width: 90%;
-    height: 90vh;
+    min-height: 90vh;
+    height: auto;
     margin: 2.5% 0;
     display: flex;
     flex-direction: row;
@@ -26,6 +27,10 @@
 
 .PurchaseForm .cards .card .text{
     height: auto;
+}
+
+.PurchaseForm .cards .card .text h4{
+    text-align: end;
 }
 
 .PurchaseForm .card-text {
@@ -49,6 +54,6 @@
     }
     
     .PurchaseForm .cards .card{
-        width: 90%;
+        width: 100%;
     }
 }

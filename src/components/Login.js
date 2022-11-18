@@ -7,6 +7,7 @@ import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/userContext";
+import Card from "react-bootstrap/Card";
 import Swal from "sweetalert2";
 
 export const Login = () => {
@@ -36,10 +37,10 @@ export const Login = () => {
       if (userWithRole?.role === "admin") {
         Swal.fire({
           title: "Log in success!",
-          text: `Welcome ${userWithRole.email.toUpperCase()}`,
+          text: `Welcome ${userWithRole.email.toLowerCase()}`,
           icon: "success",
           confirmButtonText: "Go ahead",
-          confirmButtonColor: "#8c7851",
+          confirmButtonColor: "#1dcf06",
           cancelButtonColor: "#d33",
         }).then((result) => {
           // Una vez logeado, navegar al dashboard
@@ -48,10 +49,10 @@ export const Login = () => {
       } else {
         Swal.fire({
           title: "Log in success!",
-          text: `Welcome ${userWithRole.email.toUpperCase()}`,
+          text: `Welcome ${userWithRole.email.toLowerCase()}`,
           icon: "success",
           confirmButtonText: "Go ahead",
-          confirmButtonColor: "#8c7851",
+          confirmButtonColor: "#1dcf06",
           cancelButtonColor: "#d33",
         }).then((result) => {
           // Una vez logeado, navegar al home
@@ -92,11 +93,12 @@ export const Login = () => {
     <div className="d-flex flex-column align-items-center pt-2">
       <div className="">
         <h2>Welcome to Free Market</h2>
-        <p>You'll find everything you need</p>
+        <p className="text-center">You'll find everything you need</p>
       </div>
-      <div className="form__cont">
-        <form
-          className="d-flex flex-column align-items-center border border-top-0 border-primary p-3 rounded-bottom"
+      <div className="form__cont my-3">
+        <Card>
+          <form
+          className="d-flex flex-column align-items-center p-3"
           onSubmit={handleSubmit(onSubmit)}
         >
           <label>Email:</label>
@@ -143,14 +145,16 @@ export const Login = () => {
           />
           {errors.password && <span>{errors.password.message}</span>}
 
-          <input className="form__sub" type="submit" value="LOG IN" />
-          <p className="formu__signUp">
+          <input className="form__sub mt-4" type="submit" value="LOG IN" />
+          <p className="formu__signUp mt-4">
             Don't have an account yet?{" "}
             <Link to="/register" className="formu__signUp__link">
               SIGN UP
             </Link>
           </p>
         </form>
+        </Card>
+        
       </div>
     </div>
   );
