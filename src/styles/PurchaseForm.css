@@ -1,0 +1,54 @@
+
+.PurchaseForm{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+.PurchaseForm .cards{
+    width: 90%;
+    height: 90vh;
+    margin: 2.5% 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.PurchaseForm .cards .card{
+    width: 50%;
+    margin: 1rem;
+}
+
+.PurchaseForm .cards .card-title{
+    height: 3rem;
+}
+
+.PurchaseForm .cards .card .text{
+    height: auto;
+}
+
+.PurchaseForm .card-text {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.PurchaseForm .cards .card textarea{
+    height: 100px;
+}
+
+.PurchaseForm .cards .card .buttons{
+    display: flex;
+}
+
+@media (max-width:550px) {
+    .PurchaseForm .cards{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .PurchaseForm .cards .card{
+        width: 90%;
+    }
+}

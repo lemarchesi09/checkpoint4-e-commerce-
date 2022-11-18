@@ -50,8 +50,13 @@ const ItemDetails = () => {
 
   const decreaseButton = () => {
     const newValue = count - 1;
-    newValue >= itemQty.quantity && setCount(newValue);
-    setItemQty({ ...itemQty, quantity: newValue });
+    if(newValue<=0){
+      alert('no podes agregar 0 productos')
+    }else{
+      newValue >= itemQty.quantity && setCount(newValue);
+      setItemQty({ ...itemQty, quantity: newValue });
+    }
+
   };
 
   const addToCart = () => {

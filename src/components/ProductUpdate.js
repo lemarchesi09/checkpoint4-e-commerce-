@@ -54,7 +54,7 @@ export const ProductUpdate = () => {
         icon: "success",
         confirmButtonText: "Ok",
       });
-      navigate("/productlist");
+      navigate("/admin/productlist");
     } catch (error) {
       MySwal.fire({
         title: "Error!",
@@ -62,7 +62,7 @@ export const ProductUpdate = () => {
         icon: "error",
         confirmButtonText: "Ok",
       });
-      navigate("/productlist");
+      navigate("/admin/productlist");
       console.log(error);
     }
   };
@@ -114,11 +114,10 @@ export const ProductUpdate = () => {
               onChange={handleChange}
             >
               <option>Open this select menu</option>
-              <option value="Clothes">Clothes</option>
+              <option value="Men's Clothing">Men's Clothing</option>
+              <option value="Womens's Clothing">Women's Clothing</option>
+              <option value="Jewelry">Jewelry</option>
               <option value="Electronics">Electronics</option>
-              <option value="Furniture">Furniture</option>
-              <option value="Shoes">Shoes</option>
-              <option value="Others">Others</option>
             </select>
           </div>
           <div className="mb-3">
