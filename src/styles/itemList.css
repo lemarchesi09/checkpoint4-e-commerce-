@@ -1,60 +1,68 @@
-a{
-    text-decoration: none!important ;
+a {
+  text-decoration: none !important ;
 }
 
 .textAboveItems {
-    font-family: monospace;
-    font-weight: 300;
-    font-size: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    margin-top: 2rem;
+  font-family: monospace;
+  font-weight: 300;
+  font-size: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 2rem;
 }
 
-.itemList{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-    
+.itemList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.itemList .cards{
-    margin: 2.5% 0;
-    display: flex;
+.itemList .cardContainer {
+  margin: 2.5% 0;
+  display: flex;
 }
 
-.itemList .cards .card{
-    width: 15rem;
-    margin: 1rem;
+.itemList .cardContainer .card {
+  width: 22rem;
+  margin: 1rem;
 }
 
-.itemList .cards .card:hover{
-    transform: scale(1.01);
-    box-shadow: 3px 3px 50px var(--color-shadow);
+.itemList .cardContainer .card .imgContainer {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.itemList .cards .card .image{
-    height: 300px;
+.itemList .cardContainer .card:hover {
+  transform: scale(1.01);
+  box-shadow: 3px 3px 50px var(--color-shadow);
 }
 
-.itemList .cards .card-title{
-    height: 5rem;
+.itemList .cardContainer .card .image {
+  max-height: 300px;
+  width: max-content;
+  max-width: 320px;
 }
 
-.itemList .cards .card .text{
-    height: 4rem;
+.itemList .cardContainer .card-title {
+  height: 5rem;
+}
+
+.itemList .cardContainer .card .text {
+  height: 4rem;
 }
 
 .itemList .card-text {
-    font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
-.itemList .card-text p:nth-child(1){
-    text-align: end;
-    font-size: 23px;
+.itemList .card-text p:nth-child(1) {
+  text-align: end;
+  font-size: 23px;
 }
 
-.itemList .card-text p:nth-child(2){
-    color:#00a650;
+.itemList .card-text p:nth-child(2) {
+  color: #00a650;
 }
