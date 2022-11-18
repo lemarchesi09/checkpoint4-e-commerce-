@@ -7,31 +7,28 @@ import { ProductUpdate } from "./ProductUpdate";
 import { useUserContext } from "../context/userContext";
 import { NavBarAdmin } from "./NavBarAdmin";
 
-export const Admin = () =>{
-    const {user} = useUserContext();
-    return(
-        <div>
-            {user?.role === "admin"  ? 
-            <>
-            <div className="d-flex justify-content-center">
-                <h2>Admin Dashboard</h2>
-                
-            </div>
-            <ProSidebarProvider>
+export const Admin = () => {
+  const { user } = useUserContext();
+  return (
+    <div>
+      {user?.role === "admin" ? (
+        <>
+          <div className="d-flex justify-content-center"></div>
+          <ProSidebarProvider>
             <SideBar />
-            </ProSidebarProvider> 
-            <Routes>
-                <Route path="/productform/*" element={<ProductForm />} />
-                <Route path="/productlist/*" element={<ProductList />} />
-                <Route path="/update/:id" element={<ProductUpdate />} />
-            </Routes>
-            </>
-            : 
-            
-            <>
-            <Navigate to={"/"}></Navigate>
-            </>}
-
-</div>
-)
-}
+            <NavBarAdmin />
+          </ProSidebarProvider>
+          <Routes>
+            <Route path="/productform/*" element={<ProductForm />} />
+            <Route path="/productlist/*" element={<ProductList />} />
+            <Route path="/update/:id" element={<ProductUpdate />} />
+          </Routes>
+        </>
+      ) : (
+        <>
+          <Navigate to={"/"}></Navigate>
+        </>
+      )}
+    </div>
+  );
+};
