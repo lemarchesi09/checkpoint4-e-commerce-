@@ -1,10 +1,13 @@
 .navbar {
+  
   background-color: #ffe172;
   box-shadow: 0.5px 0.866px 2px 0px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   height: 8vh;
+  z-index: 1;
+  width: 100vw;
 }
 
 .profile_info p {
