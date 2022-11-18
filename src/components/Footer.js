@@ -6,17 +6,16 @@ export const Footer = () => {
   const { user } = useUserContext();
   return (
     <>
-      {user?.role === "user" ? (
+      {user?.role === "admin" ? (
+        <></>
+      ) : (
         <div className="footer text-center text-lg-start text-muted">
           <div className="text-center p-4">
             <Link to="/aboutUs" className="footer-link">
-              {" "}
-              About us...{" "}
+              About us
             </Link>
           </div>
         </div>
-      ) : (
-        <></>
       )}
     </>
   );
