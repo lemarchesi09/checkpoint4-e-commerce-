@@ -16,8 +16,8 @@ export const Admin = () => {
           <div className="d-flex justify-content-center"></div>
           <ProSidebarProvider>
             <SideBar />
+            <NavBarAdmin />
           </ProSidebarProvider>
-          <NavBarAdmin />
           <Routes>
             <Route path="/productform/*" element={<ProductForm />} />
             <Route path="/productlist/*" element={<ProductList />} />

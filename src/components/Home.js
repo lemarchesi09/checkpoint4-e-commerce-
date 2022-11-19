@@ -1,11 +1,11 @@
 import ItemListContainter from "./ItemListContainter";
 
-export const Home = () =>{
 
-    return(
-        <>
-            <ItemListContainter/>
-        </>
-    )
-}
+export const Home = () => {
+  return (
+    <div>
+      <ItemListContainter />
+    </div>
+  );
+};
 

@@ -20,7 +20,7 @@ export const SideBar = () => {
           <div className="closemenu" onClick={() => collapseSidebar()}>
             {collapsed ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
           </div>
-          <Menu iconshape="square">
+          <Menu iconShape="square">
             <MenuItem icon={<FaList />} routerLink={<Link to="/admin/productlist" />}>
               My products
             </MenuItem>
@@ -31,7 +31,7 @@ export const SideBar = () => {
               Sell history
             </MenuItem>
           </Menu>
-          <Menu iconshape="square" id="footer">
+          <Menu iconShape="square" id="footer">
             <MenuItem
               icon={<FiLogOut />}
               id="logout"

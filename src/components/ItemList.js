@@ -24,13 +24,15 @@ const ItemList = () => {
 
   return (
     <>
-      <h1 className=" textAboveItems">PRODUCTOS MAS BUSCADOS❤🔥</h1>
+      <h1 className="textAboveItems">PRODUCTOS MAS BUSCADOS❤🔥</h1>
       <div className="itemList">
         {dataCarrousel.slice(0, 4).map((item, index) => (
           <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer">
-            <div className="cards">
+            <div className="cardContainer">
               <Card className="card" key={index}>
-                <Card.Img className="image" variant="top" src={`${item.image}`} />
+                <div className="imgContainer">
+                  <Card.Img className="image" variant="top" src={`${item.image}`} />
+                </div>
                 <Card.Body>
                   <Card.Title className="card-title">{item.title}</Card.Title>
                   <Card.Text className="text row">
