@@ -2,14 +2,33 @@ import React, { useState } from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 import "../styles/card.css";
+//context 
+import { useUserContext } from "../context/userContext";
 const PaymentMethod = () => {
+  // actual data about user 
+  const { user, setUser } = useUserContext();
+  const [cc, setCC] = useState({
+    number: "",
+    name: "",
+    expiry: "",
+    cvc: "",
+    focus: "",
+  });
+  const { number, name, expiry, cvc, focus } = cc;
 
-  const [number, setNumber] = useState("");
-  const [name, setName] = useState("");
-  const [expiry, setExpiry] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [focus, setFocus] = useState("");
+  const handleInputFocus = (e) => {
+    setCC({ ...cc, focus: e.target.name });
+  };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCC({ ...cc, [name]: value });
+  };
+  const saveCC =(e)=>{
+    e.preventDefault()
+setUser({...user,cc:cc})
+console.log(user)
+  }
   return (
     <div>
       <Cards
@@ -19,16 +38,16 @@ const PaymentMethod = () => {
         cvc={cvc}
         focused={focus}
       />
-      <form className=" container ">
+      <form className=" container " onSubmit={saveCC}>
         <div className="container-inputs d-flex flex-column justify-content-center">
           <div className="input-name">
             <input
               type="text"
               name="name"
               placeholder="Name Card"
-              onFocus={(e) => setFocus(e.target.name)}
+              onFocus={handleInputFocus}
+              onChange={handleInputChange}
               value={name}
-              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="input-number">
@@ -36,9 +55,9 @@ const PaymentMethod = () => {
               type="tel"
               name="number"
               placeholder="Card Number"
-              onFocus={(e) => setFocus(e.target.name)}
+              onFocus={handleInputFocus}
+              onChange={handleInputChange}
               value={number}
-              onChange={(e) => setNumber(e.target.value)}
             />
           </div>
           <div className="input-expiry">
@@ -46,9 +65,9 @@ const PaymentMethod = () => {
               type="text"
               name="expiry"
               placeholder="expiry"
-              onFocus={(e) => setFocus(e.target.name)}
+              onFocus={handleInputFocus}
+              onChange={handleInputChange}
               value={expiry}
-              onChange={(e) => setExpiry(e.target.value)}
             />
           </div>
           <div className="input-cvc">
@@ -56,12 +75,13 @@ const PaymentMethod = () => {
               type="tel"
               name="cvc"
               placeholder="CVC"
-              onFocus={(e) => setFocus(e.target.name)}
+              onFocus={handleInputFocus}
+              onChange={handleInputChange}
               value={cvc}
-              onChange={(e) => setCvc(e.target.value)}
             />
           </div>
         </div>
+        <button type="submit" className="btn btn-primary">SaveCC</button>
       </form>
     </div>
   );

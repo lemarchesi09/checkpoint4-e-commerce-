@@ -12,10 +12,13 @@ import "../styles/PurchaseForm.css";
 import { useState, useEffect } from "react";
 
 const PurchaseForm = () => {
-  const { user } = useUserContext();
-  const navigate=useNavigate()
+  const { user, setUser } = useUserContext();
+  const cartItem = useSelector((state) => state.item);
+
+  const navigate = useNavigate();
   const [acumulator, setAcumulator] = useState(0);
   const [qtyCatch, SetQtyCatch] = useState(0);
+  const [totalValue,setTotalValue]=useState(0)
   const cartItems = useSelector((products) => products.item);
   const [dataUser, setDataUser] = useState({
     name: "",
@@ -23,18 +26,24 @@ const PurchaseForm = () => {
     Adress: "",
     ZipCode: "",
   });
+
   const sendData = (e) => {
     e.preventDefault();
- if(dataUser.name===''|| dataUser.email===''||dataUser.Adress===''||dataUser.ZipCode===''){
-  Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text: 'All fields are required!',
-  })
- }else{
-  navigate("/PaymentMethod");
- }
-  
+    if (
+      dataUser.name === "" ||
+      dataUser.email === "" ||
+      dataUser.Adress === "" ||
+      dataUser.ZipCode === ""
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "All fields are required!",
+      });
+    } else {
+      navigate("/PaymentMethod");
+      setUser({ ...user, dataForm: dataUser, ItemCart: cartItem ,totalValue:totalValue});
+    }
   };
   useEffect(() => {
     let ActualQuantity = 0;
@@ -46,6 +55,7 @@ const PurchaseForm = () => {
 
     setAcumulator(ActualPrice.toFixed(3));
     SetQtyCatch(ActualQuantity);
+    setTotalValue(ActualQuantity * ActualPrice)
   }, []);
   const saveData = (e) => {
     setDataUser({ ...dataUser, [e.target.name]: e.target.value });
@@ -94,7 +104,9 @@ const PurchaseForm = () => {
                 className="mx-3"
                 type="submit"
                 onClick={sendData}
-              >Submit</Button>
+              >
+                Submit
+              </Button>
             </div>
           </Card.Body>
         </Card>
@@ -133,7 +145,7 @@ const PurchaseForm = () => {
                   </ListGroup.Item>
                 </ListGroup>
               </div>
-              <h4 className="my-3">Total value: ${qtyCatch * acumulator} </h4>
+              <h4 className="my-3">Total value: ${totalValue} </h4>
             </Card.Text>
           </Card.Body>
         </Card>
