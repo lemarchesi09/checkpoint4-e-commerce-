@@ -14,7 +14,6 @@ export const Register = () => {
   // Firebase Register auth
   const registerUser = async (name, email, password, role) => {
     const result = await createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      console.log("userCredential", userCredential);
       return userCredential;
     });
     const userRef = doc(firestore, `users/${result.user.uid}`);

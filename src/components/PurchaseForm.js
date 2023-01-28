@@ -4,29 +4,62 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { useUserContext } from "../context/userContext";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 //redux functions
 import { useSelector } from "react-redux";
 import "../styles/PurchaseForm.css";
 import { useState, useEffect } from "react";
 
 const PurchaseForm = () => {
-  const { user } = useUserContext();
+  const { user, setUser } = useUserContext();
+  const cartItem = useSelector((state) => state.item);
+
+  const navigate = useNavigate();
   const [acumulator, setAcumulator] = useState(0);
   const [qtyCatch, SetQtyCatch] = useState(0);
+  const [totalValue,setTotalValue]=useState(0)
   const cartItems = useSelector((products) => products.item);
+  const [dataUser, setDataUser] = useState({
+    name: "",
+    email: "",
+    Adress: "",
+    ZipCode: "",
+  });
 
+  const sendData = (e) => {
+    e.preventDefault();
+    if (
+      dataUser.name === "" ||
+      dataUser.email === "" ||
+      dataUser.Adress === "" ||
+      dataUser.ZipCode === ""
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "All fields are required!",
+      });
+    } else {
+      navigate("/PaymentMethod");
+      setUser({ ...user, dataForm: dataUser, ItemCart: cartItem ,totalValue:totalValue});
+    }
+  };
   useEffect(() => {
     let ActualQuantity = 0;
     let ActualPrice = 0;
     cartItems.forEach((element) => {
       ActualQuantity += element.quantity;
-      ActualPrice += parseInt(element.item.price)
+      ActualPrice += parseInt(element.item.price);
     });
-   
+
     setAcumulator(ActualPrice.toFixed(3));
     SetQtyCatch(ActualQuantity);
+    setTotalValue(ActualQuantity * ActualPrice)
   }, []);
-
+  const saveData = (e) => {
+    setDataUser({ ...dataUser, [e.target.name]: e.target.value });
+  };
   return (
     <div className="PurchaseForm">
       <Card className=" cards cardContainer">
@@ -34,15 +67,44 @@ const PurchaseForm = () => {
           <Card.Body>
             <Card.Title className="card-title">Purchase Form</Card.Title>
             <Card.Text className="text row">
-              <input className="mb-3" type="text" placeholder="Name" />
-              <input className="mb-3" type="text" placeholder="Address" />
-              <input className="mb-3" type="text" placeholder="Zip Code" />
-              <input className="mb-3" type="email" placeholder="E-mail" />
+              <input
+                className="mb-3"
+                type="text"
+                placeholder="Name"
+                name="name"
+                onChange={(e) => saveData(e)}
+              />
+              <input
+                className="mb-3"
+                type="text"
+                placeholder="Address"
+                name="Adress"
+                onChange={(e) => saveData(e)}
+              />
+              <input
+                className="mb-3"
+                type="text"
+                placeholder="Zip Code"
+                name="ZipCode"
+                onChange={(e) => saveData(e)}
+              />
+              <input
+                className="mb-3"
+                type="email"
+                placeholder="E-mail"
+                name="email"
+                onChange={(e) => saveData(e)}
+              />
               <textarea className="mb-3" placeholder="Observations" />
             </Card.Text>
             <div className="buttons">
               <Button variant="outline-success">Check Cart</Button>
-              <Button variant="outline-primary" className="mx-3">
+              <Button
+                variant="outline-primary"
+                className="mx-3"
+                type="submit"
+                onClick={sendData}
+              >
                 Submit
               </Button>
             </div>
@@ -53,51 +115,37 @@ const PurchaseForm = () => {
             <Card.Title className="card-title">Purchase Details</Card.Title>
             <Card.Text className="text row">
               <h3>Purchase Resume</h3>
-                <div>
-                  <ListGroup>
-                    <ListGroup.Item>
-                      <Table>
-                        <thead>
+              <div>
+                <ListGroup>
+                  <ListGroup.Item>
+                    <Table>
+                      <thead>
+                        <tr>
+                          <th className="w-4">Product</th>
+                          <th>item</th>
+                          <th>Cost</th>
+                        </tr>
+                      </thead>
+                      {cartItems.map((item) => (
+                        <tbody>
                           <tr>
-                            <th className="w-4">Product</th>
-                            <th>item</th>
-                            <th>Cost</th>
+                            <td>
+                              <div class="d-flex flex-column product-details">
+                                <span class="font-weight-bold">
+                                  {item.item.title.slice(0, 10)}...
+                                </span>
+                              </div>
+                            </td>
+                            <td>{item.quantity}</td>
+                            <td>${item.item.price}</td>
                           </tr>
-                        </thead>
-                        {cartItems.map((item) => (
-                          <tbody>
-                            <tr>
-                              <td>
-                                <div class="d-flex flex-column product-details">
-                                  <span class="font-weight-bold">
-                                    {item.item.title.slice(0,10)}...
-                                  </span>
-                                      {/* <div class="d-flex flex-row product-desc">
-                                    <div class="size mr-1">
-                                      <span class="text-grey">Size:</span>
-                                      <span class="font-weight-bold">&nbsp;M</span>
-                                    </div>
-                                  </div>
-                                  <div class="d-flex flex-row product-desc">
-                                    <div class="color">
-                                      <span class="text-grey">Color:</span>
-                                      <span class="font-weight-bold">&nbsp;Grey</span>
-                                    </div>
-                                  </div> */}
-                                </div>
-                              </td>
-                              <td>{item.quantity}</td>
-                              <td>${item.item.price}</td>
-                            </tr>
-                          </tbody>
-                        ))}
-                      </Table>
-                    </ListGroup.Item>
-                  
-                  </ListGroup>
-               
-                </div>
-                 <h4 className="my-3">Total value: ${qtyCatch * acumulator} </h4>
+                        </tbody>
+                      ))}
+                    </Table>
+                  </ListGroup.Item>
+                </ListGroup>
+              </div>
+              <h4 className="my-3">Total value: ${totalValue} </h4>
             </Card.Text>
           </Card.Body>
         </Card>
