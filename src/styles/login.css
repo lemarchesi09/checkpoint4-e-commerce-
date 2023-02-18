@@ -1,3 +1,6 @@
-.form__sub:hover{
-    background-color: #1dcf06;
+.form__sub{
+    background-color: var(--button-bg);
+}
+.form__sub:active{
+    background-color: var(--color-light-primary);
 }

@@ -56,30 +56,33 @@ const Cart = () => {
             <div>
               <Card>
             {stateItem.length === 0 ? (
-              <h1 className="text-center">todavia no hay productos en el carrito!</h1>
+              <h1 className="text-center">No products in the cart.</h1>
             ) : (
               stateItem.map((item, index) => (
                 <div className="d-flex justify-content-center cartDetail">
                   <div className="cart">
                     <div key={index} className="cartProduct p-2 bg-white mt-4 px-3 rounded" >
-                      <div className="d-flex flex-column  product-details itemTitle-cart">
+                      <div className="d-flex justify-content-center justify-content-sm-start">
+                        <img src={item.item.image} className="w-50 rounded-start"></img>
+                      </div>
+                      <div className="d-flex flex-column product-details itemTitle-cart">
                         <h3 className="font-weight-bold">{item.item.title}</h3>
                       </div>
                       <div className="qtyPrice">
 
                       <div className="qty">
                         <i className="fa fa-minus text-danger"></i>
-                        <h5 className="text-grey mt-1 mr-1 ml-1"> quantity: {item.quantity}</h5>
+                        <h5 className="text-grey mt-1 mr-1 ml-1"> Amount: {item.quantity}</h5>
                         <i className="fa fa-plus text-success"></i>
                         <div className="product-desc">
                           <div className="size mr-1"></div>
                           <div className="color">
-                            <span className="text-grey"> stock: {item.item.stock}</span>
+                            <span className="text-grey"> Stock: {item.item.stock}</span>
                           </div>
                         </div>
                       </div>
                       <div>
-                        <h5 className="text-grey">
+                        <h5 className="text-grey font-weight-bold">
                           ${item.item.price * item.quantity}
                           {""}
                         </h5>
@@ -92,7 +95,7 @@ const Cart = () => {
                   </div>  
                     <div className="deleteItem">
                         <button className="btn btn-danger" onClick={() => deleteProduct(item.item.id)}>
-                          delete
+                          Delete
                         </button>
                     </div>
                 </div>

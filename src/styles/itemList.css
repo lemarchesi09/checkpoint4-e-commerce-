@@ -25,7 +25,7 @@ a {
 
 .itemList .cardContainer .card {
   width: 22rem;
-  margin: 1rem;
+  margin: 1rem 0;
 }
 
 .itemList .cardContainer .card .imgContainer {
@@ -66,3 +66,20 @@ a {
 .itemList .card-text p:nth-child(2) {
   color: #00a650;
 }
+
+@media (max-width:320px) {
+  .itemList .cardContainer .card{
+    width: 18rem;
+  }
+  .itemList .cardContainer .card .image {
+    max-height: 230px;
+    width: max-content;
+    max-width: 250px;
+
+  }
+  .carousel-item img{
+    height: 160px;
+    object-fit: cover;
+
+  }
+}   

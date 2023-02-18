@@ -21,13 +21,14 @@ const PaymentMethod = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
     setCC({ ...cc, [name]: value });
   };
+
   const saveCC =(e)=>{
     e.preventDefault()
-setUser({...user,cc:cc})
-console.log(user)
+    setUser({...user,cc:cc})
+    console.log(user)
   }
   return (
     <div>
@@ -45,6 +46,7 @@ console.log(user)
               type="text"
               name="name"
               placeholder="Name Card"
+              required
               onFocus={handleInputFocus}
               onChange={handleInputChange}
               value={name}
@@ -55,16 +57,20 @@ console.log(user)
               type="tel"
               name="number"
               placeholder="Card Number"
+              required
+              maxLength={16}
               onFocus={handleInputFocus}
               onChange={handleInputChange}
               value={number}
             />
           </div>
-          <div className="input-expiry">
+          <div className="input-expire">
             <input
-              type="text"
+              type="tel"
               name="expiry"
-              placeholder="expiry"
+              placeholder="Expiry Date"
+              required
+              maxLength={4}
               onFocus={handleInputFocus}
               onChange={handleInputChange}
               value={expiry}
@@ -75,6 +81,8 @@ console.log(user)
               type="tel"
               name="cvc"
               placeholder="CVC"
+              required
+              maxLength={3}
               onFocus={handleInputFocus}
               onChange={handleInputChange}
               value={cvc}

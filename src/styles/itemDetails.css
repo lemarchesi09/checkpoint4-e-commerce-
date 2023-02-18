@@ -6,6 +6,19 @@
 .card-title{
     font-size: 2rem;
 }
+.card_input_count{
+    align-items: baseline;
+}
+.card_input_count button{
+    margin: 0 3%;
+}
+
+@media (max-width:768px) {
+    .btn-det{
+        height: 63%;
+    }
+}
+
 @media (max-width:550px) {
     .card-title{
         font-size: 1rem;
@@ -13,6 +26,18 @@
     .card-buttons{
         display: flex;
         flex-direction: column;
+    }
+}
+
+@media (max-width:320px) {
+    .btn-det{
+        height: 40%;
+    }
+    .text-description{
+        text-overflow: ellipsis;
+        overflow: auto;
+        height: 12rem;
+
     }
 }
 .card-text:nth-child(4){

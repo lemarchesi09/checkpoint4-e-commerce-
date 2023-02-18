@@ -51,7 +51,7 @@ const ItemDetails = () => {
   const decreaseButton = () => {
     const newValue = count - 1;
     if(newValue<=0){
-      alert('no podes agregar 0 productos')
+      
     }else{
       newValue >= itemQty.quantity && setCount(newValue);
       setItemQty({ ...itemQty, quantity: newValue });
@@ -74,7 +74,7 @@ const ItemDetails = () => {
 
   return (
     <div className="p-4">
-      <div className="card  col-md-4 w-100  ">
+      <div className="card col-md-4 w-100 ">
         <div className="row g-0">
           <div className="col-md-4">
             <img src={image} className="img-fluid rounded-start" alt=" Product img" />
@@ -85,7 +85,7 @@ const ItemDetails = () => {
                 <span>{category}</span>.
               </p>
               <h5 className="card-title">{title}</h5>
-              <p className="card-text">{description}.</p>
+              <p className="card-text text-description">{description}.</p>
               <p className="card-text">${price}</p>
               <p className="card-text">
                 <small className="text-muted"> stock: {stock}</small>
@@ -96,11 +96,11 @@ const ItemDetails = () => {
             </div>
             <div className=" row-md-2 d-flex justify-content-around">
               <div className="card_input_count d-flex">
-                <button className="btn btn-primary" onClick={decreaseButton}>
+                <button className="btn btn-primary btn-det" onClick={decreaseButton}>
                   -
                 </button>
                 {count}
-                <button className="btn btn-primary" onClick={increasebutton}>
+                <button className="btn btn-primary btn-det" onClick={increasebutton}>
                   +
                 </button>
               </div>

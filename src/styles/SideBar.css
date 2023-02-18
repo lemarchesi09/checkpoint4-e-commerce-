@@ -43,6 +43,7 @@
   color: #000;
   margin: 10px 0px;
   font-weight: bold;
+  display: block;
 }
 
 #sidebar .pro-sidebar ul .menu-icon {
