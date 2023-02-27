@@ -1,5 +1,6 @@
 a {
   text-decoration: none !important ;
+  padding: 0% 1%;
 }
 
 .textAboveItems {
@@ -11,67 +12,67 @@ a {
   margin-top: 2rem;
 }
 
-.itemList {
+ .itemList{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
 }
 
-.itemList .cardContainer {
+ .cardContainer {
   margin: 2.5% 0;
   display: flex;
 }
 
-.itemList .cardContainer .card {
+ .cardContainer .card {
   width: 22rem;
   margin: 1rem 0;
 }
 
-.itemList .cardContainer .card .imgContainer {
+ .cardContainer .card .imgContainer {
   height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.itemList .cardContainer .card:hover {
+ .cardContainer .card:hover {
   transform: scale(1.01);
   box-shadow: 3px 3px 50px var(--color-shadow);
 }
 
-.itemList .cardContainer .card .image {
+ .cardContainer .card .image {
   max-height: 300px;
   width: max-content;
   max-width: 320px;
 }
 
-.itemList .cardContainer .card-title {
+ .cardContainer .card-title {
   height: 5rem;
 }
 
-.itemList .cardContainer .card .text {
+ .cardContainer .card .text {
   height: 4rem;
 }
 
-.itemList .card-text {
+ .card-text {
   font-family: "Montserrat", sans-serif;
 }
 
-.itemList .card-text p:nth-child(1) {
+ .card-text p:nth-child(1) {
   text-align: end;
   font-size: 23px;
 }
 
-.itemList .card-text p:nth-child(2) {
+ .card-text p:nth-child(2) {
   color: #00a650;
 }
 
 @media (max-width:320px) {
-  .itemList .cardContainer .card{
+   .cardContainer .card{
     width: 18rem;
   }
-  .itemList .cardContainer .card .image {
+   .cardContainer .card .image {
     max-height: 230px;
     width: max-content;
     max-width: 250px;

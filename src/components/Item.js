@@ -1,8 +1,30 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
+import "../styles/itemList.css";
 
-const Item = () => {
+const Item = ({item, index}) => {
   return (
-    <div>Item</div>
+    <>
+      <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer">
+      <div className="cardContainer">
+        <Card className="card" key={index}>
+          <div className="imgContainer">
+            <Card.Img className="image" variant="top" src={`${item.image}`} />
+          </div>
+          <Card.Body>
+            <Card.Title className="card-title">{item.title}</Card.Title>
+            <Card.Text className="text row">
+              <p>${item.price}</p>
+              <p>
+                <i className="bi bi-truck "></i> Envio gratis!
+              </p>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </div>
+    </Link>
+    </>
   )
 }
 

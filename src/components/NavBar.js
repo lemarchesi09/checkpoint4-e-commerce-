@@ -21,10 +21,14 @@ export const NavBar = () => {
   const getAllProducts = async () =>{
     const productsCollection = collection(db, "generalProducts");
     const response = await getDocs(productsCollection);
-    // setSearchProducts(response.docs.map((doc) => ({ ...doc.data()})));
-    // console.log('searchProd en nav', searchProducts);
+    
     setAllProducts(response.docs.map((doc) => ({ ...doc.data()})));
     console.log('allProducts', allProducts);
+    setSearchProducts(response.docs.map((doc) => ({ ...doc.data()})));
+    console.log('searchProd en nav', searchProducts);
+    // setSearchProducts(allProducts);
+    // console.log('searchProd en nav', searchProducts);
+    
   }
   // value to display the number of items in the cart
 
@@ -63,7 +67,7 @@ export const NavBar = () => {
 
    
 
-    navigate(`/searchresults/${search}`);
+    navigate(`/searchResults/${search}`);
   };
 
   // const getProductsByCategory();
@@ -75,9 +79,11 @@ export const NavBar = () => {
   };
 
   console.log('allProducts2', allProducts);
+  console.log('searchProd en nav Fuera', searchProducts);
 
   useEffect(() => {
     getAllProducts();
+    
   }, [])
   return (
     <>
@@ -122,21 +128,25 @@ export const NavBar = () => {
                 </li>
 
                 <li className="nav-item">
-                  <Link to="/category/jewelery" className="nav-link">
+                  <Link to="/searchResults/Jewelry" className="nav-link">
 
-                    Jewelery
+                    Jewelry
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="#" className="nav-link">
-                    {" "}
-                    Category 2{" "}
+                  <Link to="/searchResults/Electronics" className="nav-link">
+                    
+                    Electronics
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="#" className="nav-link">
-                    {" "}
-                    Category 3{" "}
+                  <Link to="/searchResults/Womens's Clothing" className="nav-link">
+                    Womens's Clothing
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/searchResults/Men's Clothing" className="nav-link">
+                    Men's Clothing
                   </Link>
                 </li>
               </ul>

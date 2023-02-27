@@ -1,9 +1,12 @@
-.searchcard{
- 
+.results-cont{
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    grid-gap:3%;
+    justify-content: center;
 }
 
-.searchcard_img_cont{
-    border: 1px solid red;
-    width: 150px;
-    height: 150px;
-}
+@media (max-width:320px) {
+    .results-cont{
+        grid-template-columns: 100%;
+    }
+   }
