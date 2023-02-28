@@ -47,6 +47,8 @@ const Cart = () => {
     });
     setAcum(newValue);
   }, [stateItem]);
+
+  
   return (
     <div>
       {user?.role === "user" ? (

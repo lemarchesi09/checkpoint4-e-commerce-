@@ -4,16 +4,18 @@ import { Card } from 'react-bootstrap';
 import "../styles/itemList.css";
 
 const Item = ({item, index}) => {
+
+  console.log('item' , item.id);
   return (
     <>
-      <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer">
+      <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer" item={item} >
       <div className="cardContainer">
         <Card className="card" key={index}>
           <div className="imgContainer">
             <Card.Img className="image" variant="top" src={`${item.image}`} />
           </div>
           <Card.Body>
-            <Card.Title className="card-title">{item.title}</Card.Title>
+            <Card.Title className="card-title" >{item.title}</Card.Title>
             <Card.Text className="text row">
               <p>${item.price}</p>
               <p>

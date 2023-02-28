@@ -1,7 +1,6 @@
 .results-cont{
     display: grid;
     grid-template-columns: repeat(2,auto);
-    grid-gap:3%;
     justify-content: center;
 }
 
