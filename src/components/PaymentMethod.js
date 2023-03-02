@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 import "../styles/card.css";
+import { useNavigate } from "react-router-dom";
+    
 //context 
 import { useUserContext } from "../context/userContext";
 const PaymentMethod = () => {
@@ -14,6 +16,9 @@ const PaymentMethod = () => {
     cvc: "",
     focus: "",
   });
+
+  const navigate = useNavigate();
+
   const { number, name, expiry, cvc, focus } = cc;
 
   const handleInputFocus = (e) => {
@@ -29,6 +34,7 @@ const PaymentMethod = () => {
     e.preventDefault()
     setUser({...user,cc:cc})
     console.log(user)
+    navigate("/PaymentConfirm")
   }
   return (
     <div>

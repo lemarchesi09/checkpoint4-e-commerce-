@@ -24,24 +24,24 @@ a {
   display: flex;
 }
 
- .cardContainer .card {
+ .cardContainer .card-item {
   width: 22rem;
   margin: 1rem 0;
 }
 
- .cardContainer .card .imgContainer {
+ .cardContainer .card-item .imgContainer {
   height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
- .cardContainer .card:hover {
+ .cardContainer .card-item:hover {
   transform: scale(1.01);
   box-shadow: 3px 3px 50px var(--color-shadow);
 }
 
- .cardContainer .card .image {
+ .cardContainer .card-item .image {
   max-height: 300px;
   width: max-content;
   max-width: 320px;
@@ -51,7 +51,7 @@ a {
   height: 5rem;
 }
 
- .cardContainer .card .text {
+ .cardContainer .card-item .text {
   height: 4rem;
 }
 
@@ -69,10 +69,10 @@ a {
 }
 
 @media (max-width:320px) {
-   .cardContainer .card{
+   .cardContainer .card-item{
     width: 18rem;
   }
-   .cardContainer .card .image {
+   .cardContainer .card-item .image {
     max-height: 230px;
     width: max-content;
     max-width: 250px;

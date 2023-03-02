@@ -15,6 +15,7 @@ import ItemList from "./components/ItemList";
 import { PurchaseHistory } from "./components/PurchaseHistory";
 import PaymentMethod from "./components/PaymentMethod";
 import { Footer } from "./components/Footer";
+import { PaymentConfirm } from "./components/PaymentConfirm";
 function App() {
   return (
     <UserProvider>
@@ -29,6 +30,7 @@ function App() {
           <Route path="/purchasehistory/*" element={<PurchaseHistory />} />
           <Route path="/purchaseForm/*" element={<PurchaseForm />} />
           <Route path="/PaymentMethod" element={<PaymentMethod />} />
+          <Route path="/PaymentConfirm" element={<PaymentConfirm />} />
           <Route path="/searchResults/:busqueda" element={<SearchResults />} />
           <Route path="/admin/*" element={<Admin />} />
           <Route path="/aboutUs" element={<AboutUs />} />

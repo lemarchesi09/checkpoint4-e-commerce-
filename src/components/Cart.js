@@ -23,6 +23,9 @@ const Cart = () => {
   const date = Date();
   console.log(date);
 
+  let newAcum = Number(acum.toFixed(2));
+
+  console.log('acum', acum , 'newAcum', newAcum);
   const sendBuyToFirebase = async () => {
     try {
       await addDoc(purchasesCollection, { ...compra, user: user, date: date });
@@ -39,6 +42,8 @@ const Cart = () => {
   const deleteProduct = (id) => {
     dispatch(deleteItem(id));
   };
+
+ 
   // accumulator to render the total price
   useEffect(() => {
     let newValue = 0;
@@ -47,7 +52,6 @@ const Cart = () => {
     });
     setAcum(newValue);
   }, [stateItem]);
-
   
   return (
     <div>
@@ -86,7 +90,6 @@ const Cart = () => {
                       <div>
                         <h5 className="text-grey font-weight-bold">
                           ${item.item.price * item.quantity}
-                          {""}
                         </h5>
                       </div>
                       </div>
@@ -109,7 +112,7 @@ const Cart = () => {
             
             <div className={`${ stateItem.length === 0 ? "d-none" : "d-block" } d-flex flex-column mt-3 p-2 bg-white rounded`} >
               <div className="totalPrice d-flex justify-content-end">
-                <h3> Total price: ${acum}</h3>
+                <h3> Total price: ${newAcum}</h3>
               </div>
               <div className="d-flex justify-content-end">
 

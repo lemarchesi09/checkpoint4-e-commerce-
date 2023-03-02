@@ -10,7 +10,7 @@ const Item = ({item, index}) => {
     <>
       <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer" item={item} >
       <div className="cardContainer">
-        <Card className="card" key={index}>
+        <Card className="card-item" key={index}>
           <div className="imgContainer">
             <Card.Img className="image" variant="top" src={`${item.image}`} />
           </div>

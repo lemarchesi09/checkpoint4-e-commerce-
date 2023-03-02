@@ -63,7 +63,7 @@ const PurchaseForm = () => {
   return (
     <div className="PurchaseForm">
       <Card className=" cards cardContainer">
-        <Card className="card">
+        <Card className="purchase-card">
           <Card.Body>
             <Card.Title className="card-title">Purchase Form</Card.Title>
             <Card.Text className="text row">

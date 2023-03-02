@@ -20,18 +20,17 @@
     width: 13vw;
     padding: 1rem 0;
 }
+
 .form{
     width: 75%;
 }
+
 ul{
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
-ul li{
-    
 
-}
 li a{
     
     display: contents;

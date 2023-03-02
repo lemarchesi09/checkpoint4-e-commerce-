@@ -16,7 +16,7 @@
     flex-direction: row;
 }
 
-.PurchaseForm .cards .card{
+.PurchaseForm .cards .purchase-card{
     width: 50%;
     margin: 1rem;
 }
@@ -25,11 +25,11 @@
     height: 3rem;
 }
 
-.PurchaseForm .cards .card .text{
+.PurchaseForm .cards .purchase-card .text{
     height: auto;
 }
 
-.PurchaseForm .cards .card .text h4{
+.PurchaseForm .cards .carpurchase-cardd .text h4{
     text-align: end;
 }
 
@@ -37,12 +37,16 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.PurchaseForm .cards .card textarea{
+.PurchaseForm .cards .purchase-card textarea{
     height: 100px;
 }
 
-.PurchaseForm .cards .card .buttons{
+.PurchaseForm .cards .purchase-card .buttons{
     display: flex;
+}
+
+.PurchaseForm .purchase-card input:focus , textarea:focus{
+    outline: 3px solid var(--button-bg);
 }
 
 @media (max-width:550px) {
@@ -53,7 +57,7 @@
         align-items: center;
     }
     
-    .PurchaseForm .cards .card{
+    .PurchaseForm .cards .purchase-card{
         width: 100%;
     }
 }
