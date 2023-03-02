@@ -1,14 +1,68 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
 import { useUserContext } from "../context/userContext";
+import { db } from "../firebase/firebase";
+import { collection, addDoc, doc } from "firebase/firestore";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useDispatch, useSelector } from "react-redux";
+import { resetCart } from "../features/cart/cartSlice";
 
 export const PaymentConfirm = () =>{
 
+    const MySwal = withReactContent(Swal);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const { user, setUser } = useUserContext();
-    console.log('user en confirm', user.dataForm.Adress);
+
+    // const stateItem = useSelector((state) => state.item);
+    // console.log('estoy en confirm viendo el estado', stateItem);
+
+    const purchasesCollection = collection(db, "purchases");
+
+    const [purchase, setPurchase] = useState({
+      userId: user.uid,
+      dataProducts:{
+        ...user.ItemCart
+      },
+      dataPurchase: {
+        ...user.cc
+      },
+      shippingInfo: {
+        ...user.dataForm
+      }
+    })
+
+    const sendPurchase = async() =>{
+      try {
+        await addDoc(purchasesCollection, purchase);
+        MySwal.fire({
+          title: "Success!",
+          text: "Your purchase has been confirmed",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+        navigate("/");
+      } catch (error) {
+        MySwal.fire({
+          title: "Error!",
+          text: "Something went wrong",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+        console.log(error);
+      }
+    }
+
+    useEffect(() =>{
+      console.log(user);
+    })
     
  return(
     <>
@@ -30,12 +84,12 @@ export const PaymentConfirm = () =>{
                         </tr>
                       </thead>
                       {user.ItemCart.map((item) => (
-                        <tbody>
+                        <tbody key={item.item.id}>
                           <tr>
                             <td>
                               <div class="d-flex flex-column product-details">
                                 <span class="font-weight-bold">
-                                  {item.item.title.slice(0, 10)}...
+                                  {item.item.title.slice(0, 30)}...
                                 </span>
                               </div>
                             </td>
@@ -70,7 +124,7 @@ export const PaymentConfirm = () =>{
             </Card.Text>
           </Card.Body>
         </Card>
-        <button type="submit" className="btn btn-success">
+        <button type="submit" className="btn btn-success" onClick={sendPurchase}>
                 Confirm
         </button>
     </>
