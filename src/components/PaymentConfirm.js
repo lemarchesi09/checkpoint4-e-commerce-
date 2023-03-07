@@ -21,24 +21,25 @@ export const PaymentConfirm = () =>{
 
     const { user, setUser } = useUserContext();
 
+    const cartItem = useSelector((state) => state.item);
+
     // const stateItem = useSelector((state) => state.item);
     // console.log('estoy en confirm viendo el estado', stateItem);
 
     const purchasesCollection = collection(db, "purchases");
 
+    const date = Date()
     const [purchase, setPurchase] = useState({
       userId: user.uid,
-      dataProducts:{
-        ...user.ItemCart
-      },
-      dataPurchase: {
-        ...user.cc
-      },
-      shippingInfo: {
-        ...user.dataForm
-      }
+      dataProducts:{},
+      dataPurchase: {},
+      shippingInfo: {},
     })
 
+    // const removeCart = () =>{
+    //   dispatch(resetCart())
+    // }
+    
     const sendPurchase = async() =>{
       try {
         await addDoc(purchasesCollection, purchase);
@@ -48,6 +49,7 @@ export const PaymentConfirm = () =>{
           icon: "success",
           confirmButtonText: "Ok",
         });
+        
         navigate("/");
       } catch (error) {
         MySwal.fire({
@@ -61,8 +63,21 @@ export const PaymentConfirm = () =>{
     }
 
     useEffect(() =>{
-      console.log(user);
-    })
+      setPurchase({
+        userId: user.uid,
+        dataProducts:{
+          ...user.ItemCart
+        },
+        dataPurchase: {
+          ...user.cc
+        },
+        shippingInfo: {
+          ...user.dataForm
+        },
+        date: date,
+      })
+      console.log('user en payment confirm', user);
+    },[])
     
  return(
     <>

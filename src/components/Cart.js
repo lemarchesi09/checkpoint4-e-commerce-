@@ -12,23 +12,22 @@ import Card from 'react-bootstrap/Card';
 const Cart = () => {
   const { user } = useUserContext();
   const [acum, setAcum] = useState(0);
-  const stateItem = useSelector((state) => state.item);
-  console.log('estoy en cart viendo el estado ',stateItem);
-  const arrayTransformado = stateItem.map((producto) => producto);
+  const cartItem = useSelector((state) => state.item);
+  console.log('estoy en cart viendo el estado ',cartItem);
+  const arrayTransformado = cartItem.map((producto) => producto);
   // Converting array to object
-  const object = Object.assign({}, stateItem);
+  const object = Object.assign({}, cartItem);
 
 
   const [compra, setCompra] = useState(object);
-  const date = Date();
-  console.log(date);
 
   let newAcum = Number(acum.toFixed(2));
 
   console.log('acum', acum , 'newAcum', newAcum);
   const sendBuyToFirebase = async () => {
     try {
-      await addDoc(purchasesCollection, { ...compra, user: user, date: date });
+      await setCompra({...compra, user: user,})
+      // await addDoc(purchasesCollection, { ...compra, user: user, date: date });
 
     } catch (error) {
   console.log(error)
@@ -47,11 +46,11 @@ const Cart = () => {
   // accumulator to render the total price
   useEffect(() => {
     let newValue = 0;
-    stateItem.forEach((element) => {
+    cartItem.forEach((element) => {
       newValue = newValue + Number(element.item.price) * element.quantity;
     });
     setAcum(newValue);
-  }, [stateItem]);
+  }, [cartItem]);
   
   return (
     <div>
@@ -61,10 +60,10 @@ const Cart = () => {
             <h4>Shopping cart</h4>
             <div>
               <Card>
-            {stateItem.length === 0 ? (
+            {cartItem.length === 0 ? (
               <h1 className="text-center">No products in the cart.</h1>
             ) : (
-              stateItem.map((item, index) => (
+              cartItem.map((item, index) => (
                 <div className="d-flex justify-content-center cartDetail">
                   <div className="cart">
                     <div key={index} className="cartProduct p-2 bg-white mt-4 px-3 rounded" >
@@ -110,7 +109,7 @@ const Cart = () => {
                 </Card>
             </div>
             
-            <div className={`${ stateItem.length === 0 ? "d-none" : "d-block" } d-flex flex-column mt-3 p-2 bg-white rounded`} >
+            <div className={`${ cartItem.length === 0 ? "d-none" : "d-block" } d-flex flex-column mt-3 p-2 bg-white rounded`} >
               <div className="totalPrice d-flex justify-content-end">
                 <h3> Total price: ${newAcum}</h3>
               </div>

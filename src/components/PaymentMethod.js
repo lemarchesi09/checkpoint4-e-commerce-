@@ -17,6 +17,7 @@ const PaymentMethod = () => {
     focus: "",
   });
 
+  console.log('user en payment method', user);
   const navigate = useNavigate();
 
   const { number, name, expiry, cvc, focus } = cc;

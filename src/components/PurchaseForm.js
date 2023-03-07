@@ -18,15 +18,17 @@ const PurchaseForm = () => {
   const navigate = useNavigate();
   const [acumulator, setAcumulator] = useState(0);
   const [qtyCatch, SetQtyCatch] = useState(0);
-  const [totalValue,setTotalValue]=useState(0)
-  const cartItems = useSelector((products) => products.item);
+  const [totalValue,setTotalValue]=useState(0);
   const [dataUser, setDataUser] = useState({
     name: "",
     email: "",
     Adress: "",
     ZipCode: "",
   });
+  console.log('cartItem', cartItem);
 
+
+  const date = Date()
   const sendData = (e) => {
     e.preventDefault();
     if (
@@ -42,13 +44,13 @@ const PurchaseForm = () => {
       });
     } else {
       navigate("/PaymentMethod");
-      setUser({ ...user, dataForm: dataUser, ItemCart: cartItem ,totalValue:totalValue});
+      setUser({ ...user, dataForm: dataUser, ItemCart: cartItem ,totalValue: totalValue, date: date});
     }
   };
   useEffect(() => {
     let ActualQuantity = 0;
     let ActualPrice = 0;
-    cartItems.forEach((element) => {
+    cartItem.forEach((element) => {
       ActualQuantity += element.quantity;
       ActualPrice += parseInt(element.item.price);
     });
@@ -126,7 +128,7 @@ const PurchaseForm = () => {
                           <th>Cost</th>
                         </tr>
                       </thead>
-                      {cartItems.map((item) => (
+                      {cartItem.map((item) => (
                         <tbody>
                           <tr>
                             <td>
