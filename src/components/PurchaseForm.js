@@ -52,12 +52,12 @@ const PurchaseForm = () => {
     let ActualPrice = 0;
     cartItem.forEach((element) => {
       ActualQuantity += element.quantity;
-      ActualPrice += parseInt(element.item.price);
+      ActualPrice += parseInt(element.item.price * element.quantity);
     });
 
     setAcumulator(ActualPrice.toFixed(3));
     SetQtyCatch(ActualQuantity);
-    setTotalValue(ActualQuantity * ActualPrice)
+    setTotalValue( ActualPrice)
   }, []);
   const saveData = (e) => {
     setDataUser({ ...dataUser, [e.target.name]: e.target.value });
@@ -139,7 +139,7 @@ const PurchaseForm = () => {
                               </div>
                             </td>
                             <td>{item.quantity}</td>
-                            <td>${item.item.price}</td>
+                            <td>${item.item.price * item.quantity}</td>
                           </tr>
                         </tbody>
                       ))}

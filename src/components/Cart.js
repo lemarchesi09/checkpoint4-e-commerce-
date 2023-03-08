@@ -26,7 +26,7 @@ const Cart = () => {
   console.log('acum', acum , 'newAcum', newAcum);
   const sendBuyToFirebase = async () => {
     try {
-      await setCompra({...compra, user: user,})
+      await setCompra({...compra, user: user, totalValue: newAcum})
       // await addDoc(purchasesCollection, { ...compra, user: user, date: date });
 
     } catch (error) {
