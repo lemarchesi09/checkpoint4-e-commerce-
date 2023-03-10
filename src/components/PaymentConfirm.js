@@ -20,6 +20,7 @@ export const PaymentConfirm = () =>{
     const navigate = useNavigate();
 
     const { user, setUser } = useUserContext();
+    const {ItemCart, cc, dataForm} = user
 
     const cartItem = useSelector((state) => state.item);
 
@@ -29,12 +30,7 @@ export const PaymentConfirm = () =>{
     const purchasesCollection = collection(db, "purchases");
 
     const date = Date()
-    const [purchase, setPurchase] = useState({
-      userId: user.uid,
-      dataProducts:{},
-      dataPurchase: {},
-      shippingInfo: {},
-    })
+    const [purchase, setPurchase] = useState({})
 
     // const removeCart = () =>{
     //   dispatch(resetCart())
@@ -65,15 +61,9 @@ export const PaymentConfirm = () =>{
     useEffect(() =>{
       setPurchase({
         userId: user.uid,
-        dataProducts:{
-          ...user.ItemCart
-        },
-        dataPurchase: {
-          ...user.cc
-        },
-        shippingInfo: {
-          ...user.dataForm
-        },
+        ItemCart,
+        dataPurchase: cc,
+        shippingInfo: dataForm,
         date: date,
       })
       console.log('user en payment confirm', user);
