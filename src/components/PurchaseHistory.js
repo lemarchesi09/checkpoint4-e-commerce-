@@ -22,24 +22,19 @@ export const PurchaseHistory = () =>{
             
         }
     }
-
-    // const result = history.filter((item  => item.userId === user.uid ));
-
     useEffect (() =>{
         getPurchases()
         
     }, [])
 
-
-    console.log('tratando de entrar a los productos',history);
     return (
         <div>
-            <h2>Purchase History</h2>
 
             <div className="container">
-                {history && history.map((item, index ) =>{
+            <h2 className="pt-3">Orders</h2>
+                {history && history.reverse().map((item, index ) =>{
                     return(  
-                                <Card className="card">
+                                <Card className="card my-5" style={{backgroundColor: "#efefef"}}>
                                     <Card.Body key={index}>
                                         <Card.Title className="card-title">{item.date}</Card.Title>
                                         <Card.Text className="text row">
@@ -49,19 +44,17 @@ export const PurchaseHistory = () =>{
                                                 <Table>
                                                 <thead>
                                                     <tr>
-                                                    <th className="w-4">Product</th>
+                                                    <th className="">Product</th>
                                                     <th>Quantity</th>
                                                     <th>Price</th>
-                                                    
                                                     </tr>
                                                 </thead>
-                                                {/* {Object.values(item.dataProducts).map(product => 
-                                                    (<li key={product.item.category}>{product.item.title}</li>))} */}
                                                     
                                                     {item.ItemCart && item.ItemCart.map((product) => {
                                                         return(
                                                         <tbody>
                                                             <tr>
+                                                                
                                                                 <td>
                                                                 {product.item.title.length >= 20 ? product.item.title.slice(0, 30)+`...` : product.item.title}
                                                                 </td>
@@ -71,21 +64,16 @@ export const PurchaseHistory = () =>{
                                                                 <td>
                                                                 {product.item.price}
                                                                 </td>
-
                                                             </tr>
                                                         </tbody>       
 
                                                         )
                                             })}
-                                                
-
-            
-                                            </Table>
-                                            
+                                            </Table>                                            
                                         </ListGroup.Item>
                                         </ListGroup>
                                     </div>
-                                    <h4 className="my-3">Total value: $ </h4>
+                                    <h4 className="my-3">Total value: ${item?.totalValue} </h4>
                                     </Card.Text>
                                 </Card.Body>
                                 </Card>

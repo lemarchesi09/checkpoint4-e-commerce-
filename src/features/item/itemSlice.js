@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = [];
 
 export const itemSlice = createSlice({
@@ -22,9 +23,10 @@ export const itemSlice = createSlice({
       return  state.filter((item)=> item.item.id !== action.payload);
       
       
-    }
+    },
+    resetCart: () => initialState
   },
 });
 
-export const { addItem, updateItem, deleteItem } = itemSlice.actions;
+export const { addItem, updateItem, deleteItem, resetCart } = itemSlice.actions;
 export default itemSlice.reducer;

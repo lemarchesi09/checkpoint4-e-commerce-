@@ -4,15 +4,24 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Table from "react-bootstrap/Table";
 import { useUserContext } from "../context/userContext";
 import { db } from "../firebase/firebase";
-import { collection, addDoc, doc } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc, increment } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useDispatch, useSelector } from "react-redux";
-import { resetCart } from "../features/cart/cartSlice";
+import { resetCart } from "../features/item/itemSlice";
 
 export const PaymentConfirm = () =>{
+
+    // Codigo para disminuir el stock de los productos
+    // const washingtonRef = doc(db, "cities", "DC");
+
+    // // Atomically increment the population of the city by 50.
+    // await updateDoc(washingtonRef, {
+    //     population: increment(-50)
+    // });
+
 
     const MySwal = withReactContent(Swal);
 
@@ -20,7 +29,7 @@ export const PaymentConfirm = () =>{
     const navigate = useNavigate();
 
     const { user, setUser } = useUserContext();
-    const {ItemCart, cc, dataForm} = user
+    const {ItemCart, cc, dataForm, totalValue} = user
 
     const cartItem = useSelector((state) => state.item);
 
@@ -32,20 +41,22 @@ export const PaymentConfirm = () =>{
     const date = Date()
     const [purchase, setPurchase] = useState({})
 
-    // const removeCart = () =>{
-    //   dispatch(resetCart())
-    // }
+    
+    const removeCart = () =>{
+      dispatch(resetCart())
+    }
     
     const sendPurchase = async() =>{
       try {
         await addDoc(purchasesCollection, purchase);
+        
         MySwal.fire({
           title: "Success!",
           text: "Your purchase has been confirmed",
           icon: "success",
           confirmButtonText: "Ok",
         });
-        
+        removeCart();
         navigate("/");
       } catch (error) {
         MySwal.fire({
@@ -65,23 +76,25 @@ export const PaymentConfirm = () =>{
         dataPurchase: cc,
         shippingInfo: dataForm,
         date: date,
+        totalValue
       })
       console.log('user en payment confirm', user);
     },[])
     
  return(
     <>
-    <h2>Check Info </h2>
+    <div className="container">
+    {/* <h2>Check Info </h2> */}
         <Card className="card">
           <Card.Body>
-            <Card.Title className="card-title">Purchase Resume</Card.Title>
+            <Card.Title className="card-title">Purchase Summary</Card.Title>
             <Card.Text className="text row">
               <div>
                 <ListGroup>
                   <ListGroup.Item>
                     <Table>
-                      <thead>
-                        <h4>Cart</h4>
+                      <thead >
+                        <h4 className="pt-3 fw-bold">Cart</h4>
                         <tr>
                           <th className="w-4">Product</th>
                           <th>Item</th>
@@ -103,23 +116,26 @@ export const PaymentConfirm = () =>{
                           </tr>
                         </tbody>
                       ))}
-                      <thead>
-                        <h4>Shipping information</h4>
-                        <tr>
-                            <th className="w-4">Address</th>     
-                            <th>Zip Code</th>
-                            <th>Contact e-mail</th>
-                            
-                        </tr>
-                      </thead>
 
-                      <tbody>
-                        <tr>
-                            <td>{user.dataForm.Adress}</td>
-                            <td>{user.dataForm.ZipCode}</td>
-                            <td>{user.dataForm.email}</td>
-                        </tr>
-                      </tbody>
+                    </Table>
+                    <Table >
+                      <thead>
+                          <h4 className="pt-3 fw-bold">Shipping information</h4>
+                          <tr>
+                              <th className="w-4">Address</th>     
+                              <th>Zip Code</th>
+                              <th>Contact e-mail</th>
+                              
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr>
+                              <td>{user.dataForm.Adress}</td>
+                              <td>{user.dataForm.ZipCode}</td>
+                              <td>{user.dataForm.email}</td>
+                          </tr>
+                        </tbody>
                     </Table>
                     
                   </ListGroup.Item>
@@ -129,9 +145,11 @@ export const PaymentConfirm = () =>{
             </Card.Text>
           </Card.Body>
         </Card>
-        <button type="submit" className="btn btn-success" onClick={sendPurchase}>
+
+        <button type="submit" className="btn btn-success mt-3" onClick={sendPurchase}>
                 Confirm
         </button>
+    </div>
     </>
  )   
 }

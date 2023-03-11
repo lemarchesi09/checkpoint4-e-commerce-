@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteItem } from "../../src/features/item/itemSlice";
+import { deleteItem, } from "../../src/features/item/itemSlice";
 import "../styles/cart.css";
 import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
@@ -26,7 +26,7 @@ const Cart = () => {
   console.log('acum', acum , 'newAcum', newAcum);
   const sendBuyToFirebase = async () => {
     try {
-      await setCompra({...compra, user: user, totalValue: newAcum})
+      await setCompra({...compra, user: user, totalValue: acum})
       // await addDoc(purchasesCollection, { ...compra, user: user, date: date });
 
     } catch (error) {
@@ -41,6 +41,7 @@ const Cart = () => {
   const deleteProduct = (id) => {
     dispatch(deleteItem(id));
   };
+
 
  
   // accumulator to render the total price
@@ -101,6 +102,7 @@ const Cart = () => {
                         <button className="btn btn-danger" onClick={() => deleteProduct(item.item.id)}>
                           Delete
                         </button>
+                        
                     </div>
                 </div>
                 
