@@ -15,7 +15,7 @@ const Item = ({item, index}) => {
             <Card.Img className="image" variant="top" src={`${item.image}`} />
           </div>
           <Card.Body>
-            <Card.Title className="card-title" >{item.title}</Card.Title>
+            <Card.Title className="card-title" >{item.title.slice(0, 30)}</Card.Title>
             <Card.Text className="text row">
               <p>${item.price}</p>
               <p>

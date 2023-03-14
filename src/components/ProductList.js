@@ -61,7 +61,7 @@ export const ProductList = () => {
 
   return (
     <>
-      <div className="productsContainer">
+      <div className="productsContainer container">
         <table className="productsTable">
           <thead>
             <tr>
@@ -84,7 +84,7 @@ export const ProductList = () => {
                   <td>{product.price}</td>
                   <td>{product.stock}</td>
                   <td>{product.description}</td>
-                  <td>
+                  <td className="action-btn-cont">
                     <Link to={`/admin/update/${product.id}`}>
                       <button type="button" className="btn btn-primary">
                         <i className="far fa-eye">Update</i>

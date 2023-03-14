@@ -5,6 +5,7 @@ import { RiPencilLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import "../styles/SideBar.css";
 import { useUserContext } from "../context/userContext";
+import  Logo  from "../assets/img/logo-market.png"
 
 export const SideBar = () => {
   const { collapseSidebar, collapsed } = useProSidebar();
@@ -12,13 +13,13 @@ export const SideBar = () => {
 
   return (
     <>
-      <div id="sidebar">
+      <div id="sidebar" className="z-1">
         <Sidebar className="pro-sidebar">
-          <div className="logotext">
-            <p>Logo</p>
-          </div>
-          <div className="closemenu" onClick={() => collapseSidebar()}>
-            {collapsed ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
+          <div className="logo-side">
+            <img  src={Logo}/>
+            <div className="closemenu" onClick={() => collapseSidebar()}>
+              {collapsed ? <FiArrowRightCircle /> : <FiArrowLeftCircle />}
+            </div>
           </div>
           <Menu iconShape="square">
             <MenuItem icon={<FaList />} routerLink={<Link to="/admin/productlist" />}>
@@ -27,7 +28,7 @@ export const SideBar = () => {
             <MenuItem icon={<RiPencilLine />} routerLink={<Link to="/admin/productform" />}>
               Add product
             </MenuItem>
-            <MenuItem icon={<FaHistory />} routerLink={<Link to="/" />}>
+            <MenuItem icon={<FaHistory />} routerLink={<Link to="/admin/sellhistory" />}>
               Sell history
             </MenuItem>
           </Menu>

@@ -41,7 +41,7 @@ li a{
  @media (max-width:768px) {
     .nav-user{
         width: 35%;
-        padding: 0 1%;
+        
         text-align: center;
     }
     .collapse{

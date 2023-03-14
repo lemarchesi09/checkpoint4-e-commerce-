@@ -14,13 +14,7 @@ import { resetCart } from "../features/item/itemSlice";
 
 export const PaymentConfirm = () =>{
 
-    // Codigo para disminuir el stock de los productos
-    // const washingtonRef = doc(db, "cities", "DC");
 
-    // // Atomically increment the population of the city by 50.
-    // await updateDoc(washingtonRef, {
-    //     population: increment(-50)
-    // });
 
 
     const MySwal = withReactContent(Swal);
@@ -33,15 +27,24 @@ export const PaymentConfirm = () =>{
 
     const cartItem = useSelector((state) => state.item);
 
-    // const stateItem = useSelector((state) => state.item);
-    // console.log('estoy en confirm viendo el estado', stateItem);
-
     const purchasesCollection = collection(db, "purchases");
 
     const date = Date()
     const [purchase, setPurchase] = useState({})
 
-    
+    //  // Codigo para disminuir el stock de los productos (Funciona con un producto en el carro, no funciona con más)
+
+    // const decrementProduct = async() =>{
+  
+    //   const productRef = doc(db, "generalProducts", `${ItemCart.map(product => product.item.id)}`);
+  
+    //   // // Atomically increment the population of the city by 50.
+    //   await updateDoc(productRef, {
+    //       stock: ItemCart.map(product => product.item.stock) - ItemCart.map(product => product.quantity)
+    //   });
+  
+    // }
+
     const removeCart = () =>{
       dispatch(resetCart())
     }
@@ -49,6 +52,7 @@ export const PaymentConfirm = () =>{
     const sendPurchase = async() =>{
       try {
         await addDoc(purchasesCollection, purchase);
+        // await decrementProduct();
         
         MySwal.fire({
           title: "Success!",
@@ -79,6 +83,7 @@ export const PaymentConfirm = () =>{
         totalValue
       })
       console.log('user en payment confirm', user);
+      console.log(ItemCart.map(product => product.item.id));
     },[])
     
  return(

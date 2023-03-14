@@ -30,8 +30,12 @@
   width: 80px;
   min-width: 80px;
 }
+#sidebar .logo-side img{
+  max-width: -webkit-fill-available;
+  max-height: -webkit-fill-available;
+}
 
-#sidebar .logotext p {
+#sidebar .logo-side p {
   font-size: 20px;
   padding: 20px;
   color: #000;
