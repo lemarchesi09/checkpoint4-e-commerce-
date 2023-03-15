@@ -17,6 +17,7 @@ export const PurchaseHistory = () =>{
         try {
             const dataPurchases = await getDocs(purchasesCollection);
             setHistory(dataPurchases.docs.map((doc) => doc.data()))
+            console.log(history);
             
         } catch (error) {
             

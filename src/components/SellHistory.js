@@ -1,14 +1,12 @@
 import { db } from "../firebase/firebase";
-import { collection, doc, getDocs, getDoc, getFirestore, query, where, } from "firebase/firestore";
+import { collection, doc, getDocs,  } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useUserContext } from "../context/userContext";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Table from "react-bootstrap/Table";
 
 export const SellHistory = () =>{
 
-    const {user} = useUserContext();
     const [history, setHistory] = useState([{}])
     const purchasesCollection = collection(db, "purchases");
 

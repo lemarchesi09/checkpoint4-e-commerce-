@@ -4,7 +4,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Table from "react-bootstrap/Table";
 import { useUserContext } from "../context/userContext";
 import { db } from "../firebase/firebase";
-import { collection, addDoc, doc, updateDoc, increment } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc, increment, query, where, getDocs } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -32,18 +32,18 @@ export const PaymentConfirm = () =>{
     const date = Date()
     const [purchase, setPurchase] = useState({})
 
-    //  // Codigo para disminuir el stock de los productos (Funciona con un producto en el carro, no funciona con más)
+     // Funcion para disminuir el stock de los productos
 
-    // const decrementProduct = async() =>{
-  
-    //   const productRef = doc(db, "generalProducts", `${ItemCart.map(product => product.item.id)}`);
-  
-    //   // // Atomically increment the population of the city by 50.
-    //   await updateDoc(productRef, {
-    //       stock: ItemCart.map(product => product.item.stock) - ItemCart.map(product => product.quantity)
-    //   });
-  
-    // }
+    const updateFunc = () =>{
+      ItemCart.forEach(async (prod) => {
+        const docRef = doc(db, "generalProducts", prod.item.id);
+        await updateDoc(docRef, {
+          stock: prod.item.stock - prod.quantity
+        });
+      });
+
+    }
+    
 
     const removeCart = () =>{
       dispatch(resetCart())
@@ -52,7 +52,8 @@ export const PaymentConfirm = () =>{
     const sendPurchase = async() =>{
       try {
         await addDoc(purchasesCollection, purchase);
-        // await decrementProduct();
+        await updateFunc();
+        
         
         MySwal.fire({
           title: "Success!",
@@ -84,6 +85,19 @@ export const PaymentConfirm = () =>{
       })
       console.log('user en payment confirm', user);
       console.log(ItemCart.map(product => product.item.id));
+      // funcionDecre();
+        const funcionDecre = async () =>{
+      const purchasesCollection = collection(db, "purchases");
+       purchasesCollection.forEach((dbProd) => dbProd)
+       const q = query(purchasesCollection, where("id", "==", `${ItemCart.map(product => product.item.id)}`));
+      
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach( doc => {
+          console.log(doc.id, " => ", doc.data());
+        });
+    }
+      
     },[])
     
  return(
