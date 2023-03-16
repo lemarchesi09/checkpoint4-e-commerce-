@@ -1,6 +1,5 @@
 a {
   text-decoration: none !important ;
-  padding: 0% 1%;
 }
 
 .textAboveItems {
@@ -25,25 +24,25 @@ a {
 }
 
  .cardContainer .card-item {
-  width: 22rem;
+  width: 13rem;
   margin: 1rem 0;
 }
 
  .cardContainer .card-item .imgContainer {
-  height: 300px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
  .cardContainer .card-item:hover {
-  box-shadow: 3px 3px 50px var(--color-shadow);
+  box-shadow: 1px 1px 10px var(--color-shadow);
 }
 
  .cardContainer .card-item .image {
-  max-height: 300px;
+  max-height: 100px;
   width: max-content;
-  max-width: 320px;
+  max-width: 150px;
 }
 
  .cardContainer .card-title {
@@ -69,13 +68,13 @@ a {
 
 @media (max-width:320px) {
    .cardContainer .card-item{
-    width: 18rem;
+    width: 15rem;
   }
    .cardContainer .card-item .image {
-    max-height: 230px;
+    max-height: 100px;
     width: max-content;
     max-width: 250px;
-
+    margin-top: auto;
   }
   .carousel-item img{
     height: 160px;

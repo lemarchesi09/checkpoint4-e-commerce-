@@ -6,7 +6,7 @@
 
 .productsTable {
   border-collapse: collapse;
-  margin: 10px 0;
+  margin: auto;
   font-size: 1em;
   width: 80%;
 }

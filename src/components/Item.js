@@ -8,7 +8,7 @@ const Item = ({item, index}) => {
   console.log('item' , item.id);
   return (
     <>
-      <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer" item={item} >
+      <Link key={index} to={`/itemDetails/${item.id}`} className="cursor-pointer px-1" item={item} >
       <div className="cardContainer">
         <Card className="card-item" key={index}>
           <div className="imgContainer">

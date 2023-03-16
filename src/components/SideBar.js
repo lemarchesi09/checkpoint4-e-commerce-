@@ -13,7 +13,7 @@ export const SideBar = () => {
 
   return (
     <>
-      <div id="sidebar" className="z-1">
+      <div id="sidebar">
         <Sidebar className="pro-sidebar">
           <div className="logo-side">
             <img  src={Logo}/>

@@ -119,7 +119,7 @@ export const NavBar = () => {
                   Search
                 </button>
               </form>
-              <ul className="navbar-nav mb-2 mb-lg-0 ">
+              <ul className="navbar-nav mb-2 mb-lg-0 text-center d-flex align-items-center">
                 <li className="nav-item">
                   <Link to="/" className="nav-link">
                     {" "}
@@ -164,7 +164,7 @@ export const NavBar = () => {
                   >
                     Log Out<i className="bi bi-person-check-fill ms-1"></i>
                   </Link>
-                  <div>
+                  <div >
                     <Link to="/purchasehistory" >History <i class="bi bi-clock-history"></i></Link>
                   </div>
                   <div className="cart">

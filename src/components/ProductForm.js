@@ -146,7 +146,7 @@ export const ProductForm = () => {
           </div>
           <div className="row justify-content-end">
             <div className="col-sm-10">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary mt-2">
                 Add product
               </button>
             </div>
