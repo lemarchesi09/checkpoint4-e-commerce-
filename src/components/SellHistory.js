@@ -23,9 +23,6 @@ export const SellHistory = () =>{
         getPurchases()
         
     }, [])
-    // padding: 0% 6%;
-    // z-index: -1;
-    // position: relative;
 
     return (
         <div>

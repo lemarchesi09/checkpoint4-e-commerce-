@@ -83,19 +83,17 @@ export const PaymentConfirm = () =>{
         date: date,
         totalValue
       })
-      console.log('user en payment confirm', user);
-      console.log(ItemCart.map(product => product.item.id));
-      // funcionDecre();
+  
         const funcionDecre = async () =>{
-      const purchasesCollection = collection(db, "purchases");
-       purchasesCollection.forEach((dbProd) => dbProd)
-       const q = query(purchasesCollection, where("id", "==", `${ItemCart.map(product => product.item.id)}`));
-      
+          const purchasesCollection = collection(db, "purchases");
+          purchasesCollection.forEach((dbProd) => dbProd)
+          const q = query(purchasesCollection, where("id", "==", `${ItemCart.map(product => product.item.id)}`));
+        
 
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach( doc => {
-          console.log(doc.id, " => ", doc.data());
-        });
+          const querySnapshot = await getDocs(q);
+          querySnapshot.forEach( doc => {
+            console.log(doc.id, " => ", doc.data());
+          });
     }
       
     },[])

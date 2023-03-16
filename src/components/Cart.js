@@ -13,7 +13,7 @@ const Cart = () => {
   const { user } = useUserContext();
   const [acum, setAcum] = useState(0);
   const cartItem = useSelector((state) => state.item);
-  console.log('estoy en cart viendo el estado ',cartItem);
+ 
   const arrayTransformado = cartItem.map((producto) => producto);
   // Converting array to object
   const object = Object.assign({}, cartItem);

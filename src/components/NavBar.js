@@ -23,11 +23,9 @@ export const NavBar = () => {
     const response = await getDocs(productsCollection);
     
     setAllProducts(response.docs.map((doc) => ({ ...doc.data()})));
-    console.log('allProducts', allProducts);
     setSearchProducts(response.docs.map((doc) => ({ ...doc.data()})));
-    console.log('searchProd en nav', searchProducts);
-    // setSearchProducts(allProducts);
-    // console.log('searchProd en nav', searchProducts);
+
+
     
   }
   // value to display the number of items in the cart
@@ -45,13 +43,6 @@ export const NavBar = () => {
 
   const getProductsFromSearch = async () => {
 
-    // const result = searchProducts.filter((product) => {
-
-    //   return product.title.toLowerCase() === "Mens Casual Slim Fit"
-    // }
-    // )
-    // console.log('result',result);
-    // setSearchProducts(result)
     // Get some products
     const q = query(collection(db, "generalProducts"), where("title", "==", search));
 
@@ -70,16 +61,12 @@ export const NavBar = () => {
     navigate(`/searchResults/${search}`);
   };
 
-  // const getProductsByCategory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     getProductsFromSearch();
     e.target.search.value = "";
   };
-
-  console.log('allProducts2', allProducts);
-  console.log('searchProd en nav Fuera', searchProducts);
 
   useEffect(() => {
     getAllProducts();

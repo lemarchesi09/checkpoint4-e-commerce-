@@ -25,7 +25,6 @@ const PurchaseForm = () => {
     Adress: "",
     ZipCode: "",
   });
-  console.log('cartItem', cartItem);
 
 
   const date = Date()

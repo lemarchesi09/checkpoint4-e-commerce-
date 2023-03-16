@@ -21,8 +21,6 @@ const ItemList = () => {
 
   useEffect(() => {
     getData();
-    console.log('item en list', dataCarrousel);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

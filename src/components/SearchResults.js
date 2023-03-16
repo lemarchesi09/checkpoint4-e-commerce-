@@ -24,43 +24,12 @@ export const SearchResults = () => {
     }
   };
 
-
-  // const getProducts = async () => {
-  //   await setProducts(searchProducts.filter((item) => item.category === busqueda))
-
-  //   console.log('entrando en await de searchresults', searchProducts);
-  //   console.log('estoy fuera del if de busqueda', products);
-
-  //   // if (busqueda) {
-  //   //   setProducts(products.filter((item) => item.category === busqueda))
-  //   //   console.log('estoy en el if de busqueda', products);
-  //   // }
-  //   // console.log('estoy fuera del if de busqueda', products);
-
-  //   // try {
-  //   //   const response = await searchProducts.docs.map((doc) => ({
-  //   //     ...doc.data(),
-  //   //     id: doc.id,
-  //   //   }));
-  //   //   console.log('result in gentProducts', response);
-  //   //   setProducts(response);
-  
-  //   //   console.log('searchprod en searchresult', searchProducts);
-      
-  //   // } catch (error) {
-  //   //   console.log(error);
-  //   // }
-  // };
   
   useEffect(() => {
     getData();
-    // getProducts();
-    console.log('searchproducts en searchresult', searchProducts);
-    console.log(busqueda);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchProducts,busqueda]);
 
-  console.log('products en searchresult2', products);
+
   return (
     <>
     <h2 className="m-auto mt-2">{busqueda}</h2>
