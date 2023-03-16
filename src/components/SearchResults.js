@@ -64,8 +64,8 @@ export const SearchResults = () => {
   return (
     <>
     <h2 className="m-auto mt-2">{busqueda}</h2>
-      <div className="container ">
-        <div className="results-cont">{/* borre itemList d-flex justify-content-center items-center container*/}
+      <div className="container d-flex flex-wrap m-auto" >
+        <div className="results-cont d-flex flex-wrap">{/* borre itemList d-flex justify-content-center items-center container*/}
           {products &&
             products.map((item, index) => (
               <Item item={item} index={index}/>
